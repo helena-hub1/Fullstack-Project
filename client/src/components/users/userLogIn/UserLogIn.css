@@ -1,0 +1,29 @@
+/* LOGIN */
+.login-page {
+  /* background-image: url("../../../assets/cars-background.jpg"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* margin: 0 auto;
+  width: 80%; */
+  height: 100vh;
+  object-fit: scale-down;
+}
+/* FORM */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* ERROR */
+.error-message {
+  font-size: small;
+  color: red;
+}
+/*FIELDS  */
+.field-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
