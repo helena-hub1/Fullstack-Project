@@ -1,0 +1,41 @@
+/* MAIN CONTAINER */
+.user-detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*PROFILE CONTAINER  */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+/* TYPOGRAPHY CONTAINER */
+.typography-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+}
+.text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 100px;
+}
+.box {
+  font-weight: bold;
+  font-size: 14px;
+}
+.box2 {
+  font-size: 14px;
+  margin-left: 20px;
+  padding: 0;
+}

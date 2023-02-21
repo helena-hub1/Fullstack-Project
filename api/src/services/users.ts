@@ -18,6 +18,9 @@ const userLogin = async (email: string): Promise<UserDocument | null> => {
 const getUserById = async (userId: string): Promise<UserDocument | null> => {
   return User.findById({ _id: userId });
 };
+const getUserByEmail = async (email: string): Promise<UserDocument | null> => {
+  return User.findById({ email: email });
+};
 
 // update user info
 const updateUserDetail = async (
@@ -36,6 +39,7 @@ export default {
   userLogin,
   getUserList,
   getUserById,
+  getUserByEmail,
   updateUserDetail,
   deleteUser,
 };

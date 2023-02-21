@@ -37,13 +37,9 @@ const userLogin = async (request: Request, response: Response) => {
     const user = await UserServices.userLogin(email);
     if (user && user.password === password) {
       // generate token
-      const token = jwt.sign(
-        { email: request.body.email, _id: user._id },
-        JWT_SECRET,
-        {
-          expiresIn: "1hr",
-        }
-      );
+      const token = jwt.sign({ email: request.body.email }, JWT_SECRET, {
+        expiresIn: "1hr",
+      });
       response.status(200).json({ user, token });
     } else {
       response.status(401).json(`Invalid account`);

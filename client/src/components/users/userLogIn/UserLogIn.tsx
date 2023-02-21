@@ -12,9 +12,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "./UserLogIn.css";
 import login from "../../../assets/login.jpg";
-import { blue, pink } from "@mui/material/colors";
 
-const url = "http://localhost:8000/users";
+import axios from "axios";
+
+const url = "http://localhost:8000/users/login";
 
 export default function UserLogIn() {
   const navigate = useNavigate();
@@ -22,12 +23,15 @@ export default function UserLogIn() {
   type Login = {
     email: string;
     password: string;
+    confirmPassword: string;
   };
   // initial values
   const initialValues: Login = {
     email: "",
     password: "",
+    confirmPassword: "",
   };
+
   // schema
   const FormSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required!"),
@@ -49,13 +53,19 @@ export default function UserLogIn() {
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values) => {
-            navigate(`/${values.email}`);
+            axios
+              .post(url, values)
+              .then((response) => response.data)
+              .then((data) =>
+                localStorage.setItem("userDetail", JSON.stringify(data))
+              );
+            navigate(`/user`);
           }}
         >
           {({ errors, touched, handleChange }) => {
             return (
               <Form>
-                <Paper elevation={6} sx={{ width: 300, mt: 4, height: 500 }}>
+                <Paper elevation={4} sx={{ width: 300, mt: 4, height: 500 }}>
                   <AvatarGroup>
                     <Avatar
                       alt="login-avatar"
