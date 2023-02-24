@@ -1,3 +1,4 @@
+import { orderAction } from "./order";
 import { createSlice } from "@reduxjs/toolkit";
 
 import User from "../../../../common/user";
@@ -28,7 +29,13 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    getUser: (state, action) => {
+    registerUser: (state, action) => {
+      state.userDetail = action.payload;
+    },
+    loginUser: (state, action) => {
+      state.userDetail = action.payload;
+    },
+    getUserDetail: (state, action) => {
       state.userDetail = action.payload;
     },
   },

@@ -16,11 +16,23 @@ import {
   Box,
 } from "@mui/material/";
 import { VisibilityOff, Visibility, Diversity1 } from "@mui/icons-material";
-
 import "./UserSignUp.css";
 import { Link } from "react-router-dom";
+import { RootState } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+
+import registerUser from "../../../redux/thunks/user";
+import { AppDispatch } from "../../../redux/store";
 
 export default function UserSignUp() {
+  // state
+  const userDetail = useSelector(
+    (state: RootState) => state.userDetail.userDetail
+  );
+  console.log(userDetail, "from signup");
+  // dispatch
+  const dispatch = useDispatch<AppDispatch>();
+  // MUI
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -67,17 +79,25 @@ export default function UserSignUp() {
       .oneOf([Yup.ref("password")], "Passwords do not match.")
       .required("Required"),
   });
-  const url = "http://localhost:8002/users";
+  // const url = "http://localhost:8000/users";
   return (
     <div>
       <Formik
         initialValues={initialValues}
         validationSchema={FormSchema}
-        onSubmit={(values: InitialValues, { resetForm }) => {
-          axios
-            .post(url, values)
-            .then((response) => console.log(response.data));
-          console.log(values);
+        onSubmit={(values, { resetForm }) => {
+          // axios
+          //   .post(url, values)
+          //   .then((response) => console.log(response.data));
+          // console.log(values);
+          dispatch(
+            registerUser(
+              values.firstName,
+              values.lastName,
+              values.email,
+              values.password
+            )
+          );
           resetForm({ values: initialValues });
         }}
       >

@@ -13,16 +13,23 @@ import "./UserSignIn.css";
 import login from "../../../assets/login.jpg";
 import axios from "axios";
 import { userAction } from "../../../redux/slices/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../redux/slices/cart";
 import { orderAction } from "../../../redux/slices/order";
+import { AppDispatch, RootState } from "../../../redux/store";
+import { loginUserThunk } from "../../../redux/thunks/user";
 // import { getCartList } from "../../../redux/thunks/cart";
 
-const url = "http://localhost:8002/users/login";
+// const url = "http://localhost:8002/users/login";
 
 export default function UserLogIn() {
+  // state
+  const userInformation = useSelector(
+    (state: RootState) => state.userDetail.userDetail
+  );
+  console.log(userInformation, "from signin page");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   type InitialValues = {
     email: string;
@@ -53,18 +60,17 @@ export default function UserLogIn() {
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values) => {
-            axios
-              .post(url, values)
-              .then((response) => response.data)
-              .then((data) => {
-                localStorage.setItem("userDetail", JSON.stringify(data));
-                // console.log(data.user, "data");
-                // console.log(data.token, "token");
-                // console.log(data.cartList, "cart");
-                dispatch(userAction.getUser(data.user));
-                dispatch(cartAction.getCartList(data.cartList));
-                dispatch(orderAction.getOrderList(data.orderList));
-              });
+            console.log(values, "values");
+            dispatch(loginUserThunk(values.email, values.password));
+            // axios
+            //   .post(url, values)
+            //   .then((response) => response.data)
+            //   .then((data) => {
+            //     localStorage.setItem("userDetail", JSON.stringify(data));
+
+            // /dispatch(cartAction.getCartList(data.cartList));
+            // dispatch(orderAction.getOrderList(data.orderList));
+
             navigate(`/user`);
           }}
         >
