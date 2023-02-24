@@ -1,6 +1,6 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Button, TextField, Paper } from "@mui/material";
+import { Button, TextField, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ export default function UpdateForm() {
   const token = userData.token;
   console.log("user id", userId);
   console.log("token", token);
-  const url = `http://localhost:8002/users/${userId}`;
+  const url = `http://localhost:8000/users/${userId}`;
 
   const navigate = useNavigate();
 
@@ -61,13 +61,17 @@ export default function UpdateForm() {
           {({ errors, touched, handleChange }) => {
             return (
               <Form>
-                <Paper sx={{ width: 300, mt: 4, height: 450 }}>
+                <Paper sx={{ width: 300, mt: 4, height: 400 }}>
                   <div className="form-container">
+                    <Typography sx={{ mt: 3, fontSize: "20px" }}>
+                      Update your detail
+                    </Typography>
                     <TextField
-                      label="Name"
-                      name="name"
+                      label="firstName"
+                      name="firstName"
                       onChange={handleChange}
                       sx={{ mt: 5, width: 250, fontSize: "10px" }}
+                      size="small"
                     ></TextField>
                     {errors.email && touched.email ? (
                       <div className="error-message"> {errors.email}</div>
@@ -77,6 +81,7 @@ export default function UpdateForm() {
                       name="email"
                       onChange={handleChange}
                       sx={{ width: 250, mb: 2, mt: 2, fontSize: "10px" }}
+                      size="small"
                     ></TextField>
                     {errors.email && touched.email ? (
                       <div className="error-message"> {errors.email}</div>
@@ -84,9 +89,9 @@ export default function UpdateForm() {
                     <TextField
                       label="Password"
                       name="password"
-                      helperText="8 Chars, One(A-Z), One(a-z) and One(0-9)"
                       sx={{ mt: 1, width: 250 }}
                       onChange={handleChange}
+                      size="small"
                     />
                     {errors.password && touched.password ? (
                       <div className="error-message"> {errors.password}</div>
@@ -98,7 +103,8 @@ export default function UpdateForm() {
                         width: "250px",
                         height: "40px",
                         mt: 3,
-                        borderRadius: "5",
+                        color: "#fff",
+                        backgroundColor: "#000",
                       }}
                       variant="outlined"
                     >

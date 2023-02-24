@@ -2,28 +2,28 @@ import Router from "express";
 
 import passport from "passport";
 import {
-  createUser,
-  deleteUserById,
-  getUserById,
-  getUserList,
-  updateUserDetail,
+  registerUser,
   userLogin,
+  getUsers,
+  getUser,
+  updateUserInformation,
+  deleteUserById,
 } from "../controllers/users";
 
 const router = Router();
 // routes
-router.post("/", createUser);
-router.get("/", passport.authenticate("jwt", { session: false }), getUserList);
+router.post("/", registerUser);
+router.get("/", passport.authenticate("jwt", { session: false }), getUsers);
 router.get(
   "/:userId",
   passport.authenticate("jwt", { session: false }),
-  getUserById
+  getUser
 );
 router.post("/login", userLogin);
 router.put(
   "/:userId",
   passport.authenticate("jwt", { session: false }),
-  updateUserDetail
+  updateUserInformation
 );
 router.delete(
   "/:userId",

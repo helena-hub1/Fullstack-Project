@@ -1,26 +1,32 @@
+import { getOrderList } from "./../../../client/src/redux/thunks/order";
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 import User from "../models/User";
 import UserServices from "../services/users";
+import generateToken from "./generateToken";
+import CartServices from "../services/carts";
 
-// create user
-const createUser = async (request: Request, response: Response) => {
+// register user
+const registerUser = async (request: Request, response: Response) => {
   try {
+    const { email, password, firstName, lastName } = request.body;
+
+    if (!email || !password || !firstName || !lastName) {
+      throw new Error("Please enter all fields");
+    }
+    const userExists = await UserServices.getUserByEmail(email);
+    if (userExists) {
+      response.status(400);
+      throw new Error(`User with email: ${email} is already in the system`);
+    }
+    // hash password
+    const saltRounds = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = new User({
-      name: request.body.name,
-      email: request.body.email,
-      password: request.body.password,
-      image: request.body.image,
-      gender: request.body.gender,
-      age: request.body.age,
-      city: request.body.city,
-      state: request.body.state,
-      country: request.body.country,
-      postcode: request.body.postcode,
-      dob: request.body.dob,
-      SSN: request.body.ssn,
-      martialStatus: request.body.martialStatus,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: hashedPassword,
     });
     const user = await UserServices.createUser(newUser);
     response.status(201).json(user);
@@ -28,28 +34,36 @@ const createUser = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-dotenv.config();
 // user login
 const userLogin = async (request: Request, response: Response) => {
   try {
-    const JWT_SECRET = process.env.JWT_SECRET as string;
     const { email, password } = request.body;
-    const user = await UserServices.userLogin(email);
-    if (user && user.password === password) {
-      // generate token
-      const token = jwt.sign({ email: request.body.email }, JWT_SECRET, {
-        expiresIn: "1hr",
-      });
-      response.status(200).json({ user, token });
-    } else {
-      response.status(401).json(`Invalid account`);
+    const user = await UserServices.getUserByEmail(email);
+    if (!user) {
+      throw new Error(" User does not exist in the system");
     }
+    // compare password
+    const passwordFromDatabase = user.password;
+    const passwordFromForm = password;
+    const matchPassword = await bcrypt.compare(
+      passwordFromForm,
+      passwordFromDatabase
+    );
+    if (!matchPassword) {
+      response.status(401);
+      throw new Error(`Invalid account`);
+    }
+    const userId = user._id;
+    // generate token
+    const token = generateToken(email, userId);
+    const cartList = await CartServices.getCartListByUserId(userId);
+    response.status(200).json({ user, token, cartList });
   } catch (error) {
     console.log(error);
   }
 };
 // get users
-const getUserList = async (request: Request, response: Response) => {
+const getUsers = async (request: Request, response: Response) => {
   try {
     const userList = await UserServices.getUserList();
     response.status(200).json(userList);
@@ -58,9 +72,9 @@ const getUserList = async (request: Request, response: Response) => {
   }
 };
 // get user by id
-const getUserById = async (request: Request, response: Response) => {
+const getUser = async (request: Request, response: Response) => {
   try {
-    const userId = request.params.userId;
+    const { userId } = request.params;
     const foundUser = await UserServices.getUserById(userId);
     response.status(200).json(foundUser);
   } catch (error) {
@@ -68,7 +82,7 @@ const getUserById = async (request: Request, response: Response) => {
   }
 };
 // update user detail
-const updateUserDetail = async (request: Request, response: Response) => {
+const updateUserInformation = async (request: Request, response: Response) => {
   try {
     const userId = request.params.userId;
     const newDetail = request.body;
@@ -81,18 +95,18 @@ const updateUserDetail = async (request: Request, response: Response) => {
 //delete a user
 const deleteUserById = async (request: Request, response: Response) => {
   try {
-    const userId = request.params.userId;
-    const deleteUser = UserServices.deleteUser(userId);
+    const { userId } = request.params;
+    const deleteUser = await UserServices.deleteUser(userId);
     response.status(200).json(deleteUser);
   } catch (error) {
     console.log(error);
   }
 };
 export {
-  createUser,
+  registerUser,
   userLogin,
-  getUserList,
-  getUserById,
-  updateUserDetail,
+  getUsers,
+  getUser,
+  updateUserInformation,
   deleteUserById,
 };

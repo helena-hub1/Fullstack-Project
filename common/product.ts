@@ -4,11 +4,12 @@ type Product = {
   model: string;
   image: string;
   fueltype: string;
-  class: string;
+  category: string;
   condtion: string;
   price: string;
   engine: string;
   color: string;
+  quantity: number;
   year: number;
 };
 

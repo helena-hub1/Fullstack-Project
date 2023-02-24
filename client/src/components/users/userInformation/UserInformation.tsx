@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, Box, Paper, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./UserInformation.css";
-export default function userInformation() {
-  const userData =
-    localStorage.getItem("userDetail") !== null
-      ? JSON.parse(localStorage.getItem("userDetail")!)
-      : null;
-  // console.log(userData.user, "user");
+// import getUserDetail from "../../../redux/thunks/user";
+import { AppDispatch, RootState } from "../../../redux/store";
+
+export default function UserInformation() {
+  // state
+  const userDetail = useSelector(
+    (state: RootState) => state.userDetail.userDetail
+  );
+  console.log("userDetail", userDetail);
   return (
     <div className="user-detail-container">
       <Paper
@@ -18,7 +22,7 @@ export default function userInformation() {
         <div className="profile-container">
           <Avatar
             alt="login-avatar"
-            src={userData.user.image}
+            src={userDetail.image}
             sx={{
               mt: 3,
               width: 80,
@@ -31,51 +35,51 @@ export default function userInformation() {
               <Box component="span" className="box">
                 Name:
               </Box>
-              <Box className="box2">{userData.user.name}</Box>
+              <Box className="box2">{userDetail.name}</Box>
             </Typography>
 
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Gender:
               </Box>
-              <Box className="box2">{userData.user.gender}</Box>
+              <Box className="box2">{userDetail.gender}</Box>
             </Typography>
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 City:
               </Box>
-              <Box className="box2">{userData.user.city}</Box>
+              <Box className="box2">{userDetail.city}</Box>
             </Typography>
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 State:
               </Box>
-              <Box className="box2">{userData.user.state}</Box>
+              <Box className="box2">{userDetail.state}</Box>
             </Typography>
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Country:
               </Box>
-              <Box className="box2">{userData.user.country}</Box>
+              <Box className="box2">{userDetail.country}</Box>
             </Typography>
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Postcode:
               </Box>
-              <Box className="box2">{userData.user.postcode}</Box>
+              <Box className="box2">{userDetail.postcode}</Box>
             </Typography>
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 dob:
               </Box>
-              <Box className="box2">{userData.user.dob}</Box>
+              {/* <Box className="box2">{userDetail.}</Box> */}
             </Typography>
 
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Email:
               </Box>
-              <Box className="box2">{userData.user.email}</Box>
+              <Box className="box2">{userDetail.email}</Box>
             </Typography>
             <Button component={Link} to="/update">
               update detail

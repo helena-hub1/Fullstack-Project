@@ -15,11 +15,11 @@ export const jwtStrategy = new JwtStrategy(
   // done => continue to controller
   async (payload, done) => {
     const email = payload.email;
-    const foundUser = await UserServices.userLogin(email);
-    if (!foundUser) {
+    const userExists = await UserServices.getUserByEmail(email);
+    if (!userExists) {
       return "No user";
     }
     // done with authentication and pass foundUser to controller
-    done(null, foundUser);
+    done(null, userExists);
   }
 );

@@ -10,8 +10,6 @@ export default function ProductItem({ product }: Prop) {
   // render
   return (
     <div>
-      <p>{product.make}</p>
-      <p>{product.price}</p>
       <Link to={`/products/${product.VIN}`}>
         <img
           src={product.image}
@@ -20,6 +18,9 @@ export default function ProductItem({ product }: Prop) {
           width="250px"
         ></img>
       </Link>
+      <p>{product.make}</p>
+      <p>{product.price}</p>
+      <p>{product.VIN}</p>
     </div>
   );
 }

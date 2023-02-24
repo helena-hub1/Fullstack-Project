@@ -2,16 +2,38 @@ import { Request, Response } from "express";
 
 import Order from "../models/Order";
 import OrderServices from "../services/orders";
-
+import CartServices from "../services/carts";
 // create order
 const createOrder = async (request: Request, response: Response) => {
   try {
+    const {
+      street,
+      city,
+      postalCode,
+      country,
+      totalPrice,
+      quantity,
+      isDelivered,
+    } = request.body;
+    const userId = request.params.userId;
+    const productsFromCart = CartServices.getCartListByUserId(userId);
+    console.log(productsFromCart, "products api");
     const newOrder = new Order({
-      userId: request.params.userId,
-      productOrder: request.body.productList,
+      userId: userId,
+      //  productOrder: request.body.productOrder,
+      productOrder: productsFromCart,
+      street: street,
+      city: city,
+      postalCode: postalCode,
+      totalPrice: totalPrice,
+      quantity: quantity,
+      country: country,
+      isDelivered: isDelivered,
     });
     const order = await OrderServices.createOrder(newOrder);
+    // response.status(201).json({ ...order, productOrder: productsFromCart });
     response.status(201).json(order);
+    // response.json(productInCart);
   } catch (error) {
     console.log(error);
   }

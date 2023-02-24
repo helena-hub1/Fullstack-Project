@@ -4,20 +4,33 @@ import { Request, Response } from "express";
 import Product from "../models/Product";
 import ProductServices from "../services/products";
 // create product
-const createProduct = async (request: Request, response: Response) => {
+const createNewProduct = async (request: Request, response: Response) => {
   try {
+    const {
+      VIN,
+      make,
+      model,
+      image,
+      category,
+      condition,
+      price,
+      engine,
+      color,
+    } = request.body;
+    const productExists = await ProductServices.getProductByVin(VIN);
+    if (!productExists) {
+      throw new Error(" Product is does not exist in the system");
+    }
     const newProduct = new Product({
-      vin: request.body.vin,
-      make: request.body.make,
-      model: request.body.model,
-      //fueltype: request.body.fueltype,
-      image: request.body.image,
-      class: request.body.class,
-      condition: request.body.condition,
-      price: request.body.price,
-      engine: request.body.engine,
-      color: request.body.color,
-      // year: request.body.year,
+      vin: VIN,
+      make: make,
+      model: model,
+      image: image,
+      category: category,
+      condition: condition,
+      price: price,
+      engine: engine,
+      color: color,
     });
     const product = await ProductServices.createProduct(newProduct);
     response.status(201).json(product);
@@ -25,8 +38,8 @@ const createProduct = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-// get a single product
-const getProductByVin = async (request: Request, response: Response) => {
+// get a product by vehicle number
+const getProduct = async (request: Request, response: Response) => {
   try {
     const productVIN = request.params.productVIN;
     const foundProduct = await ProductServices.getProductByVin(productVIN);
@@ -36,7 +49,7 @@ const getProductByVin = async (request: Request, response: Response) => {
   }
 };
 // get product list
-const getProductList = async (request: Request, response: Response) => {
+const getProducts = async (request: Request, response: Response) => {
   try {
     const productList = await ProductServices.getProductList();
     response.status(200).json(productList);
@@ -45,7 +58,10 @@ const getProductList = async (request: Request, response: Response) => {
   }
 };
 // update product info.
-const updateProductDetail = async (request: Request, response: Response) => {
+const updateProductInformation = async (
+  request: Request,
+  response: Response
+) => {
   try {
     const productId = request.params.productId;
     const updateProduct = request.body;
@@ -58,8 +74,8 @@ const updateProductDetail = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-// delete product
-const deleteProductById = async (request: Request, response: Response) => {
+// delete product by id
+const deleteProduct = async (request: Request, response: Response) => {
   try {
     const productId = request.params.productId;
     const product = await ProductServices.deleteProductById(productId);
@@ -69,9 +85,9 @@ const deleteProductById = async (request: Request, response: Response) => {
   }
 };
 export {
-  createProduct,
-  getProductByVin,
-  getProductList,
-  updateProductDetail,
-  deleteProductById,
+  createNewProduct,
+  getProduct,
+  getProducts,
+  updateProductInformation,
+  deleteProduct,
 };

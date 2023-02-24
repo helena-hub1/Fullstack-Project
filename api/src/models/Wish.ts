@@ -2,28 +2,24 @@ import mongoose, { Document } from "mongoose";
 
 import { ProductSchema } from "./Product";
 import User from "./User";
+import Wish from "../../../common/wish";
 // type
 export type WishDocument = Document & {
-  date: Date;
-  userId: string;
-  productWish: [];
+  WishDocument: Wish;
 };
 // schema
-const WishSchema = new mongoose.Schema(
-  {
-    date: {
-      type: Date,
-      default: Date.now(),
-    },
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: User,
-    },
-    productWish: {
-      type: [{ type: ProductSchema }],
-    },
+const WishSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    default: Date.now(),
   },
-  { timestamps: true }
-);
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
+  },
+  productWish: {
+    type: [{ type: ProductSchema }],
+  },
+});
 
 export default mongoose.model<WishDocument>("Wish", WishSchema);

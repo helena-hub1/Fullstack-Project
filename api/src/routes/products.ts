@@ -3,35 +3,35 @@ import Router from "express";
 import passport from "passport";
 
 import {
-  createProduct,
-  getProductByVin,
-  getProductList,
-  updateProductDetail,
-  deleteProductById,
+  createNewProduct,
+  getProduct,
+  getProducts,
+  updateProductInformation,
+  deleteProduct,
 } from "../controllers/products";
 
 const router = Router();
 // routes
-router.get("/", getProductList);
+router.get("/", getProducts);
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  createProduct
+  createNewProduct
 );
 router.get(
   "/:productVIN",
-  passport.authenticate("jwt", { session: false }),
-  getProductByVin
+  // passport.authenticate("jwt", { session: false }),
+  getProduct
 );
 router.put(
   "/:productId",
   passport.authenticate("jwt", { session: false }),
-  updateProductDetail
+  updateProductInformation
 );
 router.delete(
   "/:productId",
   passport.authenticate("jwt", { session: false }),
-  deleteProductById
+  deleteProduct
 );
 
 export default router;

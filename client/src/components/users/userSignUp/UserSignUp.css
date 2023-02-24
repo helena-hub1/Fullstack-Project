@@ -1,0 +1,44 @@
+/* FIELD CONTAINER */
+.field-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 50px;
+}
+/* NAME CONTAINER */
+.name-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+}
+/* FIELD"-CONTAINER */
+.field2-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+
+  gap: 5px;
+}
+.error-message {
+  display: flex;
+  font-size: small;
+  color: red;
+}
+.first-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.second-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+p {
+  padding: 0;
+  margin: 0;
+}

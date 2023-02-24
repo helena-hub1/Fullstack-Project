@@ -11,8 +11,8 @@ export default function ProductDetail() {
   );
   //   dispatch
   const dispatch = useDispatch<AppDispatch>();
-  const { id } = useParams();
-  const url = `http://localhost:8000/products/${id}`;
+  const { VIN } = useParams();
+  const url = `http://localhost:8000/products/${VIN}`;
   //   side effect
   useEffect(() => {
     dispatch(getProductDetails(url));

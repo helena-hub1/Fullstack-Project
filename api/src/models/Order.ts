@@ -3,27 +3,51 @@ import mongoose, { Document } from "mongoose";
 
 import { ProductSchema } from "./Product";
 import User from "./User";
+import Order from "../../../common/order";
 // type
 export type OrderDocument = Document & {
-  date: Date;
-  userId: string;
-  productOrder: [];
+  OrderDocument: Order;
 };
-const OrderSchema = new mongoose.Schema(
-  {
-    date: {
-      type: Date,
-      default: Date.now(),
-    },
-    // ref to other document
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: User,
-    },
-    // embed
-    productOrder: [{ type: ProductSchema }],
+const OrderSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    default: Date.now(),
   },
-  { timestamps: true }
-);
+  // ref to other document
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
+  },
+  // embed
+  productOrder: [{ type: ProductSchema }],
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  totalPrice: {
+    type: Number,
+    required: true,
+  },
+  street: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  country: {
+    type: String,
+    required: true,
+  },
+  postalCode: {
+    type: Number,
+    required: true,
+  },
+  isDelivered: {
+    type: Boolean,
+    required: true,
+  },
+});
 // name of collection + schema
 export default mongoose.model<OrderDocument>("Order", OrderSchema);

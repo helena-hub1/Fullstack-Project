@@ -9,17 +9,14 @@ const createUser = async (user: UserDocument): Promise<UserDocument> => {
 const getUserList = async (): Promise<UserDocument[]> => {
   return User.find();
 };
-// user login
-const userLogin = async (email: string): Promise<UserDocument | null> => {
-  return User.findOne({ email: email });
-};
 
 // get user by Id
 const getUserById = async (userId: string): Promise<UserDocument | null> => {
   return User.findById({ _id: userId });
 };
+// get user by email
 const getUserByEmail = async (email: string): Promise<UserDocument | null> => {
-  return User.findById({ email: email });
+  return User.findOne({ email: email });
 };
 
 // update user info
@@ -36,7 +33,7 @@ const deleteUser = async (userId: string): Promise<UserDocument | null> => {
 
 export default {
   createUser,
-  userLogin,
+  // userLogin,
   getUserList,
   getUserById,
   getUserByEmail,
