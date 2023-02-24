@@ -7,6 +7,8 @@ type Order = {
   city: string;
   country: string;
   postalCode: number;
+  email: string;
+  phoneNumber: string;
   isDelivered: boolean;
   productOrder: [];
 };

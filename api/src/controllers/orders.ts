@@ -17,7 +17,6 @@ const createOrder = async (request: Request, response: Response) => {
     } = request.body;
     const userId = request.params.userId;
     const productsFromCart = CartServices.getCartListByUserId(userId);
-    console.log(productsFromCart, "products api");
     const newOrder = new Order({
       userId: userId,
       //  productOrder: request.body.productOrder,

@@ -49,7 +49,7 @@ export default function CartListPage() {
     country: string;
     postalCode: number;
     email: string;
-    telephone: number;
+    phoneNumber: number;
     isDelivered: boolean;
   };
   const FormSchema = Yup.object().shape({
@@ -59,7 +59,7 @@ export default function CartListPage() {
     postalCode: Yup.number().required("Required"),
     isDelivered: Yup.boolean().required("required"),
     email: Yup.string().email("Invalid email").required("Required!"),
-    telephone: Yup.number().required("Required"),
+    phoneNumber: Yup.number().required("Required"),
   });
   const initialValues: InitialValues = {
     quantity: 1,
@@ -70,7 +70,7 @@ export default function CartListPage() {
     postalCode: 1,
     isDelivered: false,
     email: "",
-    telephone: 1,
+    phoneNumber: 1,
   };
   const userData =
     localStorage.getItem("userDetail") !== null
@@ -85,8 +85,8 @@ export default function CartListPage() {
   return (
     <div className="cart-page">
       <div className="cart-container">
-        {cartList.map((cartProduct: Cart) => (
-          <CartList cartProduct={cartProduct} />
+        {cartList.map((cartProduct: Cart, id) => (
+          <CartList cartProduct={cartProduct} key={id} />
         ))}
         <Typography fontSize="20px">Total price:</Typography>
       </div>
@@ -101,7 +101,7 @@ export default function CartListPage() {
               .then((data) => {
                 console.log(data, "cart page order");
               });
-            //  console.log(values);
+            console.log(values);
             resetForm({ values: initialValues });
           }}
         >
@@ -165,13 +165,13 @@ export default function CartListPage() {
                     ) : null}
                     <TextField
                       size="small"
-                      name="telephone"
-                      label="Tel. number:"
+                      name="phoneNumber"
+                      label="Phone number:"
                       onChange={handleChange}
-                      value={values.telephone}
+                      value={values.phoneNumber}
                     />
-                    {errors.telephone && touched.telephone ? (
-                      <div className="error-message"> {errors.telephone}</div>
+                    {errors.phoneNumber && touched.phoneNumber ? (
+                      <div className="error-message"> {errors.phoneNumber}</div>
                     ) : null}
                     <div className="shipping-information">
                       <Typography sx={{ mt: 1 }}>isDelivered</Typography>
