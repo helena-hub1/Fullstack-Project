@@ -1,0 +1,32 @@
+/* MAIN CONTAINER */
+.main-container {
+  margin: 30px;
+}
+/* DETAIL CONTAINER */
+.detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  gap: 100px;
+}
+/*CAR MAKE  */
+.car-make {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.rate-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+/* BUTTON CONTAINER */
+.btn-container {
+  display: flex;
+  gap: 20px;
+}

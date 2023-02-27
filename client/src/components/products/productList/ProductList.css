@@ -1,8 +1,12 @@
+/* PRODUCT CONTAINER */
+.product-container {
+  margin-top: 50px;
+}
 /* PRODUCT LIST */
 .product-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 20px;
   margin: 0 auto;
   width: 80%;
 }

@@ -1,0 +1,86 @@
+.cart-page {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  margin: 0 auto;
+  width: 80%;
+}
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
+  gap: 10px;
+  margin-top: 50px;
+}
+.form-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+}
+/* TEXTFIELDS */
+.textfield-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 0 auto;
+  gap: 20px;
+}
+/* SHIPPING */
+.shipping {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+/* CONTACT */
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 65px;
+}
+.shipping-information {
+  display: flex;
+  gap: 10px;
+}
+/* PAYMENT */
+.payment {
+  display: flex;
+  gap: 10px;
+}
+/* EMPTYCART */
+.empty-cartlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+/* PAYMENT CONTAINER */
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  /* margin-top: 20px; */
+  margin: 0 auto;
+  width: 80%;
+}
+/* PAYMENT-ONE */
+.payment-one {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+}
+.payment-two {
+  display: flex;
+}

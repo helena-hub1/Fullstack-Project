@@ -79,7 +79,7 @@ export default function UserSignUp() {
       .oneOf([Yup.ref("password")], "Passwords do not match.")
       .required("Required"),
   });
-  // const url = "http://localhost:8000/users";
+  // const url = "http://localhost:8002/users";
   return (
     <div>
       <Formik
@@ -105,7 +105,10 @@ export default function UserSignUp() {
           return (
             <Form>
               <div className="field-container">
-                <Paper elevation={6} sx={{ height: 500, width: 500 }}>
+                <Paper
+                  elevation={4}
+                  sx={{ height: 500, width: 500, backgroundColor: "aliceblue" }}
+                >
                   <Typography
                     component="div"
                     textAlign="center"

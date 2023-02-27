@@ -5,6 +5,7 @@ import User from "../models/User";
 import UserServices from "../services/users";
 import generateToken from "./generateToken";
 import CartServices from "../services/carts";
+import OrderServices from "../services/orders";
 
 // register user
 const registerUser = async (request: Request, response: Response) => {
@@ -57,7 +58,8 @@ const userLogin = async (request: Request, response: Response) => {
     // generate token
     const token = generateToken(email, userId);
     const cartList = await CartServices.getCartListByUserId(userId);
-    response.status(200).json({ user, token, cartList });
+    const orderList = await OrderServices.getOrderListByUserId(userId);
+    response.status(200).json({ user, token, cartList, orderList });
   } catch (error) {
     console.log(error);
   }

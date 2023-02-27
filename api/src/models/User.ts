@@ -1,7 +1,7 @@
 // user model
 import mongoose, { Document } from "mongoose";
 
-// type
+// TypeScript
 export type UserDocument = Document & {
   firstName: string;
   lastName: string;

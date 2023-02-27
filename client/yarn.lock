@@ -3153,7 +3153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*, @types/prop-types@npm:^15.7.5":
+"@types/prop-types@npm:*, @types/prop-types@npm:^15.7.3, @types/prop-types@npm:^15.7.5":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
   checksum: 5b43b8b15415e1f298243165f1d44390403bb2bd42e662bca3b5b5633fdd39c938e91b7fce3a9483699db0f7a715d08cef220c121f723a634972fdf596aec980
@@ -4707,10 +4707,10 @@ __metadata:
     react-redux: ^8.0.5
     react-router-dom: ^6.8.1
     react-scripts: 5.0.1
+    react-xarrows: ^2.0.2
     typescript: ^4.4.2
     web-vitals: ^2.1.0
     yup: ^1.0.0
-    yup-password: ^0.2.2
   languageName: unknown
   linkType: soft
 
@@ -10862,7 +10862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -11220,6 +11220,19 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: 75602840106aa9c6545149d6d7ae1502fb7b7abadcce70a6954c4b64a438ff1cd16fc77a0a1e5197cdd72da398f39eb929ea06f9005c45b132ed34e056ebdeb1
+  languageName: node
+  linkType: hard
+
+"react-xarrows@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "react-xarrows@npm:2.0.2"
+  dependencies:
+    "@types/prop-types": ^15.7.3
+    lodash: ^4.17.21
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: e74a53405811f5031d9e31ed6d78f6b712e0c357dbd762abfa68b3ebf0c1311ca9a1396bece012881af54bc84f7ec09e191c0285db6763ce73dbd4cc7fdeffed
   languageName: node
   linkType: hard
 
@@ -13714,13 +13727,6 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
-  languageName: node
-  linkType: hard
-
-"yup-password@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "yup-password@npm:0.2.2"
-  checksum: 39bbe9f5498b1021f8cf7f4b66df75bfb3b0a53bef057f34066a40f7ae72a6334f542cef5ad29926c36bcf79bcb8d8795136eee50b80fe94a5b3bf431470bebf
   languageName: node
   linkType: hard
 

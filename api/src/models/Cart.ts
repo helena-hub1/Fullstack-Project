@@ -3,11 +3,8 @@ import mongoose, { Document, ObjectId } from "mongoose";
 import { ProductSchema } from "./Product";
 import User from "./User";
 import Cart from "../../../common/cart";
-// type
+// TypeScript
 export type CartDocument = Document & {
-  // date: Date;
-  // userId: string;
-  // productCart: [];
   CartDocument: Cart;
 };
 // schema
@@ -22,6 +19,11 @@ const CartSchema = new mongoose.Schema({
   },
   productCart: {
     type: [{ type: ProductSchema }],
+  },
+  quantity: {
+    type: Number,
+    default: 1,
+    required: true,
   },
 });
 

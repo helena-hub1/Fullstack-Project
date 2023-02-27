@@ -7,23 +7,36 @@ const userData =
   localStorage.getItem("userDetail") !== null
     ? JSON.parse(localStorage.getItem("userDetail")!)
     : null;
-const userId = userData.user._id;
 
-const token = userData.token;
-const url = `http://localhost:8000/carts/${userId}`;
+const userId = userData.user._id;
+const token = userData?.token;
+const url = `http://localhost:8002/carts/${userId}`;
 console.log(userId, "userId");
 console.log(token, "token");
-export const getCartList = () => {
+
+export const getCartListThunk = () => {
   return async (dispatch: AppDispatch) => {
-    const response = await axios.get(url);
-    //   {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // }
-    // );
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.data;
     dispatch(cartAction.getCartList(data));
     console.log(data, "data from cart thunk");
   };
 };
+
+// Get cart by cart id
+// export const getCartByIdThunk = (url: string) => {
+//   return async (dispatch: AppDispatch) => {
+//     const response = await axios.get(url, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     const data = await response.data;
+//     dispatch(cartAction.getCartList(data));
+//     console.log(data, "data from cart thunk");
+//   };
+// };

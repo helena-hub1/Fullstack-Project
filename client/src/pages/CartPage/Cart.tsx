@@ -1,6 +1,6 @@
 import React from "react";
-import CartListPage from "../../components/cart/cartListPage/CartListPage";
+import CartList from "../../components/cart/cartList/CartList";
 
 export default function Cart() {
-  return <CartListPage />;
+  return <CartList />;
 }

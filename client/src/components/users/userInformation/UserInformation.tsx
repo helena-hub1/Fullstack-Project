@@ -4,84 +4,56 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./UserInformation.css";
-// import getUserDetail from "../../../redux/thunks/user";
+import getUserDetail from "../../../redux/thunks/user";
 import { AppDispatch, RootState } from "../../../redux/store";
 
 export default function UserInformation() {
   // state
-  const userDetail = useSelector(
-    (state: RootState) => state.userDetail.userDetail
-  );
-  console.log("userDetail", userDetail);
+  const user = useSelector((state: RootState) => state.userDetail.userDetail);
+  //   const userData = JSON.parse(localStorage.getItem("userDetail")!);
+  //   const user = userData.user;
+  // console.log("user data", user);
+
   return (
     <div className="user-detail-container">
-      <Paper
-        elevation={3}
-        sx={{ width: 300, height: 500, mt: 4, mb: 4, background: "aliceblue" }}
-      >
+      <Paper elevation={3} sx={{ width: 300, height: 300, mt: 4, mb: 4 }}>
         <div className="profile-container">
-          <Avatar
-            alt="login-avatar"
-            src={userDetail.image}
-            sx={{
-              mt: 3,
-              width: 80,
-              height: 80,
-              alignItems: "center",
-            }}
-          />
+          <Typography sx={{ textAlign: "center", mt: 3 }}>
+            {user.firstName}'s profile
+          </Typography>
           <div className="typography-container">
             <Typography className="text-container" component="div">
               <Box component="span" className="box">
-                Name:
+                First Name:
               </Box>
-              <Box className="box2">{userDetail.name}</Box>
+              <Box className="box2">{user.firstName}</Box>
             </Typography>
 
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
-                Gender:
+                Last Name:
               </Box>
-              <Box className="box2">{userDetail.gender}</Box>
+              <Box className="box2">{user.lastName}</Box>
             </Typography>
-            <Typography component="div" className="text-container">
-              <Box component="span" className="box">
-                City:
-              </Box>
-              <Box className="box2">{userDetail.city}</Box>
-            </Typography>
-            <Typography component="div" className="text-container">
-              <Box component="span" className="box">
-                State:
-              </Box>
-              <Box className="box2">{userDetail.state}</Box>
-            </Typography>
-            <Typography component="div" className="text-container">
-              <Box component="span" className="box">
-                Country:
-              </Box>
-              <Box className="box2">{userDetail.country}</Box>
-            </Typography>
-            <Typography component="div" className="text-container">
-              <Box component="span" className="box">
-                Postcode:
-              </Box>
-              <Box className="box2">{userDetail.postcode}</Box>
-            </Typography>
-            <Typography component="div" className="text-container">
-              <Box component="span" className="box">
-                dob:
-              </Box>
-              {/* <Box className="box2">{userDetail.}</Box> */}
-            </Typography>
-
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Email:
               </Box>
-              <Box className="box2">{userDetail.email}</Box>
+              <Box className="box2">{user.email}</Box>
             </Typography>
-            <Button component={Link} to="/update">
+            <Button
+              component={Link}
+              to="/update"
+              type="submit"
+              sx={{
+                width: "250px",
+                height: "40px",
+                mt: 3,
+                color: "#fff",
+                backgroundColor: "#000",
+              }}
+              variant="outlined"
+            >
               update detail
             </Button>
           </div>

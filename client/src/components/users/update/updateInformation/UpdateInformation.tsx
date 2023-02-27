@@ -4,7 +4,7 @@ import { Button, TextField, Paper, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function UpdateForm() {
+export default function UpdateInformation() {
   // get token & user id from local storage
   const userData =
     localStorage.getItem("userDetail") !== null
@@ -14,7 +14,7 @@ export default function UpdateForm() {
   const token = userData.token;
   console.log("user id", userId);
   console.log("token", token);
-  const url = `http://localhost:8000/users/${userId}`;
+  const url = `http://localhost:8002/users/${userId}`;
 
   const navigate = useNavigate();
 

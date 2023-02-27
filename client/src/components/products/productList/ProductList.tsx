@@ -19,10 +19,12 @@ export default function ProductList() {
   }, [dispatch]);
   console.log(productList);
   return (
-    <div className="product-list">
-      {productList.map((product, index) => (
-        <ProductItem key={index} product={product} />
-      ))}
+    <div className="product-container">
+      <div className="product-list">
+        {productList.map((product, index) => (
+          <ProductItem key={index} product={product} />
+        ))}
+      </div>
     </div>
   );
 }

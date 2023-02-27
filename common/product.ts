@@ -6,11 +6,13 @@ type Product = {
   fueltype: string;
   category: string;
   condtion: string;
-  price: string;
+  price: number;
   engine: string;
   color: string;
   quantity: number;
   year: number;
+  rating: number;
+  description: string;
 };
 
 export default Product;

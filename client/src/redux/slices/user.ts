@@ -9,18 +9,22 @@ type InitialState = {
 // initial state
 const initialState: InitialState = {
   userDetail: {
-    gender: "",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
-    image: "",
     password: "",
-    city: "",
-    state: "",
-    country: "",
-    postcode: "",
-    age: 1,
-    martialStatus: "",
-    SSN: "",
+    // gender: "",
+    // name: "",
+    // email: "",
+    // image: "",
+    // password: "",
+    // city: "",
+    // state: "",
+    // country: "",
+    // postcode: "",
+    // age: 1,
+    // martialStatus: "",
+    // SSN: "",
   },
 };
 

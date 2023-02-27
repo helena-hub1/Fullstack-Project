@@ -1,0 +1,18 @@
+.latest-models2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+/* IMAGE */
+.img {
+  object-fit: scale-down;
+}
+/* Text */
+.audi-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0;
+}

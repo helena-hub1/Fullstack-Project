@@ -4,7 +4,11 @@
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  margin-top: 50px;
+  margin: 50px;
+  /* background-image: url("../../../../../client/src/assets/NewAudimodel.jpg"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: scale-down;
 }
 /* NAME CONTAINER */
 .name-container {

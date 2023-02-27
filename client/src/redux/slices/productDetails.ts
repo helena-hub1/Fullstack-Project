@@ -15,11 +15,13 @@ const initialState: InitialState = {
     fueltype: "",
     category: "",
     condtion: "",
-    price: "",
+    price: 1,
     engine: "",
     color: "",
     year: 1,
     quantity: 1,
+    rating: 1,
+    description: "",
   },
 };
 // slice

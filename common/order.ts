@@ -3,12 +3,14 @@ type Order = {
   userId: string;
   quantity: number;
   totalPrice: number;
-  street: string;
-  city: string;
-  country: string;
-  postalCode: number;
+  shippingAddress: {
+    street: string;
+    city: string;
+    country: string;
+    postalCode: number;
+  };
   email: string;
-  phoneNumber: string;
+  phoneNumber: number;
   isDelivered: boolean;
   productOrder: [];
 };

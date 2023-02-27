@@ -3,7 +3,7 @@ import mongoose, { Document } from "mongoose";
 import { ProductSchema } from "./Product";
 import User from "./User";
 import Wish from "../../../common/wish";
-// type
+// TypeScript
 export type WishDocument = Document & {
   WishDocument: Wish;
 };

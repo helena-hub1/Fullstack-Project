@@ -18,9 +18,13 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Home from "@mui/icons-material/Home";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useNavigate } from "react-router-dom";
 
-import car from "../../assets/carNavbar.png";
+import car from "../../assets/navbarcar.png";
 import "./NavBar.css";
+import { fontSize } from "@mui/system";
+import { Button } from "@mui/material";
 // MUI
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,8 +67,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
-  const user = localStorage.getItem("userDetail");
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -88,6 +90,13 @@ export default function NavBar() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  // useNavigate
+  const navigate = useNavigate();
+  // logout user
+  const logoutHandler = () => {
+    localStorage.removeItem("userDetail");
+    navigate("/");
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -106,11 +115,23 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <Link className="link" to="/signin">
+        <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
+          Sign in
+        </MenuItem>
+      </Link>
+      <Link className="link" to="/signup">
+        <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
+          Sign up
+        </MenuItem>
+      </Link>
+      <Link className="link" to="/">
+        <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
+          <Typography onClick={() => logoutHandler}>Logout</Typography>
+        </MenuItem>
+      </Link>
     </Menu>
   );
-
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -128,26 +149,6 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <Home />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -158,34 +159,29 @@ export default function NavBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        {/* <p>Profile</p> */}
       </MenuItem>
     </Menu>
   );
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
         color="inherit"
-        sx={{ height: "70px", backgroundImage: "" }}
+        sx={{ backgroundColor: "aliceblue" }}
       >
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ mx: 5, display: { xs: "none", sm: "block" } }}
           >
-            ABC.COM CAR DELLER
+            <IconButton sx={{ color: "inherit" }}>
+              <StarBorderIcon sx={{ fontSize: "50px" }} />
+            </IconButton>
+            CAR DELLER
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -197,76 +193,37 @@ export default function NavBar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-              component={Link}
-              to="/"
-            >
-              <Home />
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-              component={Link}
-              to="/products"
-            >
-              <img
-                src={car}
-                alt="clothe-icon"
-                height="50px"
-                width="50px"
-                color="#000"
-              />
-            </IconButton>
-            <IconButton>
-              <Typography
+          <Box>
+            <div className="navbar-icons">
+              <Link to="/order">order</Link>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
                 color="inherit"
-                sx={{ fiontSize: "20px" }}
                 component={Link}
-                to="/signin"
+                to="/"
               >
-                Sign in
-              </Typography>
-              <Typography
+                <Home />
+              </IconButton>
+              <Link to="/products">
+                <img src={car} alt="car-icon" height="50px" width="50px" />
+              </Link>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
                 color="inherit"
-                sx={{ fiontSize: "20px" }}
-                component={Link}
-                to="/signup"
               >
-                Sign up
-              </Typography>
-            </IconButton>
-            {/* <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <FavoriteBorderIcon />
-              </Badge>
-            </IconButton> */}
-
-            {/* <Link to="/wishList">wishlist</Link>
-       <Link to="/user">User Information</Link>
-       <Link to="/order">order</Link>
-       <Link to="/cartlist">Cart list</Link> */}
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+                <AccountCircle />
+              </IconButton>
+              <Button onClick={logoutHandler}>Logout</Button>
+            </div>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+
+          {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -277,7 +234,7 @@ export default function NavBar() {
             >
               <MoreIcon />
             </IconButton>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

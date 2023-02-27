@@ -1,16 +1,23 @@
 /* LOGIN */
 .login-page {
+  display: flex;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
-  object-fit: scale-down;
+
+  /* height: 100vh; */
+  /* object-fit: scale-down; */
+  /* background-image: url("../../../assets/NewAudimodel.jpg"); */
 }
+
 /* FORM */
 .form-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin: 0 auto;
+  width: 80%;
+  height: 100vh;
 }
 /* ERROR */
 .error-message {

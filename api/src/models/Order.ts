@@ -4,7 +4,7 @@ import mongoose, { Document } from "mongoose";
 import { ProductSchema } from "./Product";
 import User from "./User";
 import Order from "../../../common/order";
-// type
+// TypeScript
 export type OrderDocument = Document & {
   OrderDocument: Order;
 };
@@ -20,27 +20,29 @@ const OrderSchema = new mongoose.Schema({
   },
   // embed
   productOrder: [{ type: ProductSchema }],
+  shippingAddress: {
+    street: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    postalCode: {
+      type: Number,
+      required: true,
+    },
+  },
   quantity: {
     type: Number,
     required: true,
   },
   totalPrice: {
-    type: Number,
-    required: true,
-  },
-  street: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  country: {
-    type: String,
-    required: true,
-  },
-  postalCode: {
     type: Number,
     required: true,
   },

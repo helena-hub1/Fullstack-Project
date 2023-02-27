@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/navBar/NavBar";
-import WishList from "./components/wishList/WishList";
+import WishList from "./components/wishList/wishList/WishList";
 import Home from "./pages/homePage/Home";
 import Order from "./pages/orderPage/Order";
 import Products from "./pages/productsPage/Products";
@@ -16,6 +16,7 @@ import SuccessMessage from "./components/users/update/successOnUpdate/SuccessMes
 import UserSignUp from "./components/users/userSignUp/UserSignUp";
 import ProductDetail from "./components/products/productDetail/ProductDetail";
 import Cart from "./pages/CartPage/Cart";
+import Footer from "./components/footer/Footer";
 function App() {
   return (
     <div>
@@ -32,8 +33,10 @@ function App() {
         <Route path="/logout" element={<LogOutPage />}></Route>
         <Route path="/update" element={<UpdatePage />}></Route>
         <Route path="/success" element={<SuccessMessage />}></Route>
-        <Route path="/cartList" element={<Cart />}></Route>
+        <Route path="/cartlist" element={<Cart />}></Route>
+        <Route path="/cartlist/:id" element={<Cart />}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 }

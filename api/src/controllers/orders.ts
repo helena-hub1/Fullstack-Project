@@ -14,20 +14,26 @@ const createOrder = async (request: Request, response: Response) => {
       totalPrice,
       quantity,
       isDelivered,
+      email,
+      phoneNumber,
     } = request.body;
     const userId = request.params.userId;
-    const productsFromCart = CartServices.getCartListByUserId(userId);
+    // const productsFromCart = CartServices.getCartListByUserId(userId);
     const newOrder = new Order({
       userId: userId,
-      //  productOrder: request.body.productOrder,
-      productOrder: productsFromCart,
-      street: street,
-      city: city,
-      postalCode: postalCode,
+      productOrder: request.body.productOrder,
+      // productOrder: productsFromCart,
+      shippingAddress: {
+        street: street,
+        city: city,
+        postalCode: postalCode,
+        country: country,
+      },
       totalPrice: totalPrice,
       quantity: quantity,
-      country: country,
       isDelivered: isDelivered,
+      email: email,
+      phoneNumber: phoneNumber,
     });
     const order = await OrderServices.createOrder(newOrder);
     // response.status(201).json({ ...order, productOrder: productsFromCart });

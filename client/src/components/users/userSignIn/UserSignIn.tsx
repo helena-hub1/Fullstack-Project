@@ -12,12 +12,15 @@ import { Link, useNavigate } from "react-router-dom";
 import "./UserSignIn.css";
 import login from "../../../assets/login.jpg";
 import axios from "axios";
+
 import { userAction } from "../../../redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAction } from "../../../redux/slices/cart";
 import { orderAction } from "../../../redux/slices/order";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { loginUserThunk } from "../../../redux/thunks/user";
+import { getCartListThunk } from "../../../redux/thunks/cart";
+import cars from "../../../assets/NewAudimodel.jpg";
 // import { getCartList } from "../../../redux/thunks/cart";
 
 // const url = "http://localhost:8002/users/login";
@@ -52,25 +55,18 @@ export default function UserLogIn() {
         "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
       ),
   });
-
   return (
     <div className="login-page">
+      <div className="signin-image">
+        <img src={cars} alt="car-image" />
+      </div>
       <div className="form-container">
         <Formik
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values) => {
-            console.log(values, "values");
             dispatch(loginUserThunk(values.email, values.password));
-            // axios
-            //   .post(url, values)
-            //   .then((response) => response.data)
-            //   .then((data) => {
-            //     localStorage.setItem("userDetail", JSON.stringify(data));
-
-            // /dispatch(cartAction.getCartList(data.cartList));
-            // dispatch(orderAction.getOrderList(data.orderList));
-
+            // dispatch(getCartListThunk());
             navigate(`/user`);
           }}
         >
@@ -78,16 +74,16 @@ export default function UserLogIn() {
             return (
               <Form>
                 <Paper
-                  elevation={4}
+                  // elevation={4}
                   sx={{
-                    // backgroundColor: "#E6E6E6",
-                    width: 300,
-                    mt: 4,
-                    height: 350,
+                    // backgroundColor: "aliceblue",
+                    width: 400,
+                    // mt: 4,
+                    // height: "100,
                   }}
                 >
                   <div className="form-container">
-                    <Typography sx={{ mt: 3, fontSize: "30px" }}>
+                    <Typography sx={{ mt: 5, fontSize: "30px" }}>
                       Log in
                     </Typography>
                     <IconButton sx={{ color: "inherit" }}>
@@ -99,7 +95,12 @@ export default function UserLogIn() {
                       name="email"
                       onChange={handleChange}
                       // variant="standard"
-                      sx={{ width: 250, fontSize: "10px", mt: 2 }}
+                      sx={{
+                        width: 250,
+                        fontSize: "10px",
+                        mt: 2,
+                      }}
+                      // style={{ borderRadius: 25 }}
                       size="small"
                     ></TextField>
                     {errors.email && touched.email ? (
@@ -111,7 +112,7 @@ export default function UserLogIn() {
                       type="password"
                       // variant="standard"
                       // helperText="8 Chars, One(A-Z), One(a-z) and One(0-9)"
-                      sx={{ mt: 1, width: 250 }}
+                      sx={{ mt: 1, width: 250, borderRadius: 10 }}
                       onChange={handleChange}
                       size="small"
                     />
@@ -124,7 +125,7 @@ export default function UserLogIn() {
                         width: "250px",
                         height: "40px",
                         mt: 3,
-                        borderRadius: "5",
+                        borderRadius: "10px",
                         backgroundColor: "#000",
                         color: "#fff",
                       }}
@@ -152,5 +153,6 @@ export default function UserLogIn() {
         </Formik>
       </div>
     </div>
+    // </div>
   );
 }

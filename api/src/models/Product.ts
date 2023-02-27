@@ -2,8 +2,8 @@
 import mongoose, { Document } from "mongoose";
 
 import Product from "../../../common/product";
-// import Cart from "./Cart";
-// type
+
+// TypeScript
 export type ProductDocument = Document & {
   ProductDocument: Product;
 };
@@ -33,7 +33,7 @@ export const ProductSchema = new mongoose.Schema({
     type: String,
   },
   price: {
-    type: String,
+    type: Number,
   },
   engine: {
     type: String,
@@ -47,6 +47,12 @@ export const ProductSchema = new mongoose.Schema({
   quantity: {
     type: Number,
     default: 1,
+  },
+  rating: {
+    type: Number,
+  },
+  description: {
+    type: String,
   },
 });
 // model

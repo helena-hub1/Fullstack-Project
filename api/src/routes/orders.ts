@@ -13,12 +13,12 @@ const router = Router();
 // routes
 router.post(
   "/:userId",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   createOrder
 );
 router.get(
   "/:userId",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   getOrderListByUserId
 );
 router.get(

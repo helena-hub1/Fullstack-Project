@@ -1,47 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Paper,
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Cart from "../../../../../common/cart";
 import Product from "../../../../../common/product";
 import "./CartItem.css";
+import productDetail from "../../../pages/productDetailsPage/productDetail";
+import { useDispatch } from "react-redux";
+import { cartAction } from "../../../redux/slices/cart";
 
 // type
 type Prop = {
-  cartItem: Product;
+  product: Product;
 };
-export default function CartItem({ cartItem }: Prop) {
-  const [quantity, setQuantity] = React.useState("");
-
+export default function CartItem({ product }: Prop) {
+  const [quantity, setQuantity] = useState("");
+  // dispatch
+  const dispatch = useDispatch();
   const handleChange = (event: SelectChangeEvent) => {
     setQuantity(event.target.value as string);
+
+    dispatch(cartAction.incrementQty(product));
+
+    // dispatch(cartAction.decrementQty(product));
+  };
+  const removeCartProductHandler = () => {
+    dispatch(cartAction.removeFromCart(product));
   };
   // console.log(cartItem, "product from item");
   return (
     <div>
       {
         <div>
-          <Paper sx={{ height: "200px", width: "500px" }}>
+          <Paper
+            sx={{
+              height: "250px",
+              width: "400px",
+              backgroundColor: "aliceblue",
+            }}
+          >
             <div className="cartitem-container">
-              <div>
+              <Box sx={{ mt: 2 }}>
                 <img
-                  src={cartItem.image}
+                  src={product.image}
                   alt="car"
                   height="150px"
                   width="150px"
                 />
-                <p>{cartItem.VIN}</p>
-              </div>
+                <p>{product.make}</p>
+                <p>Price:${product.price}</p>
+              </Box>
               <div>
                 <Box sx={{ minWidth: 120 }}>
-                  <FormControl fullWidth>
+                  <FormControl fullWidth size="small">
                     <InputLabel id="demo-simple-select-label">
                       Quantity
                     </InputLabel>
@@ -61,6 +80,9 @@ export default function CartItem({ cartItem }: Prop) {
                   </FormControl>
                 </Box>
               </div>
+              <IconButton onClick={removeCartProductHandler}>
+                <DeleteOutlineIcon />
+              </IconButton>
             </div>
           </Paper>
         </div>

@@ -1,0 +1,5 @@
+.wish-container {
+  display: flex;
+  margin: 30px;
+  gap: 20px;
+}
