@@ -3,8 +3,8 @@ import axios from "axios";
 import { AppDispatch } from "../../redux/store";
 import { userAction } from "../slices/user";
 
-const registerUrl = "http://localhost:8002/users/";
-const loginUrl = "http://localhost:8002/users/login";
+const registerUrl = "http://localhost:8000/users/";
+const loginUrl = "http://localhost:8000/users/login";
 
 export default function registerUser(
   firstName: string,

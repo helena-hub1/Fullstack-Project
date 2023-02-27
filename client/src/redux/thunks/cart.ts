@@ -10,7 +10,7 @@ const userData =
 
 const userId = userData.user._id;
 const token = userData?.token;
-const url = `http://localhost:8002/carts/${userId}`;
+const url = `http://localhost:8000/carts/${userId}`;
 console.log(userId, "userId");
 console.log(token, "token");
 

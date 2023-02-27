@@ -9,9 +9,11 @@ import { AppDispatch, RootState } from "../../../redux/store";
 
 export default function UserInformation() {
   // state
-  const user = useSelector((state: RootState) => state.userDetail.userDetail);
-  //   const userData = JSON.parse(localStorage.getItem("userDetail")!);
-  //   const user = userData.user;
+  const userDetail = useSelector(
+    (state: RootState) => state.userDetail.userDetail
+  );
+  const userData = JSON.parse(localStorage.getItem("userDetail")!);
+  const user = userData.user;
   // console.log("user data", user);
 
   return (

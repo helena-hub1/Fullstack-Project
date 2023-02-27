@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import createOrderThunk from "../../../redux/thunks/order";
+// import createOrderThunk from "../../../redux/thunks/order";
 import maestro from "../../../assets/maestro.svg";
 import visaelectron from "../../../assets/visa-electron.svg";
 import visa from "../../../assets/visa.svg";
@@ -37,7 +37,7 @@ export default function CartList() {
   const cartList = useSelector((state: RootState) => state.cartList.cartList);
   const totalPrice = Math.round(
     cartList.reduce(
-      (accum, product) => accum + product.price * product.quantity,
+      (accum, product) => accum + product.price * product.cartItemQty,
       0
     )
   );
@@ -133,20 +133,22 @@ export default function CartList() {
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values, { resetForm }) => {
-            dispatch(
-              createOrderThunk(
-                cartList,
-                values.quantity,
-                values.totalPrice,
-                values.street,
-                values.city,
-                values.country,
-                values.postalCode,
-                values.email,
-                values.phoneNumber,
-                values.isDelivered
-              )
-            );
+            // dispatch(
+            //   createOrderThunk(
+            //     cartList,
+            //     values.quantity,
+            //     values.totalPrice,
+            //     values.street,
+            //     values.city,
+            //     values.country,
+            //     values.postalCode,
+            //     values.email,
+            //     values.phoneNumber,
+            //     values.isDelivered
+            //   )
+            // );
+            console.log("cart list", cartList);
+            console.log("values", values);
             resetForm({ values: initialValues });
           }}
         >
@@ -271,7 +273,6 @@ export default function CartList() {
                       </RadioGroup>
                       {errors.isDelivered && touched.isDelivered ? (
                         <div className="error-message">
-                          {" "}
                           {errors.isDelivered}
                         </div>
                       ) : null}

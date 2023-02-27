@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Order from "../../../../common/order";
-import Product from "../../../../common/product";
 // type
 type InitialState = {
   order: {};
@@ -8,7 +6,7 @@ type InitialState = {
 // initial state
 const initialState: InitialState = {
   order: {
-    productOrder: [],
+    productCart: [],
     shippingAddress: {
       street: "",
       city: "",

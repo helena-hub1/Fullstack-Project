@@ -13,18 +13,6 @@ const initialState: InitialState = {
     lastName: "",
     email: "",
     password: "",
-    // gender: "",
-    // name: "",
-    // email: "",
-    // image: "",
-    // password: "",
-    // city: "",
-    // state: "",
-    // country: "",
-    // postcode: "",
-    // age: 1,
-    // martialStatus: "",
-    // SSN: "",
   },
 };
 

@@ -19,7 +19,7 @@ import { cartAction } from "../../../redux/slices/cart";
 
 // type
 type Prop = {
-  product: Product;
+  product: Cart;
 };
 export default function CartItem({ product }: Prop) {
   const [quantity, setQuantity] = useState("");

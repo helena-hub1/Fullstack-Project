@@ -1,10 +1,10 @@
 type Cart = {
-  userId: string;
-  productId: string;
+  productId: number;
+  VIN: string;
   make: string;
   rating: number;
   price: number;
   image: string;
-  quantity: number;
+  cartItemQty: number;
 };
 export default Cart;

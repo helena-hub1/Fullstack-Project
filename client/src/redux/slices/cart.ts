@@ -1,13 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Product from "../../../../common/product";
 import Cart from "../../../../common/cart";
+import ShippingAddress from "../../../../common/shippingAddress";
+import ContactInformation from "../../.../../../../common/contactInformation";
 // type
 type InitialState = {
-  cartList: Product[];
+  cartList: Cart[];
+  shippingAddress: ShippingAddress;
+  totalPrice: number;
+  contactInformation: ContactInformation;
 };
 // initial state
 const initialState: InitialState = {
   cartList: [],
+  shippingAddress: {
+    street: "",
+    city: "",
+    country: "",
+    postalCode: 1,
+  },
+  contactInformation: {
+    email: "",
+    phoneNumber: 1,
+  },
+  totalPrice: 1,
 };
 // slice
 const cartSlice = createSlice({
@@ -22,7 +37,7 @@ const cartSlice = createSlice({
         (cartItem) => cartItem.VIN === action.payload.VIN
       );
       if (index !== -1) {
-        state.cartList[index].quantity += 1;
+        state.cartList[index].cartItemQty += 1;
       } else {
         state.cartList.push(action.payload);
       }
@@ -45,7 +60,7 @@ const cartSlice = createSlice({
         (product) => product.make === action.payload.make
       );
       if (index !== -1) {
-        state.cartList[index].quantity += 1;
+        state.cartList[index].cartItemQty += 1;
       }
     },
     // DECREMENT
@@ -54,8 +69,8 @@ const cartSlice = createSlice({
         (product) => product.VIN === action.payload.VIN
       );
       if (index !== -1) {
-        if (state.cartList[index].quantity > 1) {
-          state.cartList[index].quantity -= 1;
+        if (state.cartList[index].cartItemQty > 1) {
+          state.cartList[index].cartItemQty -= 1;
         }
       }
     },

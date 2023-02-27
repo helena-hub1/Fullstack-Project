@@ -67,6 +67,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function NavBar() {
+  // get data from local storage
+  const userData = JSON.parse(localStorage.getItem("userDetail")!);
+  // console.log(userData.token, "user data from navbbar");
+  // const userId = userData.user._id;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -163,7 +167,72 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
-
+  if (!userData) {
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar
+          position="static"
+          color="inherit"
+          sx={{ backgroundColor: "aliceblue" }}
+        >
+          <Toolbar>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mx: 5, display: { xs: "none", sm: "block" } }}
+            >
+              <IconButton sx={{ color: "inherit" }}>
+                <StarBorderIcon sx={{ fontSize: "50px" }} />
+              </IconButton>
+              CAR DELLER
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box>
+              <div className="navbar-icons">
+                <Link to="/order">order</Link>
+                <IconButton
+                  size="large"
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                  component={Link}
+                  to="/"
+                >
+                  <Home />
+                </IconButton>
+                <Link to="/products">
+                  <img src={car} alt="car-icon" height="50px" width="50px" />
+                </Link>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Button onClick={logoutHandler}>Logout</Button>
+              </div>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </Box>
+    );
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -183,58 +252,14 @@ export default function NavBar() {
             </IconButton>
             CAR DELLER
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <div className="navbar-icons">
               <Link to="/order">order</Link>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-                component={Link}
-                to="/"
-              >
-                <Home />
-              </IconButton>
-              <Link to="/products">
-                <img src={car} alt="car-icon" height="50px" width="50px" />
-              </Link>
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
               <Button onClick={logoutHandler}>Logout</Button>
             </div>
           </Box>
-
-          {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box> */}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
@@ -242,25 +267,3 @@ export default function NavBar() {
     </Box>
   );
 }
-//   if (!user) {
-//   return (
-//     <div className="navbar">
-//       <Link to="/">Home</Link>
-//       <Link to="/products">Products</Link>
-//       <Link to="/signin">Sign In</Link>
-//       <Link to="/signup">Sign Up</Link>
-//       <Link to="/wishList">wishlist</Link>
-//       <Link to="/user">User Information</Link>
-//       <Link to="/order">order</Link>
-//       <Link to="/cartlist">Cart list</Link>
-//     </div>
-//   );
-// }
-// return (
-//   <div className="navbar">
-//     <Link to="/wishList">wishlist</Link>
-//     <Link to="/userInformation">User Information</Link>
-//     <Link to="/order">order</Link>
-//   </div>
-// );
-// }

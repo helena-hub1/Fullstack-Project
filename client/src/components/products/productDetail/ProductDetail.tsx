@@ -8,6 +8,7 @@ import "./ProductDetail.css";
 import { Box, Button, Rating, Typography } from "@mui/material";
 import { cartAction } from "../../../redux/slices/cart";
 import { wishAction } from "../../../redux/slices/wish";
+import Product from "../../../../../common/product";
 export default function ProductDetail() {
   // state
   const productDetails = useSelector(
@@ -18,21 +19,31 @@ export default function ProductDetail() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   // Add to cart
-  // const addToCartHandler = (productDetails) => {
-  //   dispatch(cartAction.addToCart());
-  //   navigate("/cartlist");
-  // };
+
   const addToCartHandler = () => {
-    dispatch(cartAction.addToCart(productDetails));
+    let cartItem = {
+      VIN: productDetails.VIN,
+      make: productDetails.make,
+      rating: productDetails.rating,
+      price: productDetails.price,
+      image: productDetails.image,
+      cartItemQty: 1,
+    };
+    dispatch(cartAction.addToCart(cartItem));
     navigate("/cartlist");
   };
+
+  // const addToCartHandler = () => {
+  //   dispatch(cartAction.addToCart(productDetails));
+  //   navigate("/cartlist");
+  // };
   // add to wish
   const addToWishHandler = () => {
     dispatch(wishAction.addToWish(productDetails));
     navigate("/wishlist");
   };
   const { VIN } = useParams();
-  const url = `http://localhost:8002/products/${VIN}`;
+  const url = `http://localhost:8000/products/${VIN}`;
   //   side effect
   useEffect(() => {
     dispatch(getProductDetails(url));

@@ -14,7 +14,7 @@ export default function UpdateInformation() {
   const token = userData.token;
   console.log("user id", userId);
   console.log("token", token);
-  const url = `http://localhost:8002/users/${userId}`;
+  const url = `http://localhost:8000/users/${userId}`;
 
   const navigate = useNavigate();
 
