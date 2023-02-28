@@ -18,9 +18,9 @@ export default function Footer() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="static"
+        position="sticky"
         color="inherit"
-        sx={{ mt: 20, backgroundColor: "aliceblue" }}
+        sx={{ marginTop: "300px", backgroundColor: "aliceblue" }}
       >
         <Container maxWidth="xl" className="footer">
           <div className="footer-icons">

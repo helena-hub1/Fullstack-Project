@@ -9,9 +9,14 @@ type InitialState = {
   totalPrice: number;
   contactInformation: ContactInformation;
 };
+// GET ITEM
+const cartItems: Cart[] =
+  localStorage.getItem("cartlist") !== null
+    ? JSON.parse(localStorage.getItem("cartlist")!)
+    : [];
 // initial state
 const initialState: InitialState = {
-  cartList: [],
+  cartList: cartItems,
   shippingAddress: {
     street: "",
     city: "",
@@ -40,6 +45,10 @@ const cartSlice = createSlice({
         state.cartList[index].cartItemQty += 1;
       } else {
         state.cartList.push(action.payload);
+        localStorage.setItem(
+          "cartlist",
+          JSON.stringify(state.cartList.map((item) => item))
+        );
       }
     },
     removeFromCart: (state, action) => {
@@ -53,6 +62,10 @@ const cartSlice = createSlice({
         (product) => product.VIN != action.payload.VIN
       );
       state.cartList = filteredCartList;
+      localStorage.setItem(
+        "cartlist",
+        JSON.stringify(state.cartList.map((item) => item))
+      );
     },
     // INCREMENT
     incrementQty: (state, action) => {

@@ -15,7 +15,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-// import createOrderThunk from "../../../redux/thunks/order";
+import createOrderThunk from "../../../redux/thunks/order";
 import maestro from "../../../assets/maestro.svg";
 import visaelectron from "../../../assets/visa-electron.svg";
 import visa from "../../../assets/visa.svg";
@@ -96,6 +96,7 @@ export default function CartList() {
           maxWidth: 400,
           height: 300,
           my: 10,
+          backgroundColor: "aliceblue",
         }}
       >
         <img src={emptycart} height="150px" width="150px"></img>
@@ -133,20 +134,20 @@ export default function CartList() {
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values, { resetForm }) => {
-            // dispatch(
-            //   createOrderThunk(
-            //     cartList,
-            //     values.quantity,
-            //     values.totalPrice,
-            //     values.street,
-            //     values.city,
-            //     values.country,
-            //     values.postalCode,
-            //     values.email,
-            //     values.phoneNumber,
-            //     values.isDelivered
-            //   )
-            // );
+            dispatch(
+              createOrderThunk(
+                cartList,
+                values.quantity,
+                values.totalPrice,
+                values.street,
+                values.city,
+                values.country,
+                values.postalCode,
+                values.email,
+                values.phoneNumber,
+                values.isDelivered
+              )
+            );
             console.log("cart list", cartList);
             console.log("values", values);
             resetForm({ values: initialValues });

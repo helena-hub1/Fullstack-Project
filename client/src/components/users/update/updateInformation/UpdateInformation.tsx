@@ -61,7 +61,14 @@ export default function UpdateInformation() {
           {({ errors, touched, handleChange }) => {
             return (
               <Form>
-                <Paper sx={{ width: 300, mt: 4, height: 400 }}>
+                <Paper
+                  sx={{
+                    width: 300,
+                    mt: 8,
+                    height: 400,
+                    backgroundColor: "aliceblue",
+                  }}
+                >
                   <div className="form-container">
                     <Typography sx={{ mt: 3, fontSize: "20px" }}>
                       Update your detail

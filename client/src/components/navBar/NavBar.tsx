@@ -19,12 +19,16 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Home from "@mui/icons-material/Home";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 
 import car from "../../assets/navbarcar.png";
 import "./NavBar.css";
 import { fontSize } from "@mui/system";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 // MUI
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,8 +73,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function NavBar() {
   // get data from local storage
   const userData = JSON.parse(localStorage.getItem("userDetail")!);
-  // console.log(userData.token, "user data from navbbar");
-  // const userId = userData.user._id;
+
+  const cartList = useSelector((state: RootState) => state.cartList.cartList);
+  const wishList = useSelector((state: RootState) => state.wishList.wishList);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -129,11 +135,11 @@ export default function NavBar() {
           Sign up
         </MenuItem>
       </Link>
-      <Link className="link" to="/">
+      {/* <Link className="link" to="/">
         <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
           <Typography onClick={() => logoutHandler}>Logout</Typography>
         </MenuItem>
-      </Link>
+      </Link> */}
     </Menu>
   );
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -180,12 +186,12 @@ export default function NavBar() {
               variant="h6"
               noWrap
               component="div"
-              sx={{ mx: 5, display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", sm: "block" } }}
             >
               <IconButton sx={{ color: "inherit" }}>
                 <StarBorderIcon sx={{ fontSize: "50px" }} />
               </IconButton>
-              CAR DELLER
+              CAR DEALER
             </Typography>
             <Search>
               <SearchIconWrapper>
@@ -193,13 +199,12 @@ export default function NavBar() {
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
+                inputProps={{ "aria-label": "search", width: 200 }}
               />
             </Search>
             <Box sx={{ flexGrow: 1 }} />
             <Box>
               <div className="navbar-icons">
-                <Link to="/order">order</Link>
                 <IconButton
                   size="large"
                   aria-label="show 4 new mails"
@@ -212,6 +217,9 @@ export default function NavBar() {
                 <Link to="/products">
                   <img src={car} alt="car-icon" height="50px" width="50px" />
                 </Link>
+                <Button component={Link} to="/user" sx={{ color: "inherit" }}>
+                  Profile
+                </Button>
                 <IconButton
                   size="large"
                   edge="end"
@@ -223,7 +231,6 @@ export default function NavBar() {
                 >
                   <AccountCircle />
                 </IconButton>
-                <Button onClick={logoutHandler}>Logout</Button>
               </div>
             </Box>
           </Toolbar>
@@ -247,7 +254,7 @@ export default function NavBar() {
             component="div"
             sx={{ mx: 5, display: { xs: "none", sm: "block" } }}
           >
-            <IconButton sx={{ color: "inherit" }}>
+            <IconButton sx={{ color: "inherit" }} component={Link} to="/">
               <StarBorderIcon sx={{ fontSize: "50px" }} />
             </IconButton>
             CAR DELLER
@@ -256,8 +263,27 @@ export default function NavBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <div className="navbar-icons">
-              <Link to="/order">order</Link>
-              <Button onClick={logoutHandler}>Logout</Button>
+              <Link to="/products">
+                <img src={car} alt="car-icon" height="50px" width="50px" />
+              </Link>
+              <IconButton color="inherit" component={Link} to="/wishlist">
+                <Badge badgeContent={wishList.length} color="error">
+                  <FavoriteIcon />
+                </Badge>
+              </IconButton>
+              <IconButton component={Link} to="/cartlist" color="inherit">
+                <Badge badgeContent={cartList.length} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+
+              <Button component={Link} to="/order" sx={{ color: "inherit" }}>
+                order
+              </Button>
+
+              <Button onClick={logoutHandler} sx={{ color: "inherit" }}>
+                Logout
+              </Button>
             </div>
           </Box>
         </Toolbar>

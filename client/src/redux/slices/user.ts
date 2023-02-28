@@ -24,11 +24,13 @@ const userSlice = createSlice({
     registerUser: (state, action) => {
       state.userDetail = action.payload;
     },
-    loginUser: (state, action) => {
-      state.userDetail = action.payload;
-    },
+    // loginUser: (state, action) => {
+    //   state.userDetail = action.payload;
+    // },
     getUserDetail: (state, action) => {
-      state.userDetail = action.payload;
+      state.userDetail.firstName = action.payload.firstName;
+      state.userDetail.lastName = action.payload.lastName;
+      state.userDetail.email = action.payload.email;
     },
   },
 });

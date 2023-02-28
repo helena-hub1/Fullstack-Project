@@ -44,7 +44,7 @@ export function loginUserThunk(email: string, password: string) {
 
       const data = await response.data;
       localStorage.setItem("userDetail", JSON.stringify(data));
-      dispatch(userAction.loginUser(data.user));
+      dispatch(userAction.getUserDetail(data.user));
       console.log(data.user, "from user thunk");
     } catch (error) {
       console.log(error);

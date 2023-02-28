@@ -5,9 +5,12 @@ import Product from "../../../../common/product";
 type InitialState = {
   wishList: Product[];
 };
-
+const wishItems: Product[] =
+  localStorage.getItem("cartlist") !== null
+    ? JSON.parse(localStorage.getItem("cartlist")!)
+    : [];
 const initialState: InitialState = {
-  wishList: [],
+  wishList: wishItems,
 };
 // slice
 const wishSlice = createSlice({
@@ -25,6 +28,10 @@ const wishSlice = createSlice({
         return;
       } else {
         state.wishList.push(action.payload);
+        localStorage.setItem(
+          "wishlist",
+          JSON.stringify(state.wishList.map((item) => item))
+        );
       }
     },
     removeFromWish: (state, action) => {
@@ -38,6 +45,10 @@ const wishSlice = createSlice({
         (product) => product.VIN != action.payload.VIN
       );
       state.wishList = filteredWishList;
+      localStorage.setItem(
+        "wishlist",
+        JSON.stringify(state.wishList.map((item) => item))
+      );
     },
   },
 });

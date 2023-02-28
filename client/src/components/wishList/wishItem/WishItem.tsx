@@ -3,10 +3,14 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  IconButton,
+  Link,
   Rating,
   Typography,
 } from "@mui/material";
-import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+
+import "./WishItem.css";
 import Product from "../../../../../common/product";
 // type
 type Prop = {
@@ -21,19 +25,12 @@ export default function WishItem({ product }: Prop) {
             component="img"
             height="140"
             image={product.image}
-            alt="green iguana"
+            alt="car image"
           />
-          <CardContent
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <Typography gutterBottom textAlign="center">
-              ${product.price}
-            </Typography>
+          <CardContent>
+            {/* <div className="text-container"> */}
+            <Typography gutterBottom>{product.make}</Typography>
+            <Typography gutterBottom>${product.price}</Typography>
             <Rating
               name="half-rating-read"
               defaultValue={product.rating}
@@ -41,9 +38,7 @@ export default function WishItem({ product }: Prop) {
               precision={0.5}
               readOnly
             />
-            <Typography gutterBottom textAlign="center">
-              {product.make}
-            </Typography>
+            {/* </div> */}
           </CardContent>
         </CardActionArea>
       </Card>

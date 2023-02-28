@@ -1,7 +1,7 @@
 // order model
 import mongoose, { Document } from "mongoose";
 
-import { ProductSchema } from "./Product";
+// import { ProductOrderSchema } from "./ProductOrder";
 import User from "./User";
 import Order from "../../../common/order";
 // TypeScript
@@ -19,7 +19,7 @@ const OrderSchema = new mongoose.Schema({
     ref: User,
   },
   // embed
-  productOrder: [{ type: ProductSchema }],
+  // productOrder: [{ type: ProductOrderSchema }],
   shippingAddress: {
     street: {
       type: String,

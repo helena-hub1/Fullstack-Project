@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cart from "../../../../common/cart";
 // type
 type InitialState = {
   order: {};

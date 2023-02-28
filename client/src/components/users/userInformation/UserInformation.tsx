@@ -9,39 +9,35 @@ import { AppDispatch, RootState } from "../../../redux/store";
 
 export default function UserInformation() {
   // state
-  const userDetail = useSelector(
+  const userData = useSelector(
     (state: RootState) => state.userDetail.userDetail
   );
-  const userData = JSON.parse(localStorage.getItem("userDetail")!);
-  const user = userData.user;
-  // console.log("user data", user);
-
+  console.log(userData, "from user information page");
   return (
     <div className="user-detail-container">
       <Paper elevation={3} sx={{ width: 300, height: 300, mt: 4, mb: 4 }}>
         <div className="profile-container">
           <Typography sx={{ textAlign: "center", mt: 3 }}>
-            {user.firstName}'s profile
+            {userData.firstName}'s profile
           </Typography>
           <div className="typography-container">
             <Typography className="text-container" component="div">
               <Box component="span" className="box">
                 First Name:
               </Box>
-              <Box className="box2">{user.firstName}</Box>
+              <Box className="box2">{userData.firstName}</Box>
             </Typography>
-
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Last Name:
               </Box>
-              <Box className="box2">{user.lastName}</Box>
+              <Box className="box2">{userData.lastName}</Box>
             </Typography>
             <Typography component="div" className="text-container">
               <Box component="span" className="box">
                 Email:
               </Box>
-              <Box className="box2">{user.email}</Box>
+              <Box className="box2">{userData.email}</Box>
             </Typography>
             <Button
               component={Link}

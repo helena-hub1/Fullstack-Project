@@ -65,9 +65,12 @@ export default function UserLogIn() {
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values) => {
-            dispatch(loginUserThunk(values.email, values.password));
-            // dispatch(getCartListThunk());
-            navigate(`/user`);
+            if (values.email && values.password) {
+              dispatch(loginUserThunk(values.email, values.password));
+              // dispatch(getCartListThunk());
+              // navigate(`/user`);
+              navigate("/");
+            }
           }}
         >
           {({ errors, touched, handleChange }) => {
@@ -125,7 +128,7 @@ export default function UserLogIn() {
                         width: "250px",
                         height: "40px",
                         mt: 3,
-                        borderRadius: "10px",
+                        // borderRadius: "10px",
                         backgroundColor: "#000",
                         color: "#fff",
                       }}
