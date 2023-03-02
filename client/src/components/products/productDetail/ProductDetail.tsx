@@ -43,7 +43,7 @@ export default function ProductDetail() {
     navigate("/wishlist");
   };
   const { VIN } = useParams();
-  const url = `http://localhost:8000/products/${VIN}`;
+  const url = `http://localhost:8002/products/${VIN}`;
   //   side effect
   useEffect(() => {
     dispatch(getProductDetails(url));

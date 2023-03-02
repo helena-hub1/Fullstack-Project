@@ -8,9 +8,10 @@ const userData =
     ? JSON.parse(localStorage.getItem("userDetail")!)
     : null;
 const userId = userData?.user._id;
-
+console.log(userId, "from thunk");
 const token = userData?.token;
-const createOrderUrl = `http://localhost:8000/orders/${userId}`;
+console.log(token, "from order thunk");
+const createOrderUrl = `http://localhost:8002/orders/${userId}`;
 
 export default function createOrderThunk(
   productOrder: Cart[],

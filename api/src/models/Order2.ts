@@ -61,4 +61,4 @@ const OrderSchema = new mongoose.Schema({
   },
 });
 // name of collection + schema
-export default mongoose.model<OrderDocument>("Order", OrderSchema);
+export default mongoose.model<OrderDocument>("Order2", OrderSchema);

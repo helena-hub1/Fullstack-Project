@@ -2,12 +2,25 @@ import { createSlice } from "@reduxjs/toolkit";
 import Cart from "../../../../common/cart";
 // type
 type InitialState = {
-  order: {};
+  order: {
+    productOrder: Cart[];
+    shippingAddress: {
+      street: string;
+      city: string;
+      country: string;
+      postalCode: number;
+    };
+    quantity: number;
+    totalPrice: number;
+    email: string;
+    phoneNumber: number;
+    isDelivered: false;
+  };
 };
 // initial state
 const initialState: InitialState = {
   order: {
-    productCart: [],
+    productOrder: [],
     shippingAddress: {
       street: "",
       city: "",

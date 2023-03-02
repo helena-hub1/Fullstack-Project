@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 import app from "./app";
 // connect DB
-const port = 8000;
+const port = 8002;
 dotenv.config();
 mongoose.set("strictQuery", false);
 mongoose

@@ -8,11 +8,14 @@ const userData =
     ? JSON.parse(localStorage.getItem("userDetail")!)
     : null;
 const userId = userData?.user._id;
-
 const token = userData?.token;
-const getOrdersUrl = `http://localhost:8000/orders/${userId}`;
+const getOrdersUrl = `http://localhost:8002/orders/${userId}`;
 
 export const getOrderListThunk = () => {
+  // if (!userData) {
+  //   console.log("No user data dound");
+  //   return;
+  // }
   return async (dispatch: AppDispatch) => {
     const response = await axios.get(getOrdersUrl, {
       headers: {

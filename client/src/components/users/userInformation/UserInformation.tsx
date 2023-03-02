@@ -15,7 +15,16 @@ export default function UserInformation() {
   console.log(userData, "from user information page");
   return (
     <div className="user-detail-container">
-      <Paper elevation={3} sx={{ width: 300, height: 300, mt: 4, mb: 4 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          width: 300,
+          height: 300,
+          mt: 4,
+          mb: 4,
+          backgroundColor: "aliceblue",
+        }}
+      >
         <div className="profile-container">
           <Typography sx={{ textAlign: "center", mt: 3 }}>
             {userData.firstName}'s profile
