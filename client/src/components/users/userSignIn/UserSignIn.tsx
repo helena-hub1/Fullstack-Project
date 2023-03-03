@@ -10,20 +10,12 @@ import {
 import LoginIcon from "@mui/icons-material/Login";
 import { Link, useNavigate } from "react-router-dom";
 import "./UserSignIn.css";
-import login from "../../../assets/login.jpg";
-import axios from "axios";
 
-import { userAction } from "../../../redux/slices/user";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../../redux/slices/cart";
-import { orderAction } from "../../../redux/slices/order";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { loginUserThunk } from "../../../redux/thunks/user";
-import { getCartListThunk } from "../../../redux/thunks/cart";
 import cars from "../../../assets/NewAudimodel.jpg";
-// import { getCartList } from "../../../redux/thunks/cart";
-
-// const url = "http://localhost:/users/login";
+import { userAction } from "../../../redux/slices/user";
 
 export default function UserLogIn() {
   // state
@@ -67,8 +59,6 @@ export default function UserLogIn() {
           onSubmit={(values) => {
             if (values.email && values.password) {
               dispatch(loginUserThunk(values.email, values.password));
-              // dispatch(getCartListThunk());
-              // navigate(`/user`);
               navigate("/");
             }
           }}
@@ -77,12 +67,8 @@ export default function UserLogIn() {
             return (
               <Form>
                 <Paper
-                  // elevation={4}
                   sx={{
-                    // backgroundColor: "aliceblue",
                     width: 400,
-                    // mt: 4,
-                    // height: "100,
                   }}
                 >
                   <div className="form-container">
@@ -97,13 +83,11 @@ export default function UserLogIn() {
                       label="Email"
                       name="email"
                       onChange={handleChange}
-                      // variant="standard"
                       sx={{
                         width: 250,
                         fontSize: "10px",
                         mt: 2,
                       }}
-                      // style={{ borderRadius: 25 }}
                       size="small"
                     ></TextField>
                     {errors.email && touched.email ? (
@@ -113,8 +97,6 @@ export default function UserLogIn() {
                       label="Password"
                       name="password"
                       type="password"
-                      // variant="standard"
-                      // helperText="8 Chars, One(A-Z), One(a-z) and One(0-9)"
                       sx={{ mt: 1, width: 250, borderRadius: 10 }}
                       onChange={handleChange}
                       size="small"
@@ -128,7 +110,6 @@ export default function UserLogIn() {
                         width: "250px",
                         height: "40px",
                         mt: 3,
-                        // borderRadius: "10px",
                         backgroundColor: "#000",
                         color: "#fff",
                       }}
@@ -145,9 +126,7 @@ export default function UserLogIn() {
                         mt: 2,
                         textDecoration: "none",
                       }}
-                    >
-                      Don't have an account?
-                    </Typography>
+                    ></Typography>
                   </div>
                 </Paper>
               </Form>

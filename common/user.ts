@@ -3,6 +3,7 @@ type User = {
   lastName: string;
   email: string;
   password: string;
+
   // name: string;
   // email: string;
   // password: string;

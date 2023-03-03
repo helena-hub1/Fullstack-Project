@@ -1,5 +1,15 @@
+/* WISHCONTAINER */
 .wish-container {
   display: flex;
   margin: 30px;
   gap: 20px;
+}
+/* EMPTYWISH */
+.empty-wishlist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }

@@ -6,8 +6,8 @@ type InitialState = {
   wishList: Product[];
 };
 const wishItems: Product[] =
-  localStorage.getItem("cartlist") !== null
-    ? JSON.parse(localStorage.getItem("cartlist")!)
+  localStorage.getItem("wishlist") !== null
+    ? JSON.parse(localStorage.getItem("wishlist")!)
     : [];
 const initialState: InitialState = {
   wishList: wishItems,

@@ -42,16 +42,33 @@ export function loginUserThunk(email: string, password: string) {
       const response = await axios.post(loginUrl, { email, password }, config);
 
       const data = await response.data;
+
       localStorage.setItem(
         "userDetail",
         JSON.stringify({
-          email: data.user.email,
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
+          userEmail: data.userEmail,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          userId: data.userId,
           token: data.token,
+
+          // userId: data.user._id,
+          // userEmail: data.user.email,
+          // firstName: data.user.firstName,
+          // lastName: data.user.lastName,
+          // token: data.token
         })
       );
-      dispatch(userAction.getUserDetail(data.user));
+      dispatch(
+        userAction.getUserDetail({
+          email: data.userEmail,
+          firstName: data.firstName,
+          lastName: data.lastName,
+
+          // token: data.token,
+        })
+      );
+      // dispatch(userAction.accountValidationMsg(data.message));
       console.log(data.user, "from user thunk");
     } catch (error) {
       console.log(error);

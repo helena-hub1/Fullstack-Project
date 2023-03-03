@@ -1,11 +1,8 @@
-// import { getOrderList } from "./../../../client/src/redux/thunks/order";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 import UserServices from "../services/users";
 import generateToken from "./generateToken";
-import CartServices from "../services/carts";
-import OrderServices from "../services/orders";
 
 // register user
 const registerUser = async (request: Request, response: Response) => {
@@ -41,7 +38,8 @@ const userLogin = async (request: Request, response: Response) => {
     const { email, password } = request.body;
     const user = await UserServices.getUserByEmail(email);
     if (!user) {
-      throw new Error(" User does not exist in the system");
+      response.json({ message: `Email and password incorrect!` });
+      return;
     }
     // compare password
     const passwordFromDatabase = user.password;
@@ -52,14 +50,19 @@ const userLogin = async (request: Request, response: Response) => {
     );
     if (!matchPassword) {
       response.status(401);
-      throw new Error(`Invalid account`);
+      response.json({ message: `Incorrect email and password` });
     }
     const userId = user._id;
     // generate token
     const token = generateToken(email, userId);
-    const cartList = await CartServices.getCartListByUserId(userId);
-    const orderList = await OrderServices.getOrderListByUserId(userId);
-    response.status(200).json({ user, token, cartList, orderList });
+    // response.status(200).json({ user, token });
+    response.json({
+      userEmail: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      userId: userId,
+      token,
+    });
   } catch (error) {
     console.log(error);
   }

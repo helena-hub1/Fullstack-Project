@@ -17,6 +17,7 @@ import UserSignUp from "./components/users/userSignUp/UserSignUp";
 import ProductDetail from "./components/products/productDetail/ProductDetail";
 import Cart from "./pages/CartPage/Cart";
 import Footer from "./components/footer/Footer";
+import OrderForm from "./components/orderForm/OrderForm";
 function App() {
   return (
     <div>
@@ -34,7 +35,8 @@ function App() {
         <Route path="/update" element={<UpdatePage />}></Route>
         <Route path="/success" element={<SuccessMessage />}></Route>
         <Route path="/cartlist" element={<Cart />}></Route>
-        <Route path="/cartlist/:id" element={<Cart />}></Route>
+        {/* <Route path="/cartlist/:id" element={<Cart />}></Route> */}
+        <Route path="/orderschema" element={<OrderForm />}></Route>
       </Routes>
       <Footer />
     </div>

@@ -3,17 +3,14 @@ import { AppDispatch } from "../store";
 import { orderAction } from "../slices/order";
 import Product from "../../../../common/product";
 import Cart from "../../../../common/cart";
-const userData =
-  localStorage.getItem("userDetail") !== null
-    ? JSON.parse(localStorage.getItem("userDetail")!)
-    : null;
-const userId = userData?.user._id;
-console.log(userId, "from thunk");
-const token = userData?.token;
-console.log(token, "from order thunk");
+
+const userData = JSON.parse(localStorage.getItem("userDetail")!);
+const userId = userData.userId;
+const token = userData.token;
 const createOrderUrl = `http://localhost:8002/orders/${userId}`;
 
 export default function createOrderThunk(
+  userId: string,
   productOrder: Cart[],
   quantity: number,
   totalPrice: number,
@@ -37,16 +34,17 @@ export default function createOrderThunk(
         const { data } = await axios.post(
           createOrderUrl,
           {
+            userId,
             productOrder,
             street,
             city,
             postalCode,
             country,
-            quantity,
             totalPrice,
+            quantity,
             isDelivered,
-            phoneNumber,
             email,
+            phoneNumber,
           },
           config
         );

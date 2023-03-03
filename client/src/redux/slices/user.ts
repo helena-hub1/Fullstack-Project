@@ -5,6 +5,7 @@ import User from "../../../../common/user";
 // type
 type InitialState = {
   userDetail: User;
+  accountValidationMsg: string;
 };
 // initial state
 const initialState: InitialState = {
@@ -14,6 +15,7 @@ const initialState: InitialState = {
     email: "",
     password: "",
   },
+  accountValidationMsg: "",
 };
 
 // slice
@@ -31,6 +33,10 @@ const userSlice = createSlice({
       state.userDetail.firstName = action.payload.firstName;
       state.userDetail.lastName = action.payload.lastName;
       state.userDetail.email = action.payload.email;
+      // state.userDetail.password = action.payload.password;
+    },
+    accountValidationMsg: (state, action) => {
+      state.accountValidationMsg = action.payload;
     },
   },
 });

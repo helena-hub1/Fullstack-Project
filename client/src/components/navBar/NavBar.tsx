@@ -173,7 +173,7 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
-  if (!userData) {
+  if (userData === null) {
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar

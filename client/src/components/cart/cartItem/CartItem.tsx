@@ -9,7 +9,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Cart from "../../../../../common/cart";
 import Product from "../../../../../common/product";
 import "./CartItem.css";
@@ -80,8 +80,8 @@ export default function CartItem({ product }: Prop) {
                   </FormControl>
                 </Box>
               </div>
-              <IconButton onClick={removeCartProductHandler}>
-                <DeleteOutlineIcon />
+              <IconButton onClick={removeCartProductHandler} color="inherit">
+                <DeleteIcon />
               </IconButton>
             </div>
           </Paper>

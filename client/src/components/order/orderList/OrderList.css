@@ -1,4 +1,4 @@
 .order-container {
-  display: flex;
-  width: 100vw;
+  margin: 0 auto;
+  width: 80%;
 }

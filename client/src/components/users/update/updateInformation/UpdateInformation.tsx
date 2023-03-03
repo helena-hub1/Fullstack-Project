@@ -6,11 +6,11 @@ import axios from "axios";
 
 export default function UpdateInformation() {
   // get token & user id from local storage
-  const userData =
-    localStorage.getItem("userDetail") !== null
-      ? JSON.parse(localStorage.getItem("userDetail")!)
-      : null;
-  const userId = userData.user._id;
+  const userData = JSON.parse(localStorage.getItem("userDetail")!);
+  // localStorage.getItem("userDetail") !== null
+  //   ? JSON.parse(localStorage.getItem("userDetail")!)
+  //   : null;
+  const userId = userData.userId;
   const token = userData.token;
   console.log("user id", userId);
   console.log("token", token);
