@@ -28,8 +28,18 @@ export default function OrderForm() {
   // state
 
   const cartList = useSelector((state: RootState) => state.cartList.cartList);
+  const totalPrice = Math.round(
+    cartList.reduce(
+      (accum, product) => accum + product.price * product.cartItemQty,
+      0
+    )
+  );
+  const isLoggedInd = useSelector(
+    (state: RootState) => state.userDetail.isLoggedind
+  );
   // dispatch
   const dispatch = useDispatch<AppDispatch>();
+  // get userId from local storage
 
   type InitialValues = {
     quantity: number;
@@ -50,6 +60,8 @@ export default function OrderForm() {
     isDelivered: Yup.boolean().required("required"),
     email: Yup.string().email("Invalid email").required("Required!"),
     phoneNumber: Yup.number().required("Required"),
+    quantity: Yup.number().required("Required"),
+    totalPrice: Yup.number().required("Required"),
   });
   const initialValues: InitialValues = {
     quantity: 1,
@@ -64,30 +76,58 @@ export default function OrderForm() {
     email: "",
     phoneNumber: 1,
   };
+  if (!isLoggedInd) {
+    return (
+      <Card
+        className="order-login"
+        sx={{
+          width: 600,
+          height: 100,
+          my: 10,
+          backgroundColor: "aliceblue",
+          mb: 50,
+        }}
+      >
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontFamily: "monospace",
+            fontSize: "20px",
+            fontStyle: "italic",
+          }}
+        >
+          Please log in first!
+        </Typography>
+      </Card>
+    );
+  }
+
   return (
     <div className="formik-form">
       <Formik
         initialValues={initialValues}
         validationSchema={FormSchema}
         onSubmit={(values, { resetForm }) => {
-          //   dispatch(
-          //     createOrderThunk(
-
-          //       cartList,
-          //       values.quantity,
-          //       values.totalPrice,
-          //       values.street,
-          //       values.city,
-          //       values.country,
-          //       values.postalCode,
-          //       values.email,
-          //       values.phoneNumber,
-          //       values.isDelivered
-          //     )
-          //   );
+          dispatch(
+            createOrderThunk(
+              cartList,
+              values.quantity,
+              // values.totalPrice,
+              totalPrice,
+              values.street,
+              values.city,
+              values.country,
+              values.postalCode,
+              values.email,
+              values.phoneNumber,
+              values.isDelivered
+            )
+          );
           console.log("cart list", cartList);
           console.log("values", values);
+
           resetForm({ values: initialValues });
+          localStorage.removeItem("cartlist");
         }}
       >
         {({ errors, handleChange, touched, values }) => {
@@ -95,9 +135,9 @@ export default function OrderForm() {
             <Form>
               <Paper
                 sx={{
-                  mt: 10,
+                  my: 10,
                   width: "500px",
-                  height: "550px",
+                  height: "570px",
                   backgroundColor: "aliceblue",
                 }}
               >

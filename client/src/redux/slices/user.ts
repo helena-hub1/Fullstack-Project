@@ -1,11 +1,13 @@
 import { orderAction } from "./order";
 import { createSlice } from "@reduxjs/toolkit";
 
-import User from "../../../../common/user";
+import User from "../../../../types/user";
+
 // type
 type InitialState = {
   userDetail: User;
   accountValidationMsg: string;
+  isLoggedind: boolean;
 };
 // initial state
 const initialState: InitialState = {
@@ -16,6 +18,7 @@ const initialState: InitialState = {
     password: "",
   },
   accountValidationMsg: "",
+  isLoggedind: false,
 };
 
 // slice
@@ -26,17 +29,19 @@ const userSlice = createSlice({
     registerUser: (state, action) => {
       state.userDetail = action.payload;
     },
-    // loginUser: (state, action) => {
-    //   state.userDetail = action.payload;
-    // },
     getUserDetail: (state, action) => {
       state.userDetail.firstName = action.payload.firstName;
       state.userDetail.lastName = action.payload.lastName;
       state.userDetail.email = action.payload.email;
-      // state.userDetail.password = action.payload.password;
+      state.userDetail.password = action.payload.password;
+      state.isLoggedind = true;
     },
     accountValidationMsg: (state, action) => {
       state.accountValidationMsg = action.payload;
+      state.isLoggedind = false;
+    },
+    userLogout: (state) => {
+      state.isLoggedind = false;
     },
   },
 });

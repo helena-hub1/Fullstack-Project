@@ -1,18 +1,44 @@
-import React, { useEffect } from "react";
-import { Avatar, Box, Paper, Typography, Button } from "@mui/material";
+import { Box, Paper, Typography, Button, Divider, Card } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "./UserInformation.css";
-import getUserDetail from "../../../redux/thunks/user";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { RootState } from "../../../redux/store";
 
 export default function UserInformation() {
   // state
   const userData = useSelector(
     (state: RootState) => state.userDetail.userDetail
   );
-  console.log(userData, "from user information page");
+  const isLoggedInd = useSelector(
+    (state: RootState) => state.userDetail.isLoggedind
+  );
+  if (!isLoggedInd) {
+    return (
+      <Card
+        className="order-login"
+        sx={{
+          width: 600,
+          height: 100,
+          my: 10,
+          backgroundColor: "aliceblue",
+          mb: 50,
+        }}
+      >
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontFamily: "monospace",
+            fontSize: "20px",
+            fontStyle: "italic",
+          }}
+        >
+          Access is denied! Please log in first.
+        </Typography>
+      </Card>
+    );
+  }
+
   return (
     <div className="user-detail-container">
       <Paper
@@ -20,8 +46,8 @@ export default function UserInformation() {
         sx={{
           width: 300,
           height: 300,
-          mt: 4,
-          mb: 4,
+          mt: 10,
+          mb: 50,
           backgroundColor: "aliceblue",
         }}
       >
@@ -29,6 +55,7 @@ export default function UserInformation() {
           <Typography sx={{ textAlign: "center", mt: 3 }}>
             {userData.firstName}'s profile
           </Typography>
+          <Divider></Divider>
           <div className="typography-container">
             <Typography className="text-container" component="div">
               <Box component="span" className="box">

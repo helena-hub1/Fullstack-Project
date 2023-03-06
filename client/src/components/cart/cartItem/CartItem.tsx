@@ -9,13 +9,12 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Cart from "../../../../../common/cart";
-import Product from "../../../../../common/product";
-import "./CartItem.css";
-import productDetail from "../../../pages/productDetailsPage/productDetail";
 import { useDispatch } from "react-redux";
+
+import DeleteIcon from "@mui/icons-material/Delete";
+import Cart from "../../../../../types/cart";
 import { cartAction } from "../../../redux/slices/cart";
+import "./CartItem.css";
 
 // type
 type Prop = {
@@ -28,7 +27,7 @@ export default function CartItem({ product }: Prop) {
   const handleChange = (event: SelectChangeEvent) => {
     setQuantity(event.target.value as string);
 
-    dispatch(cartAction.incrementQty(product));
+    dispatch(cartAction.takeQuantity(quantity));
 
     // dispatch(cartAction.decrementQty(product));
   };

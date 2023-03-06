@@ -4,7 +4,7 @@ import mongoose, { Document } from "mongoose";
 import { ProductOrderSchema } from "./ProductOrder";
 // import { ProductSchema } from "./Product";
 import User from "./User";
-import Order from "../../../common/order";
+import Order from "../../../types/order";
 // TypeScript
 export type OrderDocument = Document & {
   OrderDocument: Order;
@@ -14,7 +14,7 @@ const OrderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  // ref to other document
+  // ref to user document
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User,

@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Product from "../../../../common/product";
-import Order from "../../../../common/order";
-import Cart from "../../../../common/cart";
+import Order from "../../../../types/order";
 // type
 type InitialState = {
   orderList: Order[];

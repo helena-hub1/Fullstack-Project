@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 
 import Order from "../models/Order";
 import OrderServices from "../services/orders";
-import CartServices from "../services/carts";
 // create order
 const createOrder = async (request: Request, response: Response) => {
   try {
@@ -18,11 +17,12 @@ const createOrder = async (request: Request, response: Response) => {
       phoneNumber,
     } = request.body;
     const userId = request.params.userId;
-    // const productsFromCart = CartServices.getCartListByUserId(userId);
+    if (!userId) {
+      response.json({ message: "Please sign in first" });
+    }
     const newOrder = new Order({
       userId: userId,
       productOrder: request.body.productOrder,
-      // productOrder: productsFromCart,
       shippingAddress: {
         street: street,
         city: city,
@@ -36,9 +36,7 @@ const createOrder = async (request: Request, response: Response) => {
       phoneNumber: phoneNumber,
     });
     const order = await OrderServices.createOrder(newOrder);
-    // response.status(201).json({ ...order, productOrder: productsFromCart });
     response.status(201).json(order);
-    // response.json(productInCart);
   } catch (error) {
     console.log(error);
   }

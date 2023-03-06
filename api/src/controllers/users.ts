@@ -10,12 +10,14 @@ const registerUser = async (request: Request, response: Response) => {
     const { email, password, firstName, lastName } = request.body;
 
     if (!email || !password || !firstName || !lastName) {
-      throw new Error("Please enter all fields");
+      response.json({ message: "Please enter the fields" });
     }
     const userExists = await UserServices.getUserByEmail(email);
     if (userExists) {
       response.status(400);
-      throw new Error(`User with email: ${email} is already in the system`);
+      response.json({
+        message: `User with email: ${email} is already in the system`,
+      });
     }
     // hash password
     const saltRounds = await bcrypt.genSalt(10);
@@ -38,7 +40,7 @@ const userLogin = async (request: Request, response: Response) => {
     const { email, password } = request.body;
     const user = await UserServices.getUserByEmail(email);
     if (!user) {
-      response.json({ message: `Email and password incorrect!` });
+      response.json({ message: `Invalide email` });
       return;
     }
     // compare password
@@ -49,8 +51,8 @@ const userLogin = async (request: Request, response: Response) => {
       passwordFromDatabase
     );
     if (!matchPassword) {
-      response.status(401);
-      response.json({ message: `Incorrect email and password` });
+      // response.status(401);
+      response.json({ message: `Invalid password` });
     }
     const userId = user._id;
     // generate token
@@ -81,6 +83,12 @@ const getUser = async (request: Request, response: Response) => {
   try {
     const { userId } = request.params;
     const foundUser = await UserServices.getUserById(userId);
+    // if (!foundUser) {
+    //   response
+    //     .status(404)
+    //     .json({ message: "User with ID ${userId} not found" });
+    //   return;
+    // }
     response.status(200).json(foundUser);
   } catch (error) {
     console.log(error);

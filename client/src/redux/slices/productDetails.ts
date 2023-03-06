@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import Product from "../../../../common/product";
+import Product from "../../../../types/product";
 // type
 type InitialState = {
   productDetails: Product;

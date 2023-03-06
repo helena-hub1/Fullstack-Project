@@ -4,6 +4,7 @@ import LatestModels from "../../components/latestModels/LatestModels";
 import car from "../../assets/homepagecar.jpg";
 import "./Home.css";
 import LatestModels2 from "../../components/latestModels2/LatestModels2";
+import ImageSlidder from "../../components/imageSlidder/ImageSlidder";
 export default function Home() {
   return (
     <div className="home">
@@ -14,6 +15,7 @@ export default function Home() {
       </div>
       <LatestModels />
       <LatestModels2 />
+      <ImageSlidder />
     </div>
   );
 }

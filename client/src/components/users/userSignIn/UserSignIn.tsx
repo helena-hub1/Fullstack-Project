@@ -16,9 +16,17 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { loginUserThunk } from "../../../redux/thunks/user";
 import cars from "../../../assets/NewAudimodel.jpg";
 import { userAction } from "../../../redux/slices/user";
+import { Message } from "@mui/icons-material";
 
 export default function UserLogIn() {
   // state
+  const validationMsg = useSelector(
+    (state: RootState) => state.userDetail.accountValidationMsg
+  );
+  const isLoggedind = useSelector(
+    (state: RootState) => state.userDetail.isLoggedind
+  );
+  console.log(isLoggedind, "isLoggedIN");
   const userInformation = useSelector(
     (state: RootState) => state.userDetail.userDetail
   );
@@ -49,92 +57,101 @@ export default function UserLogIn() {
   });
   return (
     <div className="login-page">
-      <div className="signin-image">
-        <img src={cars} alt="car-image" />
-      </div>
-      <div className="form-container">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={FormSchema}
-          onSubmit={(values) => {
-            if (values.email && values.password) {
-              dispatch(loginUserThunk(values.email, values.password));
-              navigate("/");
-            }
-          }}
-        >
-          {({ errors, touched, handleChange }) => {
-            return (
-              <Form>
-                <Paper
-                  sx={{
-                    width: 400,
-                  }}
-                >
-                  <div className="form-container">
-                    <Typography sx={{ mt: 5, fontSize: "30px" }}>
-                      Log in
-                    </Typography>
-                    <IconButton sx={{ color: "inherit" }}>
-                      <LoginIcon />
-                    </IconButton>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={FormSchema}
+        onSubmit={(values, { resetForm }) => {
+          //  dispatch(userAction.userLoggedIn());
+          dispatch(loginUserThunk(values.email, values.password));
+          // console.log("this is from sign in  page");
+          // const userData = JSON.parse(localStorage.getItem("userDetail")!);
+          // const token = userData.token;
+          // const message = userData.message;
+          // ???
+          // if (isLoggedind) {
+          navigate("/");
+          // }
+          resetForm({ values: initialValues });
+        }}
+      >
+        {({ errors, touched, handleChange, values }) => {
+          return (
+            <Form>
+              <Paper
+                elevation={0}
+                sx={{
+                  width: 400,
+                }}
+              >
+                <div className="form-container">
+                  <Typography sx={{ mt: 5, fontSize: "30px" }}>
+                    Log in
+                  </Typography>
+                  <IconButton sx={{ color: "inherit" }}>
+                    <LoginIcon />
+                  </IconButton>
 
-                    <TextField
-                      label="Email"
-                      name="email"
-                      onChange={handleChange}
-                      sx={{
-                        width: 250,
-                        fontSize: "10px",
-                        mt: 2,
-                      }}
-                      size="small"
-                    ></TextField>
-                    {errors.email && touched.email ? (
-                      <div className="error-message"> {errors.email}</div>
-                    ) : null}
-                    <TextField
-                      label="Password"
-                      name="password"
-                      type="password"
-                      sx={{ mt: 1, width: 250, borderRadius: 10 }}
-                      onChange={handleChange}
-                      size="small"
-                    />
-                    {errors.password && touched.password ? (
-                      <div className="error-message"> {errors.password}</div>
-                    ) : null}
-                    <Button
-                      type="submit"
-                      sx={{
-                        width: "250px",
-                        height: "40px",
-                        mt: 3,
-                        backgroundColor: "#000",
-                        color: "#fff",
-                      }}
-                      variant="outlined"
-                    >
-                      Log in
-                    </Button>
-                    <Typography
-                      component={Link}
-                      to="/signup"
-                      fontSize="14px"
-                      sx={{
-                        ml: 10,
-                        mt: 2,
-                        textDecoration: "none",
-                      }}
-                    ></Typography>
-                  </div>
-                </Paper>
-              </Form>
-            );
-          }}
-        </Formik>
-      </div>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    onChange={handleChange}
+                    value={values.email}
+                    sx={{
+                      width: 250,
+                      fontSize: "10px",
+                      mt: 2,
+                    }}
+                    size="small"
+                  ></TextField>
+                  {errors.email && touched.email ? (
+                    <div className="error-message"> {errors.email}</div>
+                  ) : null}
+
+                  <TextField
+                    label="Password"
+                    name="password"
+                    type="password"
+                    sx={{ mt: 1, width: 250, borderRadius: 10 }}
+                    onChange={handleChange}
+                    value={values.password}
+                    size="small"
+                  />
+                  {errors.password && touched.password ? (
+                    <div className="error-message"> {errors.password}</div>
+                  ) : null}
+                  {validationMsg ? (
+                    <div className="error-message">{validationMsg}</div>
+                  ) : null}
+                  <Button
+                    type="submit"
+                    sx={{
+                      width: "250px",
+                      height: "40px",
+                      mt: 3,
+                      backgroundColor: "#000",
+                      color: "#fff",
+                    }}
+                    variant="outlined"
+                  >
+                    Log in
+                  </Button>
+
+                  <Typography
+                    component={Link}
+                    to="/signup"
+                    fontSize="14px"
+                    sx={{
+                      ml: 10,
+                      mt: 2,
+                      textDecoration: "none",
+                    }}
+                  ></Typography>
+                </div>
+              </Paper>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
-    // </div>
   );
 }

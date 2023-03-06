@@ -2,7 +2,7 @@ import mongoose, { Document, ObjectId } from "mongoose";
 
 import { ProductSchema } from "./Product";
 import User from "./User";
-import Cart from "../../../common/cart";
+import Cart from "../../../types/cart";
 // TypeScript
 export type CartDocument = Document & {
   CartDocument: Cart;

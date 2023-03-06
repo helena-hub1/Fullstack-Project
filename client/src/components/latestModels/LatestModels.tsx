@@ -16,8 +16,8 @@ import latest6 from "../../assets/latest6.jpg";
 export default function LatestModels() {
   return (
     <div className="latest-models">
-      <Typography sx={{ fontSize: "25px", textAlign: "center", mt: 5 }}>
-        Latest models in stock.
+      <Typography variant="h6" sx={{ fontSize: "20px", mt: 5, ml: 3 }}>
+        Latest models in stock
       </Typography>
       <div className="card-container">
         <div className="card-one">

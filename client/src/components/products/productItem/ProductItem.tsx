@@ -1,8 +1,7 @@
 import { Rating, Typography } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
 
-import Product from "../../../../../common/product";
+import Product from "../../../../../types/product";
 import "./ProductItem.css";
 // type
 type Prop = {
@@ -12,7 +11,6 @@ export default function ProductItem({ product }: Prop) {
   // render
   return (
     <div className="product-items">
-      {/* <div> */}
       <Link to={`/products/${product.VIN}`}>
         <img
           src={product.image}
@@ -29,7 +27,9 @@ export default function ProductItem({ product }: Prop) {
         precision={0.5}
         readOnly
       />
-      <Typography className="pragraph-two">{product.price}</Typography>
+      <Typography className="pragraph-two" sx={{ mb: 10 }}>
+        ${product.price}
+      </Typography>
     </div>
   );
 }

@@ -10,13 +10,7 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import Home from "@mui/icons-material/Home";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -25,10 +19,11 @@ import { useNavigate } from "react-router-dom";
 
 import car from "../../assets/navbarcar.png";
 import "./NavBar.css";
-import { fontSize } from "@mui/system";
 import { Button } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { userAction } from "../../redux/slices/user";
+import SearchHandler from "../searchHandler/SearchHandler";
 // MUI
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -56,26 +51,21 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
-
-export default function NavBar() {
-  // get data from local storage
-  const userData = JSON.parse(localStorage.getItem("userDetail")!);
-
+// type
+type Prop = {
+  setUserInput: Function;
+};
+export default function NavBar({ setUserInput }: Prop) {
+  // state
+  let isLoggedind = useSelector(
+    (state: RootState) => state.userDetail.isLoggedind
+  );
   const cartList = useSelector((state: RootState) => state.cartList.cartList);
   const wishList = useSelector((state: RootState) => state.wishList.wishList);
+  // dispatch
+  const dispatch = useDispatch();
+  // navigate
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -96,18 +86,6 @@ export default function NavBar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-  // useNavigate
-  const navigate = useNavigate();
-  // logout user
-  const logoutHandler = () => {
-    localStorage.removeItem("userDetail");
-    navigate("/");
-  };
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -135,11 +113,6 @@ export default function NavBar() {
           Sign up
         </MenuItem>
       </Link>
-      {/* <Link className="link" to="/">
-        <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
-          <Typography onClick={() => logoutHandler}>Logout</Typography>
-        </MenuItem>
-      </Link> */}
     </Menu>
   );
   const mobileMenuId = "primary-search-account-menu-mobile";
@@ -169,68 +142,70 @@ export default function NavBar() {
         >
           <AccountCircle />
         </IconButton>
-        {/* <p>Profile</p> */}
       </MenuItem>
     </Menu>
   );
-  if (userData === null) {
+  // logout handler
+  const logOutHandler = () => {
+    localStorage.removeItem("userDetail");
+    dispatch(userAction.userLogout());
+    navigate("/");
+  };
+  if (isLoggedind) {
+    // render
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
           position="static"
           color="inherit"
-          sx={{ backgroundColor: "aliceblue" }}
+          sx={{ backgroundColor: "aliceblue", height: "70px" }}
         >
           <Toolbar>
+            <IconButton sx={{ color: "inherit" }} component={Link} to="/">
+              <StarBorderIcon sx={{ fontSize: "50px" }} />
+            </IconButton>
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ fontSize: "25px", display: { xs: "none", sm: "block" } }}
             >
-              <IconButton sx={{ color: "inherit" }}>
-                <StarBorderIcon sx={{ fontSize: "50px" }} />
-              </IconButton>
-              CAR DEALER
+              <Box component="span" sx={{ color: "darkblue" }}>
+                C
+              </Box>
+              ar's e
+              <Box component="span" sx={{ color: "darkblue" }}>
+                S
+              </Box>
+              hop
             </Typography>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search", width: 200 }}
-              />
-            </Search>
+
             <Box sx={{ flexGrow: 1 }} />
             <Box>
               <div className="navbar-icons">
-                <IconButton
-                  size="large"
-                  aria-label="show 4 new mails"
-                  color="inherit"
-                  component={Link}
-                  to="/"
-                >
-                  <Home />
-                </IconButton>
                 <Link to="/products">
                   <img src={car} alt="car-icon" height="50px" width="50px" />
                 </Link>
+                <IconButton color="inherit" component={Link} to="/wishlist">
+                  <Badge badgeContent={wishList.length} color="error">
+                    <FavoriteIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton component={Link} to="/cartlist" color="inherit">
+                  <Badge badgeContent={cartList.length} color="error">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </IconButton>
                 <Button component={Link} to="/user" sx={{ color: "inherit" }}>
                   Profile
                 </Button>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
+                <Button component={Link} to="/order" sx={{ color: "inherit" }}>
+                  order
+                </Button>
+
+                <Button onClick={logOutHandler} sx={{ color: "inherit" }}>
+                  Logout
+                </Button>
               </div>
             </Box>
           </Toolbar>
@@ -245,45 +220,55 @@ export default function NavBar() {
       <AppBar
         position="static"
         color="inherit"
-        sx={{ backgroundColor: "aliceblue" }}
+        sx={{ backgroundColor: "aliceblue", height: "80px" }}
       >
         <Toolbar>
+          <IconButton sx={{ color: "inherit" }} component={Link} to="/">
+            <StarBorderIcon sx={{ fontSize: "50px" }} />
+          </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ mx: 5, display: { xs: "none", sm: "block" } }}
+            sx={{ fontSize: "25px", display: { xs: "none", sm: "block" } }}
           >
-            <IconButton sx={{ color: "inherit" }} component={Link} to="/">
-              <StarBorderIcon sx={{ fontSize: "50px" }} />
-            </IconButton>
-            CAR DELLER
+            <Box component="span" sx={{ color: "darkblue" }}>
+              C
+            </Box>
+            ar's e
+            <Box component="span" sx={{ color: "darkblue" }}>
+              S
+            </Box>
+            hop
           </Typography>
-
+          <SearchHandler setUserInput={setUserInput} />
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <div className="navbar-icons">
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+                component={Link}
+                to="/"
+              >
+                <Home />
+              </IconButton>
               <Link to="/products">
                 <img src={car} alt="car-icon" height="50px" width="50px" />
               </Link>
-              <IconButton color="inherit" component={Link} to="/wishlist">
-                <Badge badgeContent={wishList.length} color="error">
-                  <FavoriteIcon />
-                </Badge>
-              </IconButton>
-              <IconButton component={Link} to="/cartlist" color="inherit">
-                <Badge badgeContent={cartList.length} color="error">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
 
-              <Button component={Link} to="/order" sx={{ color: "inherit" }}>
-                order
-              </Button>
-
-              <Button onClick={logoutHandler} sx={{ color: "inherit" }}>
-                Logout
-              </Button>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
             </div>
           </Box>
         </Toolbar>

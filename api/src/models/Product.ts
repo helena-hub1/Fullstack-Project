@@ -1,7 +1,7 @@
 // product model here
 import mongoose, { Document } from "mongoose";
 
-import Product from "../../../common/product";
+import Product from "../../../types/product";
 
 // TypeScript
 export type ProductDocument = Document & {

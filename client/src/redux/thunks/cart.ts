@@ -4,13 +4,9 @@ import axios from "axios";
 import { AppDispatch } from "./../store";
 // get id and token  from localStorage
 const userData = JSON.parse(localStorage.getItem("userDetail")!);
-// localStorage.getItem("userDetail") !== null
-//   ? JSON.parse(localStorage.getItem("userDetail")!)
-//   : null;
-
 const userId = userData.userId;
 const token = userData.token;
-const url = `http://localhost:8002/carts/${userId}`;
+const url = `http://localhost:8001/carts/${userId}`;
 
 export const getCartListThunk = () => {
   return async (dispatch: AppDispatch) => {

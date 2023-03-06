@@ -3,12 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../../redux/thunks/productDetails";
 import { AppDispatch, RootState } from "../../../redux/store";
+import { Box, Button, Rating, Typography } from "@mui/material";
 
 import "./ProductDetail.css";
-import { Box, Button, Rating, Typography } from "@mui/material";
 import { cartAction } from "../../../redux/slices/cart";
 import { wishAction } from "../../../redux/slices/wish";
-import Product from "../../../../../common/product";
+
 export default function ProductDetail() {
   // state
   const productDetails = useSelector(
@@ -18,8 +18,8 @@ export default function ProductDetail() {
   //   dispatch
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  // Add to cart
 
+  // Add to cart
   const addToCartHandler = () => {
     let cartItem = {
       VIN: productDetails.VIN,
@@ -33,17 +33,13 @@ export default function ProductDetail() {
     navigate("/cartlist");
   };
 
-  // const addToCartHandler = () => {
-  //   dispatch(cartAction.addToCart(productDetails));
-  //   navigate("/cartlist");
-  // };
   // add to wish
   const addToWishHandler = () => {
     dispatch(wishAction.addToWish(productDetails));
     navigate("/wishlist");
   };
   const { VIN } = useParams();
-  const url = `http://localhost:8002/products/${VIN}`;
+  const url = `http://localhost:8001/products/${VIN}`;
   //   side effect
   useEffect(() => {
     dispatch(getProductDetails(url));
@@ -61,18 +57,22 @@ export default function ProductDetail() {
         <div className="product-detail">
           <Typography
             className="car-make"
-            sx={{ fontSize: "18px", textAlign: "center" }}
+            sx={{
+              fontSize: "20px",
+              textAlign: "center",
+              fontFamily: "verdana",
+            }}
           >
             {productDetails.make}
           </Typography>
           <Typography>
             <Box
               component="span"
-              sx={{ fontWeight: "bold", fontSize: "14px", m: 2 }}
+              sx={{ fontWeight: "bold", fontSize: "14px", mr: 1 }}
             >
               Price:
             </Box>
-            {productDetails.price}
+            ${productDetails.price}
           </Typography>
           <Typography component="div">
             <Box
@@ -80,7 +80,7 @@ export default function ProductDetail() {
               sx={{
                 fontWeight: "bold",
                 fontSize: "14px",
-                m: 2,
+                fontFamily: "sans-serif",
               }}
             >
               Description:
@@ -106,7 +106,7 @@ export default function ProductDetail() {
                   backgroundColor: "#000",
                   color: "#fff",
                   width: "180px",
-                  borderRadius: 10,
+                  // borderRadius: 10,
                 }}
               >
                 Add to cart
@@ -117,7 +117,8 @@ export default function ProductDetail() {
                   backgroundColor: "#000",
                   color: "#fff",
                   width: "180px",
-                  borderRadius: 10,
+
+                  // borderRadius: 10,
                 }}
               >
                 Add to Wish

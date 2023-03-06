@@ -5,8 +5,9 @@ import { getProductList } from "../../../redux/thunks/product";
 import { AppDispatch, RootState } from "../../../redux/store";
 import ProductItem from "../productItem/ProductItem";
 import "./ProductList.css";
-
-export default function ProductList() {
+// type
+type Prop = { userInput: string };
+export default function ProductList({ userInput }: Prop) {
   // state
   const productList = useSelector(
     (state: RootState) => state.productList.productList
@@ -17,13 +18,22 @@ export default function ProductList() {
   useEffect(() => {
     dispatch(getProductList());
   }, [dispatch]);
-  console.log(productList);
+
+  // Search handler
+  const filteredProduct = productList.filter((product) =>
+    product.make.toLocaleLowerCase().includes(userInput.toLocaleLowerCase())
+  );
+
   return (
     <div className="product-container">
       <div className="product-list">
-        {productList.map((product, index) => (
-          <ProductItem key={index} product={product} />
-        ))}
+        {filteredProduct
+          ? filteredProduct.map((product, index) => (
+              <ProductItem key={index} product={product} />
+            ))
+          : productList.map((product, index) => (
+              <ProductItem key={index} product={product} />
+            ))}
       </div>
     </div>
   );

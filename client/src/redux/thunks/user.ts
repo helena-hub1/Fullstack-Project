@@ -1,11 +1,12 @@
+import { Message } from "@mui/icons-material";
 import axios from "axios";
 
 import { AppDispatch } from "../../redux/store";
 import { userAction } from "../slices/user";
 
-const registerUrl = "http://localhost:8002/users/";
-const loginUrl = "http://localhost:8002/users/login";
-
+const registerUrl = "http://localhost:8001/users";
+const loginUrl = "http://localhost:8001/users/login";
+// register
 export default function registerUser(
   firstName: string,
   lastName: string,
@@ -14,23 +15,23 @@ export default function registerUser(
 ) {
   return async (dispatch: AppDispatch) => {
     try {
-      {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-        const { data } = await axios.post(
-          registerUrl,
-          { firstName, lastName, email, password },
-          config
-        );
-      }
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        registerUrl,
+        { firstName, lastName, email, password },
+        config
+      );
+      console.log(data, "data from register thunk");
     } catch (error) {
       console.log(error);
     }
   };
 }
+// login
 export function loginUserThunk(email: string, password: string) {
   return async (dispatch: AppDispatch) => {
     try {
@@ -40,9 +41,15 @@ export function loginUserThunk(email: string, password: string) {
         },
       };
       const response = await axios.post(loginUrl, { email, password }, config);
-
       const data = await response.data;
+      console.log(data, "data");
 
+      // invalid account
+      if (data.message) {
+        dispatch(userAction.accountValidationMsg(data.message));
+        return;
+      }
+      //  set localstorage
       localStorage.setItem(
         "userDetail",
         JSON.stringify({
@@ -51,25 +58,19 @@ export function loginUserThunk(email: string, password: string) {
           lastName: data.lastName,
           userId: data.userId,
           token: data.token,
-
-          // userId: data.user._id,
-          // userEmail: data.user.email,
-          // firstName: data.user.firstName,
-          // lastName: data.user.lastName,
-          // token: data.token
         })
       );
+
+      const userData = JSON.parse(localStorage.getItem("userDetail")!);
+      //  const token = userData.token;
+      //  if (token) {
       dispatch(
         userAction.getUserDetail({
           email: data.userEmail,
           firstName: data.firstName,
           lastName: data.lastName,
-
-          // token: data.token,
         })
       );
-      // dispatch(userAction.accountValidationMsg(data.message));
-      console.log(data.user, "from user thunk");
     } catch (error) {
       console.log(error);
     }

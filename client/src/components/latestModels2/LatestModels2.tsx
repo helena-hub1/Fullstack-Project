@@ -10,8 +10,8 @@ export default function LatestModels2() {
   return (
     <div className="latest-models2">
       <div className="latest-models">
-        <Typography sx={{ fontSize: "25px", textAlign: "center", mt: 5 }}>
-          New collections from Audi-Q8 vtron.
+        <Typography variant="h6" sx={{ fontSize: "20px", mt: 5, ml: 3 }}>
+          New collections from Audi-Q8 vtron
         </Typography>
         <div className="card-container">
           <div className="card-two">

@@ -2,7 +2,7 @@ import mongoose, { Document } from "mongoose";
 
 import { ProductSchema } from "./Product";
 import User from "./User";
-import Wish from "../../../common/wish";
+import Wish from "../../../types/wish";
 // TypeScript
 export type WishDocument = Document & {
   WishDocument: Wish;

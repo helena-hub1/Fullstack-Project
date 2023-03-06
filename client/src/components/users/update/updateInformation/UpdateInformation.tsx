@@ -1,29 +1,32 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Button, TextField, Paper, Typography } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Paper,
+  Typography,
+  Divider,
+  Card,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/store";
 
 export default function UpdateInformation() {
-  // get token & user id from local storage
-  const userData = JSON.parse(localStorage.getItem("userDetail")!);
-  // localStorage.getItem("userDetail") !== null
-  //   ? JSON.parse(localStorage.getItem("userDetail")!)
-  //   : null;
-  const userId = userData.userId;
-  const token = userData.token;
-  console.log("user id", userId);
-  console.log("token", token);
-  const url = `http://localhost:/users/${userId}`;
-
+  // state
+  const isLoggedInd = useSelector(
+    (state: RootState) => state.userDetail.isLoggedind
+  );
+  // navigate
   const navigate = useNavigate();
-
-  type Login = {
+  // type
+  type InitialValues = {
     email: string;
     password: string;
   };
   // initial values
-  const initialValues: Login = {
+  const initialValues: InitialValues = {
     email: "",
     password: "",
   };
@@ -42,14 +45,48 @@ export default function UpdateInformation() {
         "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
       ),
   });
+  if (!isLoggedInd) {
+    return (
+      <Card
+        className="order-login"
+        sx={{
+          width: 600,
+          height: 100,
+          my: 10,
+          backgroundColor: "aliceblue",
+          mb: 50,
+        }}
+      >
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontFamily: "monospace",
+            fontSize: "20px",
+          }}
+        >
+          Access is denied! Please log in first.
+        </Typography>
+      </Card>
+    );
+  }
 
   return (
-    <div className="login-page">
+    <div className="login-page-update">
       <div className="form-container">
         <Formik
           initialValues={initialValues}
           validationSchema={FormSchema}
           onSubmit={(values) => {
+            const userData = JSON.parse(localStorage.getItem("userDetail")!);
+            // no user
+            if (!userData) {
+              <div>No userData</div>;
+            }
+            const userId = userData.userId;
+            const token = userData.token;
+            console.log("user id", userId);
+            console.log("token", token);
+            const url = `http://localhost:8001/users/${userId}`;
             axios
               .put(url, values, {
                 headers: { Authorization: `Bearer ${token} ` },
@@ -64,15 +101,17 @@ export default function UpdateInformation() {
                 <Paper
                   sx={{
                     width: 300,
-                    mt: 8,
+                    mt: 10,
                     height: 400,
                     backgroundColor: "aliceblue",
+                    mb: 50,
                   }}
                 >
                   <div className="form-container">
                     <Typography sx={{ mt: 3, fontSize: "20px" }}>
                       Update your detail
                     </Typography>
+                    <Divider />
                     <TextField
                       label="firstName"
                       name="firstName"

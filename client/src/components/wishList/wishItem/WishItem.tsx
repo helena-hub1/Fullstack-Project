@@ -11,7 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./WishItem.css";
-import Product from "../../../../../common/product";
+import Product from "../../../../../types/product";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { wishAction } from "../../../redux/slices/wish";
@@ -30,7 +30,14 @@ export default function WishItem({ product }: Prop) {
     <div className="wish-container">
       <Card
         elevation={6}
-        sx={{ maxWidth: 400, height: 300, backgroundColor: "aliceblue" }}
+        sx={{
+          maxWidth: 400,
+          height: 300,
+          backgroundColor: "aliceblue",
+          mt: 10,
+          ml: 10,
+          mb: 50,
+        }}
       >
         <CardActionArea>
           <CardMedia

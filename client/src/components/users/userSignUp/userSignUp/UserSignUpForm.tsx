@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+
 import {
   Button,
   FormControl,
@@ -15,21 +15,19 @@ import {
   OutlinedInput,
   Box,
 } from "@mui/material/";
-import { VisibilityOff, Visibility, Diversity1 } from "@mui/icons-material";
-import "./UserSignUp.css";
-import { Link } from "react-router-dom";
-import { RootState } from "../../../redux/store";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
+import "./UserSignUpForm.css";
+import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
-import registerUser from "../../../redux/thunks/user";
-import { AppDispatch } from "../../../redux/store";
+import infoIcon from "../../../../assets/info.jpg";
+import registerUser from "../../../../redux/thunks/user";
+import { AppDispatch } from "../../../../redux/store";
 
-export default function UserSignUp() {
-  // state
-  const userDetail = useSelector(
-    (state: RootState) => state.userDetail.userDetail
-  );
-  console.log(userDetail, "from signup");
+export default function UserSignUpForm() {
+  // navigate
+  const navigate = useNavigate();
   // dispatch
   const dispatch = useDispatch<AppDispatch>();
   // MUI
@@ -79,17 +77,14 @@ export default function UserSignUp() {
       .oneOf([Yup.ref("password")], "Passwords do not match.")
       .required("Required"),
   });
-  // const url = "http://localhost:8002/users";
+  // render
   return (
     <div>
       <Formik
         initialValues={initialValues}
         validationSchema={FormSchema}
         onSubmit={(values, { resetForm }) => {
-          // axios
-          //   .post(url, values)
-          //   .then((response) => console.log(response.data));
-          // console.log(values);
+          // dispatch registerUser
           dispatch(
             registerUser(
               values.firstName,
@@ -98,7 +93,9 @@ export default function UserSignUp() {
               values.password
             )
           );
+          console.log(values, "values");
           resetForm({ values: initialValues });
+          navigate("/welcome");
         }}
       >
         {({ errors, handleChange, touched, values }) => {
@@ -107,7 +104,13 @@ export default function UserSignUp() {
               <div className="field-container">
                 <Paper
                   elevation={4}
-                  sx={{ height: 500, width: 500, backgroundColor: "aliceblue" }}
+                  sx={{
+                    mt: 6,
+                    height: 600,
+                    width: 500,
+                    backgroundColor: "aliceblue",
+                    mb: 50,
+                  }}
                 >
                   <Typography
                     component="div"
@@ -194,6 +197,17 @@ export default function UserSignUp() {
                         label="Password"
                       />
                     </FormControl>
+                    <Typography fontSize="12px">
+                      <img
+                        src={infoIcon}
+                        height="15px"
+                        width="15px"
+                        alt="information icon"
+                      ></img>
+                      Password must contain at least 8 characters, one number &
+                      one special character
+                    </Typography>
+
                     {errors.password && touched.password ? (
                       <p className="error-message"> {errors.password}</p>
                     ) : null}
@@ -239,16 +253,16 @@ export default function UserSignUp() {
                       margin="10px"
                     >
                       By clicking Sign Up, you agree to our
-                      <Box component={Link} to="/">
+                      <Box component={Link} to="#" sx={{ ml: 1 }}>
                         Terms
                       </Box>
                       . Learn how we collect, use and share your data in our
                       Privacy Policy and how we use cookies and similar
                       technology in our
-                      <Box component={Link} to="/">
+                      <Box component={Link} to="#" sx={{ ml: 1 }}>
                         Cookies Policy
                       </Box>
-                      . You may receive SMS Notifications from us and can opt
+                      . You may receive SMS Notifications from us and can access
                       out any time.
                     </Typography>
                     <Button
@@ -265,6 +279,15 @@ export default function UserSignUp() {
                     >
                       Sign Up
                     </Button>
+                    <Typography
+                      component="div"
+                      sx={{ fontSize: "12px", mt: 1 }}
+                    >
+                      Already have an account?
+                      <Box component={Link} to="/signin" sx={{ ml: 1 }}>
+                        Sign in
+                      </Box>
+                    </Typography>
                   </div>
                 </Paper>
               </div>

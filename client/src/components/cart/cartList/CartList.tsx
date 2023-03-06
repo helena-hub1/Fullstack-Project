@@ -10,16 +10,37 @@ import emptycart from "../../../assets/emptycart.png";
 export default function CartList() {
   // state
   const cartList = useSelector((state: RootState) => state.cartList.cartList);
-  const totalPrice = Math.round(
-    cartList.reduce(
-      (accum, product) => accum + product.price * product.cartItemQty,
-      0
-    )
+  const isLoggedInd = useSelector(
+    (state: RootState) => state.userDetail.isLoggedind
   );
   //  dispatch
   const dispatch = useDispatch<AppDispatch>();
 
-  console.log(cartList, " from cart List");
+  if (!isLoggedInd) {
+    return (
+      <Card
+        className="order-login"
+        sx={{
+          width: 600,
+          height: 100,
+          my: 10,
+          backgroundColor: "aliceblue",
+          mb: 50,
+        }}
+      >
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontFamily: "monospace",
+            fontSize: "20px",
+            fontStyle: "italic",
+          }}
+        >
+          Access is denied! Please log in first.
+        </Typography>
+      </Card>
+    );
+  }
 
   if (cartList.length === 0) {
     return (
@@ -28,8 +49,9 @@ export default function CartList() {
         sx={{
           maxWidth: 400,
           height: 300,
-          my: 10,
+          mt: 10,
           backgroundColor: "aliceblue",
+          mb: 50,
         }}
       >
         <img src={emptycart} height="150px" width="150px"></img>

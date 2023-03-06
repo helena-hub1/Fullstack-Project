@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Cart from "../../../../common/cart";
-import ShippingAddress from "../../../../common/shippingAddress";
-import ContactInformation from "../../.../../../../common/contactInformation";
+import Cart from "../../../../types/cart";
+import ShippingAddress from "../../../../types/shippingAddress";
+import ContactInformation from "../../.../../../../types/contactInformation";
 // type
 type InitialState = {
   cartList: Cart[];
@@ -85,6 +85,16 @@ const cartSlice = createSlice({
         if (state.cartList[index].cartItemQty > 1) {
           state.cartList[index].cartItemQty -= 1;
         }
+      }
+    },
+    takeQuantity: (state, action) => {
+      const index = state.cartList.findIndex(
+        (product) => product.VIN === action.payload.VIN
+      );
+      if (index !== -1) {
+        // if (state.cartList[index].cartItemQty > 1) {
+        state.cartList[index].cartItemQty = action.payload;
+        // }
       }
     },
   },

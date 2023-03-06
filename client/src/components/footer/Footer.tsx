@@ -1,8 +1,9 @@
+import { Link, animateScroll as scroll } from "react-scroll";
+
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import Xarrow from "react-xarrows";
 
 import "./Footer.css";
 import {
@@ -12,17 +13,35 @@ import {
   Toolbar,
   Typography,
   Container,
+  Paper,
 } from "@mui/material";
-import { fontSize } from "@mui/system";
+
 export default function Footer() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="sticky"
         color="inherit"
-        sx={{ marginTop: "300px", backgroundColor: "aliceblue" }}
+        sx={{ backgroundColor: "aliceblue" }}
       >
         <Container maxWidth="xl" className="footer">
+          <Paper
+            elevation={0}
+            sx={{
+              width: "100%",
+              backgroundColor: "aliceblue",
+            }}
+          >
+            <Link
+              to="/"
+              className="someDiv"
+              onClick={() => scroll.scrollToTop()}
+            >
+              <Typography sx={{ textAlign: "center", fontSize: "18px", mt: 2 }}>
+                Back to Top
+              </Typography>
+            </Link>
+          </Paper>
           <div className="footer-icons">
             <IconButton color="inherit">
               <FacebookIcon />

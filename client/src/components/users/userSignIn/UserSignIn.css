@@ -1,12 +1,12 @@
 /* LOGIN */
 .login-page {
   display: flex;
+  justify-content: flex-end;
+  gap: 100px;
   background-size: cover;
   background-repeat: no-repeat;
-
-  /* height: 100vh; */
-  /* object-fit: scale-down; */
-  /* background-image: url("../../../assets/NewAudimodel.jpg"); */
+  background-image: url("../../../assets/loginbackground.jpg");
+  min-height: 100%;
 }
 
 /* FORM */
