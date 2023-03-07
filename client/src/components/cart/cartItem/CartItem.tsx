@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Box,
+  Card,
   FormControl,
   IconButton,
   InputLabel,
@@ -9,7 +10,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import Cart from "../../../../../types/cart";
@@ -21,7 +22,9 @@ type Prop = {
   product: Cart;
 };
 export default function CartItem({ product }: Prop) {
+  // state
   const [quantity, setQuantity] = useState("");
+
   // dispatch
   const dispatch = useDispatch();
   const handleChange = (event: SelectChangeEvent) => {
@@ -34,7 +37,7 @@ export default function CartItem({ product }: Prop) {
   const removeCartProductHandler = () => {
     dispatch(cartAction.removeFromCart(product));
   };
-  // console.log(cartItem, "product from item");
+
   return (
     <div>
       {

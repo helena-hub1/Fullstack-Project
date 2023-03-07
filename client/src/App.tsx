@@ -14,7 +14,7 @@ import SuccessMessage from "./components/users/update/successOnUpdate/SuccessMes
 import ProductDetail from "./components/products/productDetail/ProductDetail";
 import Cart from "./pages/CartPage/Cart";
 import Footer from "./components/footer/Footer";
-import OrderForm from "./components/orderForm/OrderForm";
+import OrderForm from "./components/order/orderForm/OrderForm";
 import SuccessOnSignUp from "./components/users/userSignUp/successOnSignUp/SuccessOnSignUp";
 import UserSignUpForm from "./components/users/userSignUp/userSignUp/UserSignUpForm";
 function App() {

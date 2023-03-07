@@ -1,43 +1,14 @@
-import { useSelector } from "react-redux";
 import React from "react";
+import { useSelector } from "react-redux";
+import { Button, Card, Link, Typography } from "@mui/material";
 
 import { RootState } from "../../../redux/store";
 import WishItem from "../wishItem/WishItem";
-import "./WishList.css";
-import { Card, Typography } from "@mui/material";
-
 import wishcart from "../../../assets/wishcart.png";
-
+import "./WishList.css";
 export default function WishList() {
   // state
   const wishList = useSelector((state: RootState) => state.wishList.wishList);
-  const isLoggedInd = useSelector(
-    (state: RootState) => state.userDetail.isLoggedind
-  );
-  if (!isLoggedInd) {
-    return (
-      <Card
-        className="order-login"
-        sx={{
-          width: 600,
-          height: 100,
-          my: 10,
-          backgroundColor: "aliceblue",
-          mb: 50,
-        }}
-      >
-        <Typography
-          sx={{
-            textAlign: "center",
-            fontFamily: "monospace",
-            fontSize: "20px",
-          }}
-        >
-          Access is denied! Please log in first.
-        </Typography>
-      </Card>
-    );
-  }
 
   if (wishList.length === 0) {
     return (
@@ -67,9 +38,11 @@ export default function WishList() {
   }
   return (
     <div className="wish-container">
-      {wishList.map((product, id) => (
-        <WishItem product={product} key={id} />
-      ))}
+      <div className="wish-wrapper">
+        {wishList.map((product, id) => (
+          <WishItem product={product} key={id} />
+        ))}
+      </div>
     </div>
   );
 }

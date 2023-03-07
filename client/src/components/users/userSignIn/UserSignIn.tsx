@@ -70,8 +70,8 @@ export default function UserLogIn() {
           // ???
           // if (isLoggedind) {
           navigate("/");
-          // }
           resetForm({ values: initialValues });
+          // }
         }}
       >
         {({ errors, touched, handleChange, values }) => {
@@ -84,7 +84,7 @@ export default function UserLogIn() {
                 }}
               >
                 <div className="form-container">
-                  <Typography sx={{ mt: 5, fontSize: "30px" }}>
+                  <Typography sx={{ mt: 5, mr: 1, fontSize: "30px" }}>
                     Log in
                   </Typography>
                   <IconButton sx={{ color: "inherit" }}>

@@ -1,14 +1,15 @@
 import {
+  Badge,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
   IconButton,
-  Link,
   Rating,
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import "./WishItem.css";
 import Product from "../../../../../types/product";
@@ -22,7 +23,11 @@ type Prop = {
 export default function WishItem({ product }: Prop) {
   // dispatch
   const dispatch = useDispatch<AppDispatch>();
-  // remove from cart
+  // add to wish
+  const addToWishListHandler = () => {
+    dispatch(wishAction.addToWish(product));
+  };
+  // remove from wish
   const removeWishProductHandler = () => {
     dispatch(wishAction.removeFromWish(product));
   };
@@ -64,13 +69,14 @@ export default function WishItem({ product }: Prop) {
             />
           </CardContent>
         </CardActionArea>
-        <IconButton
-          sx={{ ml: 30 }}
-          onClick={removeWishProductHandler}
-          color="inherit"
-        >
-          <DeleteIcon />
-        </IconButton>
+        <div className="icon-container">
+          <IconButton color="inherit" onClick={addToWishListHandler}>
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton onClick={removeWishProductHandler} color="inherit">
+            <DeleteIcon />
+          </IconButton>
+        </div>
       </Card>
     </div>
   );

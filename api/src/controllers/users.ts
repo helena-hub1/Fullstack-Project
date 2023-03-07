@@ -53,6 +53,7 @@ const userLogin = async (request: Request, response: Response) => {
     if (!matchPassword) {
       // response.status(401);
       response.json({ message: `Invalid password` });
+      return;
     }
     const userId = user._id;
     // generate token

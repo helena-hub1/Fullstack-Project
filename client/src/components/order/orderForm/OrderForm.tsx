@@ -15,13 +15,13 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import createOrderThunk from "../../redux/thunks/order";
-import maestro from "../../assets/maestro.svg";
-import visaelectron from "../..//assets/visa-electron.svg";
-import visa from "../../assets/visa.svg";
-import mastercard from "../../assets/mastercard.svg";
-import dankort from "../../assets/dankort.svg";
-import { AppDispatch, RootState } from "../../redux/store";
+import createOrderThunk from "../../../redux/thunks/order";
+import maestro from "../../../assets/maestro.svg";
+import visaelectron from "../../../assets/visa-electron.svg";
+import visa from "../../../assets/visa.svg";
+import mastercard from "../../../assets/mastercard.svg";
+import dankort from "../../../assets/dankort.svg";
+import { AppDispatch, RootState } from "../../../redux/store";
 import "./OrderForm.css";
 
 export default function OrderForm() {
@@ -93,10 +93,9 @@ export default function OrderForm() {
             textAlign: "center",
             fontFamily: "monospace",
             fontSize: "20px",
-            fontStyle: "italic",
           }}
         >
-          Please log in first!
+          Access is denied! Please log in first.
         </Typography>
       </Card>
     );

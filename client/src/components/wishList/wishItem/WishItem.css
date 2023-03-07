@@ -1,7 +1,6 @@
-/* .wish-container {
+.icon-container {
   display: flex;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
 }
-.text-container {
-  display: flex;
-  flex-direction: column;
-} */
