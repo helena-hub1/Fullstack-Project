@@ -1,7 +1,7 @@
 // order model
 import mongoose, { Document } from "mongoose";
 
-import { ProductOrderSchema } from "./ProductOrder";
+import { ProductOrderSchema } from "./productOrder";
 import User from "./User";
 import Order from "../../../types/order";
 
