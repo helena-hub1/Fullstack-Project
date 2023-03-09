@@ -43,6 +43,10 @@ const userSlice = createSlice({
     userLogout: (state) => {
       state.isLoggedind = false;
     },
+    userLogIn: (state) => {
+      state.isLoggedind = true;
+      localStorage.setItem("userLoggedInd", JSON.stringify(state.isLoggedind));
+    },
   },
 });
 // actions and reducers

@@ -1,24 +1,31 @@
-/* MAIN CONTAINER */
+/* Main  */
 .main-container {
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 200px;
 }
-/* DETAIL CONTAINER */
+/* Detail */
 .detail-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   width: 80%;
-  gap: 100px;
+  gap: 30px;
 }
-/*CAR MAKE  */
+
+/*Car make  */
 .car-make {
   font-family: "Courier New", Courier, monospace;
   font-size: 50px;
   font-weight: 500;
 }
-
+.description-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+}
+/* Rate */
 .rate-btn {
   display: flex;
   flex-direction: column;
@@ -26,7 +33,7 @@
   align-items: center;
   gap: 30px;
 }
-/* BUTTON CONTAINER */
+/* Btn */
 .btn-container {
   display: flex;
   gap: 20px;

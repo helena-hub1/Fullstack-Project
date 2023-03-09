@@ -14,34 +14,38 @@ import {
   Typography,
   Container,
   Paper,
+  Divider,
 } from "@mui/material";
 
 export default function Footer() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="sticky"
+        position="static"
         color="inherit"
-        sx={{ backgroundColor: "aliceblue" }}
+        sx={{ backgroundColor: "#eeeeee" }}
       >
-        <Container maxWidth="xl" className="footer">
-          <Paper
-            elevation={0}
-            sx={{
-              width: "100%",
-              backgroundColor: "aliceblue",
-            }}
-          >
-            <Link
-              to="/"
-              className="someDiv"
-              onClick={() => scroll.scrollToTop()}
+        <Paper
+          elevation={0}
+          sx={{
+            width: "100%",
+            backgroundColor: "#cccccc",
+          }}
+        >
+          <Link to="/" className="someDiv" onClick={() => scroll.scrollToTop()}>
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: "18px",
+                m: 1,
+                color: "#002e5c",
+              }}
             >
-              <Typography sx={{ textAlign: "center", fontSize: "18px", mt: 2 }}>
-                Back to Top
-              </Typography>
-            </Link>
-          </Paper>
+              Back to Top
+            </Typography>
+          </Link>
+        </Paper>
+        <Container maxWidth="xl" className="footer">
           <div className="footer-icons">
             <IconButton color="inherit">
               <FacebookIcon />
@@ -85,7 +89,7 @@ export default function Footer() {
             </div>
             <div className="vehicles">
               VIHICLES
-              <Typography sx={{ fontSize: "small", mt: 3 }}>
+              <Typography sx={{ fontSize: "small", mt: 3, color: "#002e5c" }}>
                 All type vhicles
               </Typography>
               <Typography sx={{ fontSize: "small" }}>SUVs</Typography>
@@ -136,9 +140,7 @@ export default function Footer() {
               <Typography sx={{ fontSize: "small" }}>
                 Care & maintenance
               </Typography>
-              <Typography sx={{ fontSize: "small" }}>
-                Safety recalls{" "}
-              </Typography>
+              <Typography sx={{ fontSize: "small" }}>Safety recalls</Typography>
               <Typography sx={{ fontSize: "small" }}>
                 Service Campaigns
               </Typography>
@@ -175,6 +177,7 @@ export default function Footer() {
               <Typography sx={{ fontSize: "small" }}>Plant tours</Typography>
             </div>
           </div>
+          <Divider />
           <div className="copyright-information">
             <Typography sx={{ fontWeight: "bold" }}>Contact us</Typography>
             <Typography sx={{ fontWeight: "bold" }}>FAQ's</Typography>
@@ -193,7 +196,6 @@ export default function Footer() {
               Code Section 220506.
             </Typography>
           </div>
-          {/* </div> */}
         </Container>
         <Toolbar></Toolbar>
       </AppBar>

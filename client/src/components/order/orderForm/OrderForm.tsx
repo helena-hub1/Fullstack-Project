@@ -13,7 +13,7 @@ import {
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import createOrderThunk from "../../../redux/thunks/order";
 import maestro from "../../../assets/maestro.svg";
@@ -23,10 +23,10 @@ import mastercard from "../../../assets/mastercard.svg";
 import dankort from "../../../assets/dankort.svg";
 import { AppDispatch, RootState } from "../../../redux/store";
 import "./OrderForm.css";
+import { cartAction } from "../../../redux/slices/cart";
 
 export default function OrderForm() {
   // state
-
   const cartList = useSelector((state: RootState) => state.cartList.cartList);
   const totalPrice = Math.round(
     cartList.reduce(
@@ -40,7 +40,7 @@ export default function OrderForm() {
   // dispatch
   const dispatch = useDispatch<AppDispatch>();
   // get userId from local storage
-
+  const navigate = useNavigate();
   type InitialValues = {
     quantity: number;
     totalPrice: number;
@@ -84,7 +84,7 @@ export default function OrderForm() {
           width: 600,
           height: 100,
           my: 10,
-          backgroundColor: "aliceblue",
+          backgroundColor: "#eeeeee",
           mb: 50,
         }}
       >
@@ -93,6 +93,7 @@ export default function OrderForm() {
             textAlign: "center",
             fontFamily: "monospace",
             fontSize: "20px",
+            color: "#002e5c",
           }}
         >
           Access is denied! Please log in first.
@@ -111,7 +112,6 @@ export default function OrderForm() {
             createOrderThunk(
               cartList,
               values.quantity,
-              // values.totalPrice,
               totalPrice,
               values.street,
               values.city,
@@ -124,9 +124,9 @@ export default function OrderForm() {
           );
           console.log("cart list", cartList);
           console.log("values", values);
-
+          dispatch(cartAction.clearCart());
           resetForm({ values: initialValues });
-          localStorage.removeItem("cartlist");
+          navigate("/order");
         }}
       >
         {({ errors, handleChange, touched, values }) => {
@@ -134,10 +134,10 @@ export default function OrderForm() {
             <Form>
               <Paper
                 sx={{
-                  my: 10,
+                  my: 5,
                   width: "500px",
                   height: "570px",
-                  backgroundColor: "aliceblue",
+                  backgroundColor: "#eeeeee",
                 }}
               >
                 <div className="form-field">

@@ -6,6 +6,7 @@ import {
   Paper,
   Typography,
   IconButton,
+  Box,
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,10 +14,8 @@ import "./UserSignIn.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { loginUserThunk } from "../../../redux/thunks/user";
-import cars from "../../../assets/NewAudimodel.jpg";
 import { userAction } from "../../../redux/slices/user";
-import { Message } from "@mui/icons-material";
+import axios from "axios";
 
 export default function UserLogIn() {
   // state
@@ -26,6 +25,8 @@ export default function UserLogIn() {
   const isLoggedind = useSelector(
     (state: RootState) => state.userDetail.isLoggedind
   );
+  // url
+  const url = "http://localhost:8001/users/login";
   console.log(isLoggedind, "isLoggedIN");
   const userInformation = useSelector(
     (state: RootState) => state.userDetail.userDetail
@@ -61,17 +62,26 @@ export default function UserLogIn() {
         initialValues={initialValues}
         validationSchema={FormSchema}
         onSubmit={(values, { resetForm }) => {
-          //  dispatch(userAction.userLoggedIn());
-          dispatch(loginUserThunk(values.email, values.password));
-          // console.log("this is from sign in  page");
-          // const userData = JSON.parse(localStorage.getItem("userDetail")!);
-          // const token = userData.token;
-          // const message = userData.message;
-          // ???
-          // if (isLoggedind) {
-          navigate("/");
-          resetForm({ values: initialValues });
-          // }
+          axios.post(url, values).then((response) => {
+            const userData = response.data;
+            localStorage.setItem("userDetail", JSON.stringify(userData));
+            const token = userData.token;
+            if (token) {
+              navigate("/");
+              dispatch(
+                userAction.getUserDetail({
+                  email: userData.userEmail,
+                  firstName: userData.firstName,
+                  lastName: userData.lastName,
+                })
+              );
+              dispatch(userAction.userLogIn());
+              return;
+            }
+            const message = userData.message;
+            dispatch(userAction.accountValidationMsg(message));
+            resetForm({ values: initialValues });
+          });
         }}
       >
         {({ errors, touched, handleChange, values }) => {
@@ -80,11 +90,14 @@ export default function UserLogIn() {
               <Paper
                 elevation={0}
                 sx={{
-                  width: 400,
+                  width: 300,
+                  height: 400,
+                  mt: 5,
+                  background: "#eeeeee",
                 }}
               >
                 <div className="form-container">
-                  <Typography sx={{ mt: 5, mr: 1, fontSize: "30px" }}>
+                  <Typography sx={{ mt: 4, mr: 1, fontSize: "30px" }}>
                     Log in
                   </Typography>
                   <IconButton sx={{ color: "inherit" }}>
@@ -138,20 +151,23 @@ export default function UserLogIn() {
 
                   <Typography
                     component={Link}
-                    to="/signup"
+                    to="#"
                     fontSize="14px"
                     sx={{
                       ml: 10,
                       mt: 2,
                       textDecoration: "none",
                     }}
-                  ></Typography>
+                  >
+                    Forgot your password?
+                  </Typography>
                 </div>
               </Paper>
             </Form>
           );
         }}
       </Formik>
+      <Box sx={{ mb: 70 }}></Box>
     </div>
   );
 }

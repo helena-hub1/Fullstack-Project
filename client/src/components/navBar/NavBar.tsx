@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Home from "@mui/icons-material/Home";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -24,32 +22,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { userAction } from "../../redux/slices/user";
 import SearchHandler from "../searchHandler/SearchHandler";
-// MUI
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
 
 // type
 type Prop = {
@@ -57,19 +29,21 @@ type Prop = {
 };
 export default function NavBar({ setUserInput }: Prop) {
   // state
-  let isLoggedind = useSelector(
-    (state: RootState) => state.userDetail.isLoggedind
-  );
+  const isLoggedind = localStorage.getItem("userLoggedInd");
   const cartList = useSelector((state: RootState) => state.cartList.cartList);
   const wishList = useSelector((state: RootState) => state.wishList.wishList);
+  const userData = useSelector(
+    (state: RootState) => state.userDetail.userDetail
+  );
+  console.log(userData, "userData Nav");
   // dispatch
   const dispatch = useDispatch();
   // navigate
   const navigate = useNavigate();
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -104,12 +78,12 @@ export default function NavBar({ setUserInput }: Prop) {
       onClose={handleMenuClose}
     >
       <Link className="link" to="/signin">
-        <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
+        <MenuItem onClick={handleMenuClose} sx={{ color: "#002e5c" }}>
           Sign in
         </MenuItem>
       </Link>
       <Link className="link" to="/signup">
-        <MenuItem onClick={handleMenuClose} sx={{ color: "#000" }}>
+        <MenuItem onClick={handleMenuClose} sx={{ color: "#002e5c" }}>
           Sign up
         </MenuItem>
       </Link>
@@ -145,11 +119,31 @@ export default function NavBar({ setUserInput }: Prop) {
       </MenuItem>
     </Menu>
   );
+  // dashbord
+  const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
+  const open2 = Boolean(anchorEl2);
+  const handleClick2 = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl2(event.currentTarget);
+  };
+  const handleClose2 = () => {
+    setAnchorEl2(null);
+  };
   // logout handler
   const logOutHandler = () => {
     localStorage.removeItem("userDetail");
+    localStorage.removeItem("userLoggedInd");
     dispatch(userAction.userLogout());
     navigate("/");
+  };
+
+  const navigateToOrderHandler = () => {
+    navigate("/order");
+  };
+  const navigateToProfileHandler = () => {
+    navigate("/profile");
+  };
+  const navigateToProductsHandler = () => {
+    navigate("/products");
   };
   if (isLoggedind) {
     // render
@@ -157,55 +151,100 @@ export default function NavBar({ setUserInput }: Prop) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar
           position="static"
-          color="inherit"
-          sx={{ backgroundColor: "aliceblue", height: "70px" }}
+          sx={{ backgroundColor: "#eeeeee", height: "70px" }}
         >
           <Toolbar>
             <IconButton sx={{ color: "inherit" }} component={Link} to="/">
-              <StarBorderIcon sx={{ fontSize: "50px" }} />
+              <StarBorderIcon sx={{ fontSize: "30px", color: "#002e5c" }} />
             </IconButton>
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ fontSize: "25px", display: { xs: "none", sm: "block" } }}
+              sx={{
+                fontSize: "25px",
+                color: "#002e5c",
+                display: { xs: "none", sm: "block" },
+              }}
             >
-              <Box component="span" sx={{ color: "darkblue" }}>
-                C
-              </Box>
-              ar's e
-              <Box component="span" sx={{ color: "darkblue" }}>
-                S
-              </Box>
-              hop
+              Car's eShop
             </Typography>
+            <SearchHandler setUserInput={setUserInput} />
 
             <Box sx={{ flexGrow: 1 }} />
             <Box>
               <div className="navbar-icons">
                 <Link to="/products">
-                  <img src={car} alt="car-icon" height="50px" width="50px" />
+                  <img
+                    src={car}
+                    alt="car-icon"
+                    height="50px"
+                    width="50px"
+                    color="#002e5c"
+                  />
                 </Link>
-                <IconButton color="inherit" component={Link} to="/wishlist">
-                  <Badge badgeContent={wishList.length} color="error">
+                <IconButton
+                  color="inherit"
+                  component={Link}
+                  to="/wishlist"
+                  sx={{ color: "#002e5c" }}
+                >
+                  <Badge badgeContent={wishList.length} color="info">
                     <FavoriteIcon />
                   </Badge>
                 </IconButton>
-                <IconButton component={Link} to="/cartlist" color="inherit">
-                  <Badge badgeContent={cartList.length} color="error">
+                <IconButton
+                  component={Link}
+                  to="/cartlist"
+                  sx={{ color: "#002e5c" }}
+                >
+                  <Badge badgeContent={cartList.length} color="info">
                     <ShoppingCartIcon />
                   </Badge>
                 </IconButton>
-                <Button component={Link} to="/user" sx={{ color: "inherit" }}>
-                  Profile
-                </Button>
-                <Button component={Link} to="/order" sx={{ color: "inherit" }}>
-                  order
-                </Button>
 
-                <Button onClick={logOutHandler} sx={{ color: "inherit" }}>
-                  Logout
+                <Button
+                  id="fade-button"
+                  aria-controls={open2 ? "fade-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open2 ? "true" : undefined}
+                  onClick={handleClick2}
+                  sx={{ color: "#002e5c" }}
+                >
+                  Dashboard
                 </Button>
+                <Menu
+                  id="fade-menu"
+                  MenuListProps={{
+                    "aria-labelledby": "fade-button",
+                  }}
+                  anchorEl={anchorEl2}
+                  open={open2}
+                  onClose={handleClose2}
+                  TransitionComponent={Fade}
+                >
+                  <MenuItem
+                    onClick={navigateToProductsHandler}
+                    sx={{ color: "#002e5c" }}
+                  >
+                    Showroom
+                  </MenuItem>
+                  <MenuItem
+                    onClick={navigateToProfileHandler}
+                    sx={{ color: "#002e5c" }}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={navigateToOrderHandler}
+                    sx={{ color: "#002e5c" }}
+                  >
+                    Order
+                  </MenuItem>
+                  <MenuItem onClick={logOutHandler} sx={{ color: "#002e5c" }}>
+                    Logout
+                  </MenuItem>
+                </Menu>
               </div>
             </Box>
           </Toolbar>
@@ -220,43 +259,47 @@ export default function NavBar({ setUserInput }: Prop) {
       <AppBar
         position="static"
         color="inherit"
-        sx={{ backgroundColor: "aliceblue", height: "80px" }}
+        sx={{ backgroundColor: "#eeeeee", height: "80px" }}
       >
         <Toolbar>
           <IconButton sx={{ color: "inherit" }} component={Link} to="/">
-            <StarBorderIcon sx={{ fontSize: "50px" }} />
+            <StarBorderIcon sx={{ fontSize: "30px", color: "#002e5c" }} />
           </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ fontSize: "25px", display: { xs: "none", sm: "block" } }}
+            sx={{
+              fontSize: "25px",
+              color: "#002e5c",
+              display: { xs: "none", sm: "block" },
+            }}
           >
-            <Box component="span" sx={{ color: "darkblue" }}>
-              C
-            </Box>
-            ar's e
-            <Box component="span" sx={{ color: "darkblue" }}>
-              S
-            </Box>
-            hop
+            Car's eShop
           </Typography>
           <SearchHandler setUserInput={setUserInput} />
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <div className="navbar-icons">
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-                component={Link}
-                to="/"
-              >
-                <Home />
-              </IconButton>
               <Link to="/products">
-                <img src={car} alt="car-icon" height="50px" width="50px" />
+                <img
+                  src={car}
+                  alt="car-icon"
+                  height="50px"
+                  width="50px"
+                  color="#002e5c"
+                />
               </Link>
+              <IconButton color="inherit" component={Link} to="/wishlist">
+                <Badge badgeContent={wishList.length} color="info">
+                  <FavoriteIcon />
+                </Badge>
+              </IconButton>
+              <IconButton component={Link} to="/cartlist" color="inherit">
+                <Badge badgeContent={cartList.length} color="info">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
 
               <IconButton
                 size="large"

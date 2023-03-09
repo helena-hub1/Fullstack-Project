@@ -28,23 +28,18 @@ export default function OrderList({ order }: Prop) {
         <Paper sx={{ width: 600, height: 400 }}>
           <div className="order-logo">
             <div className="logo-container">
-              <IconButton sx={{ color: "inherit" }}>
-                <StarBorderIcon sx={{ fontSize: "50px", size: "small" }} />
-              </IconButton>
+              <StarBorderIcon sx={{ fontSize: "30px", color: "#002e5c" }} />
               <Typography
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ fontSize: "25px", display: { xs: "none", sm: "block" } }}
+                sx={{
+                  fontSize: "20px",
+                  color: "#002e5c",
+                  display: { xs: "none", sm: "block" },
+                }}
               >
-                <Box component="span" sx={{ color: "darkblue" }}>
-                  C
-                </Box>
-                ar's e
-                <Box component="span" sx={{ color: "darkblue" }}>
-                  S
-                </Box>
-                hop
+                Car's eShop
               </Typography>
             </div>
             <div className="logo-text">
@@ -58,18 +53,20 @@ export default function OrderList({ order }: Prop) {
               <Typography component="div">Denmark</Typography>
             </div>
           </div>
+          <Divider />
           <Typography
             sx={{
               textAlign: "center",
               fontSize: "20px",
               fontFamily: "bold",
               mt: 4,
-              backgroundColor: "aliceblue",
+              backgroundColor: "#eeeeee",
+              color: "#002e5c",
             }}
           >
             Order Detail
           </Typography>
-          <Divider></Divider>
+
           <Typography sx={{ fontSize: "14px" }}>
             <Box component="span" sx={{ m: 2, fontWeight: "bold" }}>
               Date:
@@ -90,7 +87,11 @@ export default function OrderList({ order }: Prop) {
           <Divider></Divider>
           <Typography
             textAlign="center"
-            sx={{ backgroundColor: "aliceblue", fontSize: "16px" }}
+            sx={{
+              backgroundColor: "#eeeeee",
+              fontSize: "16px",
+              color: "#002e5c",
+            }}
           >
             Shipping Address
           </Typography>
@@ -143,7 +144,10 @@ export default function OrderList({ order }: Prop) {
       </div>
       <div className="total-price">
         <Typography component="div" sx={{ mt: 2, fontFamily: "bold" }}>
-          <Box component="span" sx={{ m: 2, fontWeight: "bold" }}>
+          <Box
+            component="span"
+            sx={{ m: 2, fontWeight: "bold", fontSize: "20px" }}
+          >
             Total Price:
           </Box>
           ${order.totalPrice}

@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
 }
-/* FORM FIELDS */
+/* Form fields */
 .form-field {
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@
   gap: 20px;
   margin-top: 10px;
 }
-/* TEXTFIELDS */
+/* Text fields */
 .textfield-container {
   display: flex;
   justify-content: space-between;
@@ -20,7 +20,7 @@
   width: 0 auto;
   gap: 20px;
 }
-/* SHIPPING */
+/* Shipping */
 .shipping {
   display: flex;
   flex-direction: column;
@@ -42,13 +42,13 @@
   display: flex;
   gap: 10px;
 }
-/* PAYMENT */
+/* Payment */
 .payment {
   display: flex;
   gap: 10px;
 }
 
-/* PAYMENT CONTAINER */
+/* Payment handler */
 .payment-container {
   display: flex;
   flex-direction: column;
@@ -56,15 +56,17 @@
   margin: 0 auto;
   width: 80%;
 }
-/* PAYMENT-ONE */
+/* Payment One */
 .payment-one {
   display: flex;
   margin-top: 10px;
   gap: 10px;
 }
+/* Payment Two */
 .payment-two {
   display: flex;
 }
+/* Orders */
 .order-login {
   display: flex;
   justify-content: center;

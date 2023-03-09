@@ -5,6 +5,7 @@ import { getProductList } from "../../../redux/thunks/product";
 import { AppDispatch, RootState } from "../../../redux/store";
 import ProductItem from "../productItem/ProductItem";
 import "./ProductList.css";
+import { Box } from "@mui/material";
 // type
 type Prop = { userInput: string };
 export default function ProductList({ userInput }: Prop) {
@@ -35,6 +36,7 @@ export default function ProductList({ userInput }: Prop) {
               <ProductItem key={index} product={product} />
             ))}
       </div>
+      <Box sx={{ mb: 30 }}></Box>
     </div>
   );
 }

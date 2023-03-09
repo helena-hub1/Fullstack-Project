@@ -4,12 +4,10 @@ import Cart from "../../../../types/cart";
 type InitialState = {
   order: {
     productOrder: Cart[];
-
     street: string;
     city: string;
     country: string;
     postalCode: number;
-
     quantity: number;
     totalPrice: number;
     email: string;

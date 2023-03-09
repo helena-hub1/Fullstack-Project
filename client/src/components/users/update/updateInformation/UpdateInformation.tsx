@@ -7,43 +7,40 @@ import {
   Typography,
   Divider,
   Card,
+  Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/store";
 
 export default function UpdateInformation() {
   // state
-  const isLoggedInd = useSelector(
-    (state: RootState) => state.userDetail.isLoggedind
-  );
+  const isLoggedInd = localStorage.getItem("userLoggedInd");
   // navigate
   const navigate = useNavigate();
   // type
   type InitialValues = {
+    firstName: string;
+    lastName: string;
     email: string;
-    password: string;
   };
   // initial values
   const initialValues: InitialValues = {
+    firstName: "",
+    lastName: "",
     email: "",
-    password: "",
   };
 
   // schema
   const FormSchema = Yup.object().shape({
-    name: Yup.string().min(2, "name too short").max(50, "name too long"),
+    firstName: Yup.string()
+      .min(2, "name too short")
+      .max(50, "name too long")
+      .required("Required"),
+    lastName: Yup.string()
+      .min(2, "name too short")
+      .max(50, "name too long")
+      .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string()
-      .required("Required")
-      .min(2, "Password should be minimum 2 chars!")
-      .max(50, "Too long")
-      .matches(/[0-9]/, "Password should contain a number!")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
-      ),
   });
   if (!isLoggedInd) {
     return (
@@ -78,10 +75,6 @@ export default function UpdateInformation() {
           validationSchema={FormSchema}
           onSubmit={(values) => {
             const userData = JSON.parse(localStorage.getItem("userDetail")!);
-            // no user
-            if (!userData) {
-              <div>No userData</div>;
-            }
             const userId = userData.userId;
             const token = userData.token;
             console.log("user id", userId);
@@ -91,8 +84,13 @@ export default function UpdateInformation() {
               .put(url, values, {
                 headers: { Authorization: `Bearer ${token} ` },
               })
-              .then((response) => console.log(response.data));
-            navigate(`/success`);
+              .then((response) =>
+                localStorage.setItem(
+                  "updatedDetail",
+                  JSON.stringify(response.data)
+                )
+              );
+            navigate(`/profile`);
           }}
         >
           {({ errors, touched, handleChange }) => {
@@ -103,7 +101,7 @@ export default function UpdateInformation() {
                     width: 300,
                     mt: 10,
                     height: 400,
-                    backgroundColor: "aliceblue",
+                    backgroundColor: "#eeeeee",
                     mb: 50,
                   }}
                 >
@@ -123,6 +121,17 @@ export default function UpdateInformation() {
                       <div className="error-message"> {errors.email}</div>
                     ) : null}
                     <TextField
+                      label="lastName"
+                      name="lastName"
+                      sx={{ mt: 1, width: 250 }}
+                      onChange={handleChange}
+                      size="small"
+                    />
+                    {errors.lastName && touched.lastName ? (
+                      <div className="error-message"> {errors.lastName}</div>
+                    ) : null}
+
+                    <TextField
                       label="Email"
                       name="email"
                       onChange={handleChange}
@@ -131,16 +140,6 @@ export default function UpdateInformation() {
                     ></TextField>
                     {errors.email && touched.email ? (
                       <div className="error-message"> {errors.email}</div>
-                    ) : null}
-                    <TextField
-                      label="Password"
-                      name="password"
-                      sx={{ mt: 1, width: 250 }}
-                      onChange={handleChange}
-                      size="small"
-                    />
-                    {errors.password && touched.password ? (
-                      <div className="error-message"> {errors.password}</div>
                     ) : null}
 
                     <Button
@@ -163,6 +162,7 @@ export default function UpdateInformation() {
           }}
         </Formik>
       </div>
+      <Box sx={{ mb: 50 }}></Box>
     </div>
   );
 }

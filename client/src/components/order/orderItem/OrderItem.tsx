@@ -10,7 +10,7 @@ type Prop = {
 };
 const StyledTableRow = styled(TableRow)`
   &:nth-of-type(odd) {
-    background-color: aliceblue;
+    background-color: #eeeeee;
   }
   &:nth-of-type(even) {
     background-color: #000;

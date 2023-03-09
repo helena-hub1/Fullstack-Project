@@ -1,19 +1,15 @@
 /* NAVBAR */
 .navbar {
   display: flex;
-  /* gap: 20px; */
-  /* margin: 0 auto; */
-  /* width: 80%; */
 }
 .navbar-icons {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   gap: 20px;
+  color: #002e5c;
 }
 /* LINK */
 .link {
   text-decoration: none;
 }
-/* ICONS */

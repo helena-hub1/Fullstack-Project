@@ -95,7 +95,7 @@ export default function UserSignUpForm() {
           );
           console.log(values, "values");
           resetForm({ values: initialValues });
-          navigate("/welcome");
+          navigate("/signin");
         }}
       >
         {({ errors, handleChange, touched, values }) => {
@@ -105,10 +105,10 @@ export default function UserSignUpForm() {
                 <Paper
                   elevation={4}
                   sx={{
-                    mt: 6,
+                    mt: 4,
                     height: 600,
                     width: 500,
-                    backgroundColor: "aliceblue",
+                    backgroundColor: "#eeeeee",
                     mb: 50,
                   }}
                 >
@@ -284,7 +284,11 @@ export default function UserSignUpForm() {
                       sx={{ fontSize: "12px", mt: 1 }}
                     >
                       Already have an account?
-                      <Box component={Link} to="/signin" sx={{ ml: 1 }}>
+                      <Box
+                        component={Link}
+                        to="/signin"
+                        sx={{ ml: 1, textDecoration: "none" }}
+                      >
                         Sign in
                       </Box>
                     </Typography>

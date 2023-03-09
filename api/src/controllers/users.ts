@@ -84,12 +84,22 @@ const getUser = async (request: Request, response: Response) => {
   try {
     const { userId } = request.params;
     const foundUser = await UserServices.getUserById(userId);
-    // if (!foundUser) {
-    //   response
-    //     .status(404)
-    //     .json({ message: "User with ID ${userId} not found" });
-    //   return;
-    // }
+    if (!foundUser) {
+      response
+        .status(404)
+        .json({ message: "User with ID ${userId} not found" });
+      return;
+    }
+    response.status(200).json(foundUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
+// get user by email
+const getUserByEmail = async (request: Request, response: Response) => {
+  try {
+    const { email } = request.body;
+    const foundUser = await UserServices.getUserByEmail(email);
     response.status(200).json(foundUser);
   } catch (error) {
     console.log(error);
@@ -123,4 +133,5 @@ export {
   getUser,
   updateUserInformation,
   deleteUserById,
+  getUserByEmail,
 };

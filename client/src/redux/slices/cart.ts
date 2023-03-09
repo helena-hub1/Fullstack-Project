@@ -67,6 +67,11 @@ const cartSlice = createSlice({
         JSON.stringify(state.cartList.map((item) => item))
       );
     },
+    // clearCart
+    clearCart: (state) => {
+      state.cartList = [];
+      localStorage.removeItem("cartlist");
+    },
     // INCREMENT
     incrementQty: (state, action) => {
       const index = state.cartList.findIndex(
@@ -85,16 +90,6 @@ const cartSlice = createSlice({
         if (state.cartList[index].cartItemQty > 1) {
           state.cartList[index].cartItemQty -= 1;
         }
-      }
-    },
-    takeQuantity: (state, action) => {
-      const index = state.cartList.findIndex(
-        (product) => product.VIN === action.payload.VIN
-      );
-      if (index !== -1) {
-        // if (state.cartList[index].cartItemQty > 1) {
-        state.cartList[index].cartItemQty = action.payload;
-        // }
       }
     },
   },

@@ -9,8 +9,11 @@ import {
   Paper,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import Cart from "../../../../../types/cart";
@@ -22,73 +25,61 @@ type Prop = {
   product: Cart;
 };
 export default function CartItem({ product }: Prop) {
-  // state
-  const [quantity, setQuantity] = useState("");
-
   // dispatch
   const dispatch = useDispatch();
-  const handleChange = (event: SelectChangeEvent) => {
-    setQuantity(event.target.value as string);
-
-    dispatch(cartAction.takeQuantity(quantity));
-
-    // dispatch(cartAction.decrementQty(product));
+  // Increase qty
+  const increaseQuantityHandler = () => {
+    dispatch(cartAction.incrementQty(product));
   };
+  // decrease qty
+  const decreaseQuantityHandler = () => {
+    dispatch(cartAction.decrementQty(product));
+  };
+  // remove product
   const removeCartProductHandler = () => {
     dispatch(cartAction.removeFromCart(product));
   };
 
   return (
-    <div>
-      {
-        <div>
-          <Paper
-            sx={{
-              height: "250px",
-              width: "400px",
-              backgroundColor: "aliceblue",
-            }}
-          >
-            <div className="cartitem-container">
-              <Box sx={{ mt: 2 }}>
-                <img
-                  src={product.image}
-                  alt="car"
-                  height="150px"
-                  width="150px"
-                />
-                <p>{product.make}</p>
-                <p>Price:${product.price}</p>
-              </Box>
-              <div>
-                <Box sx={{ minWidth: 120 }}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="demo-simple-select-label">
-                      Quantity
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={quantity}
-                      label="Quantity"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={1}>1</MenuItem>
-                      <MenuItem value={2}>2</MenuItem>
-                      <MenuItem value={3}>3</MenuItem>
-                      <MenuItem value={4}>4</MenuItem>
-                      <MenuItem value={5}>5</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
-              <IconButton onClick={removeCartProductHandler} color="inherit">
-                <DeleteIcon />
+    <div className="cart-item">
+      <div>
+        <Paper
+          sx={{
+            height: "150px",
+            minWidth: "400px",
+            backgroundColor: "#eeeeee",
+          }}
+        >
+          <div className="cartitem-container">
+            <Box sx={{ mt: 2 }}>
+              <img src={product.image} alt="car" height="70px" width="70px" />
+              <p>{product.make}</p>
+              <p>${product.price}</p>
+            </Box>
+            <div className="qty-btn">
+              <IconButton
+                onClick={decreaseQuantityHandler}
+                sx={{ color: "#002e5c" }}
+              >
+                <RemoveCircleIcon />
+              </IconButton>
+              <p>{product.cartItemQty}</p>
+              <IconButton
+                onClick={increaseQuantityHandler}
+                sx={{ color: "#002e5c" }}
+              >
+                <AddCircleIcon />
               </IconButton>
             </div>
-          </Paper>
-        </div>
-      }
+            <IconButton
+              onClick={removeCartProductHandler}
+              sx={{ color: "#002e5c" }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        </Paper>
+      </div>
     </div>
   );
 }

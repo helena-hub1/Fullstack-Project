@@ -1,6 +1,12 @@
-.icon-container {
+.wishitem-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  align-items: center;
+  gap: 50px;
+  margin-top: 25px;
+}
+.btn {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }

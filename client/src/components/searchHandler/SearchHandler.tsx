@@ -47,24 +47,34 @@ export default function SearchHandler({ setUserInput }: Prop) {
         width: 600,
         height: 40,
         borderRadius: 10,
-        backgroundColor: "aliceblue",
+        backgroundColor: "#eceff1",
         display: { xs: "none", sm: "flex" },
       }}
     >
       <InputBase
-        sx={{ ml: 1, flex: 1, color: "darkblue" }}
+        sx={{
+          ml: 1,
+          flex: 1,
+          color: "#002e5c",
+        }}
         placeholder="Search for cars..."
         inputProps={{ "aria-label": "Search cars" }}
         onChange={changeHandler}
         value={searchTerm}
       />
-      <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <IconButton sx={{ color: "inherit" }} onClick={onClear}>
+      <Divider
+        sx={{ height: 28, m: 0.5, color: "#002e5c" }}
+        orientation="vertical"
+      />
+      <IconButton
+        sx={{ color: "#002e5c", display: searchTerm === "" ? "none" : "block" }}
+        onClick={onClear}
+      >
         <ClearIcon />
       </IconButton>
       <IconButton
         type="button"
-        sx={{ p: "10px", color: "inherit" }}
+        sx={{ p: "10px", color: "#002e5c" }}
         aria-label="search"
         onClick={searchHandler}
       >

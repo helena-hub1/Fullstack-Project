@@ -17,6 +17,7 @@ import Footer from "./components/footer/Footer";
 import OrderForm from "./components/order/orderForm/OrderForm";
 import SuccessOnSignUp from "./components/users/userSignUp/successOnSignUp/SuccessOnSignUp";
 import UserSignUpForm from "./components/users/userSignUp/userSignUp/UserSignUpForm";
+import { Box } from "@mui/material";
 function App() {
   // state
   const [userInput, setUserInput] = useState<string>("");
@@ -34,7 +35,7 @@ function App() {
         <Route path="/signin" element={<UserSignInPage />}></Route>
         <Route path="/signup" element={<UserSignUpForm />}></Route>
         <Route path="/wishList" element={<WishList />}></Route>
-        <Route path="/user" element={<UserInformationPage />}></Route>
+        <Route path="/profile" element={<UserInformationPage />}></Route>
         <Route path="/order" element={<Order />}></Route>
         <Route path="/logout" element={<LogOutPage />}></Route>
         <Route path="/update" element={<UpdatePage />}></Route>
@@ -43,7 +44,6 @@ function App() {
         <Route path="/orderschema" element={<OrderForm />}></Route>
         <Route path="/welcome" element={<SuccessOnSignUp />}></Route>
       </Routes>
-
       <Footer />
     </div>
   );

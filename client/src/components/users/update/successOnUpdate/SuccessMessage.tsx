@@ -14,7 +14,7 @@ export default function SuccessMessage() {
           mt: 10,
           mb: 50,
           height: 100,
-          backgroundColor: "aliceblue",
+          backgroundColor: "#eeeeee",
         }}
       >
         <Typography sx={{ ml: 6, mt: 4, textAlign: "center" }}>

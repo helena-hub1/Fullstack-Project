@@ -33,7 +33,6 @@ const deleteUser = async (userId: string): Promise<UserDocument | null> => {
 
 export default {
   createUser,
-  // userLogin,
   getUserList,
   getUserById,
   getUserByEmail,

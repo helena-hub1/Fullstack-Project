@@ -5,7 +5,7 @@ import {
   registerUser,
   userLogin,
   getUsers,
-  getUser,
+  getUserByEmail,
   updateUserInformation,
   deleteUserById,
 } from "../controllers/users";
@@ -15,10 +15,11 @@ const router = Router();
 router.post("/", registerUser);
 router.get("/", passport.authenticate("jwt", { session: false }), getUsers);
 router.get(
-  "/:userId",
+  "/:email",
   passport.authenticate("jwt", { session: false }),
-  getUser
+  getUserByEmail
 );
+
 router.post("/login", userLogin);
 router.put(
   "/:userId",
