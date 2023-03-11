@@ -31,6 +31,9 @@
     "web-vitals": "^2.1.0",
     "yup": "^1.0.0"
   },
+  "engines": {
+    "node": "14.20.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
