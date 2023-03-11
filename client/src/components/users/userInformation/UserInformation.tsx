@@ -1,9 +1,10 @@
 import { Box, Paper, Typography, Button, Divider, Card } from "@mui/material";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import "./UserInformation.css";
-import { AppDispatch, RootState } from "../../../redux/store";
+import { RootState } from "../../../redux/store";
+
 export default function UserInformation() {
   // state
   const userData = useSelector(
@@ -85,7 +86,6 @@ export default function UserInformation() {
           textAlign: "center",
           fontFamily: "monospace",
           fontSize: "20px",
-          fontStyle: "italic",
         }}
       >
         Access is denied! Please log in first.

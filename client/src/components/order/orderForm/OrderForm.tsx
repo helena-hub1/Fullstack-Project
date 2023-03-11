@@ -34,9 +34,10 @@ export default function OrderForm() {
       0
     )
   );
-  const isLoggedInd = useSelector(
-    (state: RootState) => state.userDetail.isLoggedind
-  );
+  const isLoggedInd = localStorage.getItem("userLoggedInd");
+  // const isLoggedInd = useSelector(
+  //   (state: RootState) => state.userDetail.isLoggedind
+  // );
   // dispatch
   const dispatch = useDispatch<AppDispatch>();
   // get userId from local storage
@@ -122,8 +123,6 @@ export default function OrderForm() {
               values.isDelivered
             )
           );
-          console.log("cart list", cartList);
-          console.log("values", values);
           dispatch(cartAction.clearCart());
           resetForm({ values: initialValues });
           navigate("/order");

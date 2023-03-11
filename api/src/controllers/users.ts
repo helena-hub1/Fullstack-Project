@@ -9,9 +9,6 @@ const registerUser = async (request: Request, response: Response) => {
   try {
     const { email, password, firstName, lastName } = request.body;
 
-    if (!email || !password || !firstName || !lastName) {
-      response.json({ message: "Please enter the fields" });
-    }
     const userExists = await UserServices.getUserByEmail(email);
     if (userExists) {
       response.status(400);
@@ -58,7 +55,6 @@ const userLogin = async (request: Request, response: Response) => {
     const userId = user._id;
     // generate token
     const token = generateToken(email, userId);
-    // response.status(200).json({ user, token });
     response.json({
       userEmail: user.email,
       firstName: user.firstName,

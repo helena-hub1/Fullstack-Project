@@ -6,7 +6,6 @@ import {
   Button,
   FormControl,
   IconButton,
-  Input,
   InputAdornment,
   InputLabel,
   Paper,
@@ -265,6 +264,7 @@ export default function UserSignUpForm() {
                       . You may receive SMS Notifications from us and can access
                       out any time.
                     </Typography>
+
                     <Button
                       type="submit"
                       sx={{

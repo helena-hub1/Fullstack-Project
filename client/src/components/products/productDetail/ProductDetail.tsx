@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../../redux/thunks/productDetails";
@@ -8,14 +8,12 @@ import { Box, Button, Rating, Typography } from "@mui/material";
 import "./ProductDetail.css";
 import { cartAction } from "../../../redux/slices/cart";
 import { wishAction } from "../../../redux/slices/wish";
-import { userAction } from "../../../redux/slices/user";
 
 export default function ProductDetail() {
   // state
   const productDetails = useSelector(
     (state: RootState) => state.productDetails.productDetails
   );
-
   //   dispatch
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();

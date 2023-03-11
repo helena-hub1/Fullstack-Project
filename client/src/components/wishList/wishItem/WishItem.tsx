@@ -30,6 +30,7 @@ export default function WishItem({ product }: Prop) {
   // add to cart
   const addToCartListHandler = () => {
     dispatch(cartAction.addToCart(product));
+    dispatch(wishAction.removeFromWish(product));
   };
   // remove from wish
   const removeWishProductHandler = () => {

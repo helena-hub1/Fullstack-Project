@@ -35,7 +35,6 @@ export default function NavBar({ setUserInput }: Prop) {
   const userData = useSelector(
     (state: RootState) => state.userDetail.userDetail
   );
-  console.log(userData, "userData Nav");
   // dispatch
   const dispatch = useDispatch();
   // navigate
@@ -51,7 +50,6 @@ export default function NavBar({ setUserInput }: Prop) {
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -164,13 +162,11 @@ export default function NavBar({ setUserInput }: Prop) {
               sx={{
                 fontSize: "25px",
                 color: "#002e5c",
-                display: { xs: "none", sm: "block" },
               }}
             >
               Car's eShop
             </Typography>
             <SearchHandler setUserInput={setUserInput} />
-
             <Box sx={{ flexGrow: 1 }} />
             <Box>
               <div className="navbar-icons">
@@ -249,8 +245,6 @@ export default function NavBar({ setUserInput }: Prop) {
             </Box>
           </Toolbar>
         </AppBar>
-        {renderMobileMenu}
-        {renderMenu}
       </Box>
     );
   }
@@ -272,7 +266,6 @@ export default function NavBar({ setUserInput }: Prop) {
             sx={{
               fontSize: "25px",
               color: "#002e5c",
-              display: { xs: "none", sm: "block" },
             }}
           >
             Car's eShop

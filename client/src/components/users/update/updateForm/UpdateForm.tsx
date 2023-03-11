@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function UpdateInformation() {
+export default function UpdateForm() {
   // state
   const isLoggedInd = localStorage.getItem("userLoggedInd");
   // navigate
@@ -50,7 +50,7 @@ export default function UpdateInformation() {
           width: 600,
           height: 100,
           my: 10,
-          backgroundColor: "aliceblue",
+          backgroundColor: "#eeeeee",
           mb: 50,
         }}
       >
@@ -90,7 +90,7 @@ export default function UpdateInformation() {
                   JSON.stringify(response.data)
                 )
               );
-            navigate(`/profile`);
+            navigate(`/success`);
           }}
         >
           {({ errors, touched, handleChange }) => {
@@ -113,6 +113,7 @@ export default function UpdateInformation() {
                     <TextField
                       label="firstName"
                       name="firstName"
+                      required
                       onChange={handleChange}
                       sx={{ mt: 5, width: 250, fontSize: "10px" }}
                       size="small"
@@ -123,6 +124,7 @@ export default function UpdateInformation() {
                     <TextField
                       label="lastName"
                       name="lastName"
+                      required
                       sx={{ mt: 1, width: 250 }}
                       onChange={handleChange}
                       size="small"
@@ -134,6 +136,7 @@ export default function UpdateInformation() {
                     <TextField
                       label="Email"
                       name="email"
+                      required
                       onChange={handleChange}
                       sx={{ width: 250, mb: 2, mt: 2, fontSize: "10px" }}
                       size="small"

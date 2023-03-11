@@ -1,17 +1,5 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Card,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  SelectChangeEvent,
-  Typography,
-} from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Box, IconButton, Paper } from "@mui/material";
+import { useDispatch } from "react-redux";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 

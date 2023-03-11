@@ -13,7 +13,7 @@ const StyledTableRow = styled(TableRow)`
     background-color: #eeeeee;
   }
   &:nth-of-type(even) {
-    background-color: #000;
+    background-color: #fff;
   }
 `;
 export default function OrderItem({ product }: Prop) {

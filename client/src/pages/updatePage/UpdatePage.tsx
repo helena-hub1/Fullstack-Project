@@ -1,5 +1,7 @@
 import React from "react";
-import UpdateInformation from "../../components/users/update/updateInformation/UpdateInformation";
+
+import UpdateForm from "../../components/users/update/updateForm/UpdateForm";
+
 export default function UpdatePage() {
-  return <UpdateInformation />;
+  return <UpdateForm />;
 }

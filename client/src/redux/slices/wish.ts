@@ -42,7 +42,7 @@ const wishSlice = createSlice({
         return;
       }
       const filteredWishList = state.wishList.filter(
-        (product) => product.VIN != action.payload.VIN
+        (product) => product.VIN !== action.payload.VIN
       );
       state.wishList = filteredWishList;
       localStorage.setItem(
