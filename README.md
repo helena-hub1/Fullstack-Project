@@ -46,3 +46,5 @@ MAKE THE WEBSITE AS BEAUTIFUL AS MUCH AS YOU CAN
 
 1. Week 1: Done Backend - CRUD
 2. Week 2: Front-end
+
+Deploy link: https://fullstack-frontend-1vvz.onrender.com/
