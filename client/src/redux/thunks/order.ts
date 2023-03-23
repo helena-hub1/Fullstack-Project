@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { AppDispatch } from "../store";
-import { orderAction } from "../slices/order";
+// import { orderAction } from "../slices/order";
 import Cart from "../../../../types/cart";
 
 export default function createOrderThunk(
@@ -47,7 +47,7 @@ export default function createOrderThunk(
           },
           config
         );
-        dispatch(orderAction.getOrder(data));
+        // dispatch(orderAction.getOrder(data));
       }
     } catch (error) {
       console.log(error);

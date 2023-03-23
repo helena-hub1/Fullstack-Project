@@ -3,7 +3,7 @@ import passport from "passport";
 
 import {
   createNewProduct,
-  getProduct,
+  getProductByVin,
   getProducts,
 } from "../controllers/products";
 
@@ -15,6 +15,6 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   createNewProduct
 );
-router.get("/:productVIN", getProduct);
+router.get("/:productVIN", getProductByVin);
 
 export default router;

@@ -65,7 +65,7 @@ const userLogin = async (request: Request, response: Response) => {
   }
 };
 
-const getUser = async (request: Request, response: Response) => {
+const getUserById = async (request: Request, response: Response) => {
   try {
     const { userId } = request.params;
     const foundUser = await UserServices.getUserById(userId);
@@ -92,4 +92,4 @@ const updateUserInformation = async (request: Request, response: Response) => {
   }
 };
 
-export { registerUser, userLogin, getUser, updateUserInformation };
+export { registerUser, userLogin, getUserById, updateUserInformation };

@@ -37,7 +37,7 @@ const createNewProduct = async (request: Request, response: Response) => {
   }
 };
 
-const getProduct = async (request: Request, response: Response) => {
+const getProductByVin = async (request: Request, response: Response) => {
   try {
     const productVIN = request.params.productVIN;
     const foundProduct = await ProductServices.getProductByVin(productVIN);
@@ -56,4 +56,4 @@ const getProducts = async (request: Request, response: Response) => {
   }
 };
 
-export { createNewProduct, getProduct, getProducts };
+export { createNewProduct, getProductByVin, getProducts };
