@@ -8,7 +8,6 @@ const url = "http://localhost:8001/products";
 export const getProductList = () => {
   return async (dispatch: AppDispatch) => {
     const response = await axios.get(url);
-    console.log(response);
     const data = await response.data;
     dispatch(productSliceAction.getProductList(data));
   };

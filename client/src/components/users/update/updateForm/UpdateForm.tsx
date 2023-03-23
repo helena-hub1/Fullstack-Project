@@ -77,8 +77,6 @@ export default function UpdateForm() {
             const userData = JSON.parse(localStorage.getItem("userDetail")!);
             const userId = userData.userId;
             const token = userData.token;
-            console.log("user id", userId);
-            console.log("token", token);
             const url = `http://localhost:8001/users/${userId}`;
             axios
               .put(url, values, {

@@ -25,26 +25,20 @@ export default function UserLogIn() {
   const isLoggedind = useSelector(
     (state: RootState) => state.userDetail.isLoggedind
   );
-  // url
   const url = "http://localhost:8001/users/login";
-  console.log(isLoggedind, "isLoggedIN");
   const userInformation = useSelector(
     (state: RootState) => state.userDetail.userDetail
   );
-  console.log(userInformation, "from signin page");
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-
   type InitialValues = {
     email: string;
     password: string;
   };
-  // initial values
   const initialValues: InitialValues = {
     email: "",
     password: "",
   };
-  // schema
   const FormSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required!"),
     password: Yup.string()

@@ -23,7 +23,6 @@ export default function registerUser(
         { firstName, lastName, email, password },
         config
       );
-      console.log(data, "data from register thunk");
     } catch (error) {
       console.log(error);
     }

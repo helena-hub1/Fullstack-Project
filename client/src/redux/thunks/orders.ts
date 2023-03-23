@@ -3,7 +3,6 @@ import { AppDispatch } from "../store";
 import { orderListAction } from "../slices/orderList";
 
 export const getOrderListThunk = () => {
-  // get userData from localstorage
   const userData = JSON.parse(localStorage.getItem("userDetail")!);
   const userId = userData.userId;
   const token = userData.token;

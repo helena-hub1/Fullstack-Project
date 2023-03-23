@@ -1,7 +1,6 @@
 import axios from "axios";
 
 import { AppDispatch } from "../store";
-// import { orderAction } from "../slices/order";
 import Cart from "../../../../types/cart";
 
 export default function createOrderThunk(
@@ -18,7 +17,6 @@ export default function createOrderThunk(
 ) {
   const userData = JSON.parse(localStorage.getItem("userDetail")!);
   const userId = userData.userId;
-  console.log(userId, "userId");
   const token = userData.token;
   const createOrderUrl = `http://localhost:8001/orders/${userId}`;
   return async (dispatch: AppDispatch) => {
@@ -47,7 +45,6 @@ export default function createOrderThunk(
           },
           config
         );
-        // dispatch(orderAction.getOrder(data));
       }
     } catch (error) {
       console.log(error);
