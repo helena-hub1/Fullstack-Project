@@ -10,11 +10,7 @@ import {
 const router = Router();
 // routes
 router.get("/", getProducts);
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  createNewProduct
-);
+router.post("/", createNewProduct);
 router.get("/:productVIN", getProductByVin);
 
 export default router;

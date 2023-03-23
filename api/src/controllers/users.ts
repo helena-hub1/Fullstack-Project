@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+
 import User from "../models/User";
 import UserServices from "../services/users";
 import generateToken from "../utils/generateToken";
