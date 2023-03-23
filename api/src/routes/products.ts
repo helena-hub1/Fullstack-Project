@@ -1,4 +1,3 @@
-// product router here
 import Router from "express";
 import passport from "passport";
 
@@ -6,8 +5,6 @@ import {
   createNewProduct,
   getProduct,
   getProducts,
-  updateProductInformation,
-  deleteProduct,
 } from "../controllers/products";
 
 const router = Router();
@@ -18,20 +15,6 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   createNewProduct
 );
-router.get(
-  "/:productVIN",
-  // passport.authenticate("jwt", { session: false }),
-  getProduct
-);
-router.put(
-  "/:productId",
-  passport.authenticate("jwt", { session: false }),
-  updateProductInformation
-);
-router.delete(
-  "/:productId",
-  passport.authenticate("jwt", { session: false }),
-  deleteProduct
-);
+router.get("/:productVIN", getProduct);
 
 export default router;

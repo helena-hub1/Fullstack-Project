@@ -1,9 +1,7 @@
-// product controller
 import { Request, Response } from "express";
 
 import Product from "../models/Product";
 import ProductServices from "../services/products";
-// create product
 const createNewProduct = async (request: Request, response: Response) => {
   try {
     const {
@@ -38,7 +36,7 @@ const createNewProduct = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-// get a product by vehicle number
+
 const getProduct = async (request: Request, response: Response) => {
   try {
     const productVIN = request.params.productVIN;
@@ -48,7 +46,7 @@ const getProduct = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-// get product list
+
 const getProducts = async (request: Request, response: Response) => {
   try {
     const productList = await ProductServices.getProductList();
@@ -57,37 +55,5 @@ const getProducts = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-// update product info.
-const updateProductInformation = async (
-  request: Request,
-  response: Response
-) => {
-  try {
-    const productId = request.params.productId;
-    const updateProduct = request.body;
-    const product = await ProductServices.updateProductById(
-      productId,
-      updateProduct
-    );
-    response.status(200).json(product);
-  } catch (error) {
-    console.log(error);
-  }
-};
-// delete product by id
-const deleteProduct = async (request: Request, response: Response) => {
-  try {
-    const productId = request.params.productId;
-    const product = await ProductServices.deleteProductById(productId);
-    response.status(200).json(product);
-  } catch (error) {
-    console.log(error);
-  }
-};
-export {
-  createNewProduct,
-  getProduct,
-  getProducts,
-  updateProductInformation,
-  deleteProduct,
-};
+
+export { createNewProduct, getProduct, getProducts };

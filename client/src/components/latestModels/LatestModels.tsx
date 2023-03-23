@@ -1,16 +1,14 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 
 import "./LatestModels.css";
 import latest1 from "../../assets/latest1.jpg";
 import latest2 from "../../assets/latest2.jpg";
 import latest3 from "../../assets/latest3.jpg";
 import latest4 from "../../assets/latest4.jpg";
-import latest5 from "../../assets/latest5.jpg";
 import latest6 from "../../assets/latest6.jpg";
 
 export default function LatestModels() {
@@ -33,10 +31,6 @@ export default function LatestModels() {
                 <Typography gutterBottom textAlign="center" component="div">
                   Toyota
                 </Typography>
-                {/* <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography> */}
               </CardContent>
             </CardActionArea>
           </Card>
@@ -54,10 +48,6 @@ export default function LatestModels() {
                 <Typography gutterBottom component="div" textAlign="center">
                   Mercedes-Benz
                 </Typography>
-                {/* <Typography variant="body2" color="text.secondary">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography> */}
               </CardContent>
             </CardActionArea>
           </Card>
@@ -75,10 +65,6 @@ export default function LatestModels() {
                 <Typography gutterBottom component="div" textAlign="center">
                   Mercedes-SUV's
                 </Typography>
-                {/* <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography> */}
               </CardContent>
             </CardActionArea>
           </Card>
@@ -96,10 +82,6 @@ export default function LatestModels() {
                 <Typography gutterBottom textAlign="center" component="div">
                   Mercedes-AMG
                 </Typography>
-                {/* <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography> */}
               </CardContent>
             </CardActionArea>
           </Card>

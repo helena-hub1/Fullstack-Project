@@ -1,8 +1,8 @@
-import { cartAction } from "./../slices/cart";
 import axios from "axios";
 
+import { cartAction } from "./../slices/cart";
 import { AppDispatch } from "./../store";
-// get id and token  from localStorage
+
 const userData = JSON.parse(localStorage.getItem("userDetail")!);
 const userId = userData.userId;
 const token = userData.token;

@@ -2,9 +2,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User";
 import UserServices from "../services/users";
-import generateToken from "./generateToken";
+import generateToken from "../utils/generateToken";
 
-// register user
 const registerUser = async (request: Request, response: Response) => {
   try {
     const { email, password, firstName, lastName } = request.body;
@@ -48,7 +47,6 @@ const userLogin = async (request: Request, response: Response) => {
       passwordFromDatabase
     );
     if (!matchPassword) {
-      // response.status(401);
       response.json({ message: `Invalid password` });
       return;
     }
@@ -66,16 +64,7 @@ const userLogin = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-// get users
-const getUsers = async (request: Request, response: Response) => {
-  try {
-    const userList = await UserServices.getUserList();
-    response.status(200).json(userList);
-  } catch (error) {
-    console.log(error);
-  }
-};
-// get user by id
+
 const getUser = async (request: Request, response: Response) => {
   try {
     const { userId } = request.params;
@@ -86,16 +75,6 @@ const getUser = async (request: Request, response: Response) => {
         .json({ message: "User with ID ${userId} not found" });
       return;
     }
-    response.status(200).json(foundUser);
-  } catch (error) {
-    console.log(error);
-  }
-};
-// get user by email
-const getUserByEmail = async (request: Request, response: Response) => {
-  try {
-    const { email } = request.body;
-    const foundUser = await UserServices.getUserByEmail(email);
     response.status(200).json(foundUser);
   } catch (error) {
     console.log(error);
@@ -112,22 +91,5 @@ const updateUserInformation = async (request: Request, response: Response) => {
     console.log(error);
   }
 };
-//delete a user
-const deleteUserById = async (request: Request, response: Response) => {
-  try {
-    const { userId } = request.params;
-    const deleteUser = await UserServices.deleteUser(userId);
-    response.status(200).json(deleteUser);
-  } catch (error) {
-    console.log(error);
-  }
-};
-export {
-  registerUser,
-  userLogin,
-  getUsers,
-  getUser,
-  updateUserInformation,
-  deleteUserById,
-  getUserByEmail,
-};
+
+export { registerUser, userLogin, getUser, updateUserInformation };

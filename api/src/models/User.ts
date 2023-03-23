@@ -1,14 +1,12 @@
-// user model
 import mongoose, { Document } from "mongoose";
 
-// TypeScript
 export type UserDocument = Document & {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
 };
-// schema
+
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
@@ -31,5 +29,5 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-// collection name + schema
+
 export default mongoose.model<UserDocument>("User", UserSchema);

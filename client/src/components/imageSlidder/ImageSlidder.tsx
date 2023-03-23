@@ -1,9 +1,10 @@
+import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
 import Slider from "react-slick";
 
 import "./Slick.css";
 import "./Slick-Theme.css";
 import "./ImageSlidder.css";
-import slidecar2 from "../../assets/sliddercar2.jpg";
+import slidecar2 from "../../assets/audifive.jpg";
 import slidecar3 from "../../assets/sliddercar3.jpg";
 import slidecar4 from "../../assets/sliddercar4.jpg";
 import slidecar6 from "../../assets/sliddercar6.jpg";
@@ -15,8 +16,6 @@ import slidecar13 from "../../assets/sliddercar13.jpg";
 import slidecar14 from "../../assets/sliddercar14.jpg";
 import slidecar15 from "../../assets/sliddercar15.jpg";
 import slidecar16 from "../../assets/sliddercar16.jpg";
-
-import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
 
 export default function ImageSlidder() {
   const settings = {

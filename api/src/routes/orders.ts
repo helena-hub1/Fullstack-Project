@@ -1,15 +1,9 @@
 import Router from "express";
 import passport from "passport";
-import {
-  createOrder,
-  deleteOrderById,
-  getOrderById,
-  getOrderListByUserId,
-  updateOrderDetail,
-} from "../controllers/orders";
+
+import { createOrder, getOrderListByUserId } from "../controllers/orders";
 
 const router = Router();
-
 // routes
 router.post(
   "/:userId",
@@ -21,19 +15,5 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   getOrderListByUserId
 );
-router.get(
-  "/:userId/:orderId",
-  passport.authenticate("jwt", { session: false }),
-  getOrderById
-);
-router.put(
-  "/:orderId",
-  passport.authenticate("jwt", { session: false }),
-  updateOrderDetail
-);
-router.delete(
-  "/:orderId",
-  passport.authenticate("jwt", { session: false }),
-  deleteOrderById
-);
+
 export default router;

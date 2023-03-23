@@ -42,20 +42,6 @@ export default function LatestModels2() {
               </CardActionArea>
             </Card>
           </div>
-          {/* <div className="card-three">
-            <Card
-              sx={{ maxWidth: 345, borderRadius: 10, objectFit: "scale-down" }}
-            >
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={audithree}
-                  alt="green iguana"
-                />
-              </CardActionArea>
-            </Card>
-          </div> */}
           <div className="card-three">
             <Card
               sx={{ maxWidth: 345, borderRadius: 10, objectFit: "scale-down" }}

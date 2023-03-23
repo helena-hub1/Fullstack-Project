@@ -1,22 +1,10 @@
-import {
-  Badge,
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Paper,
-  Rating,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Paper, Rating } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useDispatch } from "react-redux";
 
 import "./WishItem.css";
 import Product from "../../../../../types/product";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { wishAction } from "../../../redux/slices/wish";
 import { cartAction } from "../../../redux/slices/cart";
@@ -76,61 +64,5 @@ export default function WishItem({ product }: Prop) {
         </Paper>
       </div>
     </div>
-    // <div className="wish-item">
-    //   <Card
-    //     elevation={6}
-    //     sx={{
-    //       height: 300,
-    //       maxWidth: 500,
-    //       backgroundColor: "aliceblue",
-    //     }}
-    //   >
-    //     <div className="wish-container">
-    //       <Box
-    //         sx={{
-    //           dispaly: "flex",
-    //           flexDirection: "column",
-    //           backgroundColor: "red",
-    //           justifyContent: "center",
-    //           alignItems: "center",
-    //         }}
-    //       >
-    //         <CardActionArea>
-    //           <CardMedia
-    //             component="img"
-    //             height="140"
-    //             image={product.image}
-    //             alt="car image"
-    //             sx={{ m: 0 }}
-    //           />
-    //           <CardContent
-    //             sx={{
-    //               dispay: "flex",
-    //               flexDirection: "column",
-    //               justifyContent: "center",
-    //             }}
-    //           >
-    //             <Typography gutterBottom>{product.make}</Typography>
-    //             <Rating
-    //               name="half-rating-read"
-    //               defaultValue={product.rating}
-    //               size="small"
-    //               precision={0.5}
-    //               readOnly
-    //             />
-    //             <Typography gutterBottom>Price:${product.price}</Typography>
-    //           </CardContent>
-    //         </CardActionArea>
-    //       </Box>
-    //       {/* <div className="icon-container"> */}
-    //       <IconButton color="inherit" onClick={addToCartListHandler}>
-    //         <ShoppingCartIcon />
-    //       </IconButton>
-    //       <IconButton onClick={removeWishProductHandler} color="inherit">
-    //         <DeleteIcon />
-    //       </IconButton>
-    //     </div>
-    //   </Card>
-    // </div>
   );
 }

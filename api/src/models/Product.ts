@@ -1,4 +1,3 @@
-// product model here
 import mongoose, { Document } from "mongoose";
 
 import Product from "../../../types/product";
@@ -7,7 +6,7 @@ import Product from "../../../types/product";
 export type ProductDocument = Document & {
   ProductDocument: Product;
 };
-// schema
+
 export const ProductSchema = new mongoose.Schema({
   vin: {
     type: String,

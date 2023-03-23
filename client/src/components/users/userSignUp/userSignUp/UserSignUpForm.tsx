@@ -17,12 +17,11 @@ import {
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import "./UserSignUpForm.css";
 import { Link, useNavigate } from "react-router-dom";
-import { RootState } from "../../../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 
-import infoIcon from "../../../../assets/info.jpg";
 import registerUser from "../../../../redux/thunks/user";
 import { AppDispatch } from "../../../../redux/store";
+import info from "../../../../assets/info.jpg";
 
 export default function UserSignUpForm() {
   // navigate
@@ -83,7 +82,6 @@ export default function UserSignUpForm() {
         initialValues={initialValues}
         validationSchema={FormSchema}
         onSubmit={(values, { resetForm }) => {
-          // dispatch registerUser
           dispatch(
             registerUser(
               values.firstName,
@@ -198,7 +196,7 @@ export default function UserSignUpForm() {
                     </FormControl>
                     <Typography fontSize="12px">
                       <img
-                        src={infoIcon}
+                        src={info}
                         height="15px"
                         width="15px"
                         alt="information icon"

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 
@@ -19,12 +18,6 @@ export default function SuccessOnSignUp() {
       >
         <Typography sx={{ ml: 6, mt: 4, textAlign: "center" }}>
           Welcome to Star
-          {/* <Typography
-            variant="h6"
-            noWrap
-             component="div"
-            sx={{ fontSize: "18px" }}
-          > */}
           <Box component="span" sx={{ ml: 1, color: "darkblue" }}>
             C
           </Box>

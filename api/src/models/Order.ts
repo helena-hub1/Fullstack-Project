@@ -1,4 +1,3 @@
-// order model
 import mongoose, { Document } from "mongoose";
 
 import { ProductOrderSchema } from "./productOrder";
@@ -60,5 +59,4 @@ const OrderSchema = new mongoose.Schema({
     required: true,
   },
 });
-// name of collection + schema
 export default mongoose.model<OrderDocument>("Order", OrderSchema);

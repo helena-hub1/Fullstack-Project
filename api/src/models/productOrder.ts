@@ -1,6 +1,4 @@
-// product model here
 import mongoose, { Document } from "mongoose";
-
 // TypeScript
 export type ProductOrderDocument = Document & {
   VIN: string;

@@ -1,5 +1,5 @@
-// product thunk here
 import axios from "axios";
+
 import { AppDispatch } from "../store";
 import { productSliceAction } from "../slices/product";
 

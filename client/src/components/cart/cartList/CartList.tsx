@@ -1,4 +1,4 @@
-import { Button, Typography, Card, Divider, Box } from "@mui/material";
+import { Button, Typography, Card, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,7 +6,6 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import "./CartList.css";
 import CartItem from "../cartItem/CartItem";
 import emptycart from "../../../assets/emptycart.png";
-import order from "../../../redux/slices/order";
 
 export default function CartList() {
   // state
