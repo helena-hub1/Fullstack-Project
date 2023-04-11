@@ -1,7 +1,18 @@
 .image-container {
-  margin: 0 auto;
-  width: 80%;
+  width: 100%;
+  background: linear-gradient(to right, #2c5364, #203a43, #002e5c);
 }
 .image {
-  margin-top: 50px;
+  margin-top: 100px;
+  width: 80%;
+  margin: 0 auto;
+  animation: animate 2s linear infinite;
+}
+@keyframes animate {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(0.9);
+  }
 }
